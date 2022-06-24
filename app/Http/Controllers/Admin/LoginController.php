@@ -28,7 +28,8 @@ class LoginController extends Controller
                 return redirect('admin/dashboard');
             } else {
                 $request->session()->flash('error', 'Please Enter Valid Password');
-                return redirect('/admin');
+                $notifiction=array('message'=>'Access Denied','alert-type'=>'error');
+                return back()->with($notifiction);
             }
         } else {
             $request->session()->flash('error', 'Please Enter Valid Email');

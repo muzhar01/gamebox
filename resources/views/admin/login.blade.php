@@ -159,7 +159,7 @@
     <script type="text/javascript" src="{{ asset('admin_assets/js/modernizr.js') }}"></script>
     <script type="text/javascript" src="{{ asset('admin_assets/js/css-scrollbars.js') }}"></script>
     <script type="text/javascript" src="{{ asset('admin_assets/js/common-pages.js') }}"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script>
         @if (Session::has('message'))
             var type = "{{ Session::get('alert-type', 'info') }}"
