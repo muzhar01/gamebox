@@ -9,8 +9,6 @@ class GameController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
@@ -20,8 +18,6 @@ class GameController extends Controller
     
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function create()
     {
@@ -30,18 +26,13 @@ class GameController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $inputs = $request->validate([
             'title' => 'required',
             'short_name' => 'required',
-            'description' => 'required',
-            'start_path' => '',
-            'status' => ''
+            'description' => 'required'
         ]);
 
         $game = new Game();
@@ -53,20 +44,23 @@ class GameController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param  \App\Models\Game  $game
-     * @return \Illuminate\Http\Response
      */
-    public function show(Game $game)
+    public function show(Game $game, Request $request)
     {
-        //
+        $request->validate([
+            'status' => 'required|integer'
+        ]);
+
+        if($game->id){
+            $game->update(['status'=> $request->status]);
+            return back()->with('success', 'Status changed');
+        }else{
+            return back()->with('error', 'Some error, status not changed');
+        }
     }
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Game  $game
-     * @return \Illuminate\Http\Response
      */
     public function edit(Game $game)
     {
@@ -90,8 +84,6 @@ class GameController extends Controller
             'title' => 'required',
             'short_name' => 'required',
             'description' => 'required',
-            'start_path' => '',
-            'status' => ''
         ]);
 
         if($game->id){
@@ -114,9 +106,12 @@ class GameController extends Controller
      */
     public function destroy(Game $game)
     {
-        Game::destroy($game);
-
-        return back()->with('success', 'Game deleted successfully.');
+        if($game->id){
+            Game::destroy($game->id);
+            return back()->with('success', 'Game deleted successfully.');
+        }
+        
+        return back()->with('error', 'Error: Something wrong.');
     }
 
 }
