@@ -17,7 +17,7 @@ class Admin
     public function handle(Request $request, Closure $next)
     {
         if($request->session()->has('ADMIN_LOGIN')){
-
+            return redirect('admin/dashboard'); 
         }else{
             $notifiction=array('message'=>'Access Denied','alert-type'=>'error');
             return back()->with($notifiction);

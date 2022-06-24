@@ -47,8 +47,8 @@ class GameController extends Controller
         $game = new Game();
         $game->fill($inputs);
         $game->save();
-        
-        return redirect()->route('game.index');
+        $notifiction=array('message'=>'Game Added Successfully','alert-type'=>'success');
+        return redirect()->route('game.index')->with($notifiction);
     }
 
     /**

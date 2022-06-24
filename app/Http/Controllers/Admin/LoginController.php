@@ -36,4 +36,11 @@ class LoginController extends Controller
             return redirect('/admin');
         }
     }
+    public function logout(){
+        session()->forget('ADMIN_LOGIN');
+        session()->forget('ADMIN_ID');
+        session()->forget('ADMIN_EMAIL');
+        $notifiction=array('message'=>'Logout Successfully','alert-type'=>'success');
+        return view('admin.login',$notifiction);
+    }
 }

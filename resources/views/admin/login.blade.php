@@ -162,6 +162,9 @@
                 case 'error':
                     toastr.error("{{ Session::get('message') }}");
                     break;
+                case 'success':
+                    toastr.success("{{ Session::get('message') }}");
+                    break;
             }
         @endif
     </script>
