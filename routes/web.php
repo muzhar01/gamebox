@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -28,4 +29,7 @@ Route::post('/admin/auth', [LoginController::class, 'login'])->name('admin-login
 Route::group(['middleware'=>'admin_auth'],function(){
     // Dashboard Route //////
     Route::get('admin/dashboard',[DashboardController::class,'index']);
+    // Category Route //////
+    Route::get('admin/category',[CategoryController::class,'index'])->name('admin-category');
+    Route::get('admin/add/category',[CategoryController::class,'create'])->name('admin-add-category');
 });

@@ -19,7 +19,6 @@ class Admin
         if($request->session()->has('ADMIN_LOGIN')){
 
         }else{
-            $request->session()->flash('error','Access Denied');
             $notifiction=array('message'=>'Access Denied','alert-type'=>'error');
             return back()->with($notifiction);
         }

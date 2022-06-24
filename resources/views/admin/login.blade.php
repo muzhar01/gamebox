@@ -24,6 +24,9 @@
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="{{ asset('admin_assets/css/style.css') }}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
+
 </head>
 
 <body class="fix-menu">
@@ -82,14 +85,6 @@
                                     <h3 class="text-left txt-primary">Sign In</h3>
                                 </div>
                             </div>
-                            @if (session()->has('success'))
-                                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                    {{ session('success') }}
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                            @endif
                             @if (session()->has('error'))
                                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                     {{ session('error') }}
@@ -163,7 +158,6 @@
     <script>
         @if (Session::has('message'))
             var type = "{{ Session::get('alert-type', 'info') }}"
-
             switch (type) {
                 case 'error':
                     toastr.error("{{ Session::get('message') }}");
