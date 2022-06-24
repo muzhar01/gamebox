@@ -20,7 +20,8 @@ class Admin
 
         }else{
             $request->session()->flash('error','Access Denied');
-            return redirect('/admin');
+            $notifiction=array('message'=>'Accessx Denied','alert-type'=>'error');
+            return back()->with($notifiction);
         }
         return $next($request);
     }

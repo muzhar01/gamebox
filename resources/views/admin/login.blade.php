@@ -23,6 +23,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('admin_assets/css/icofont.css') }}">
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="{{ asset('admin_assets/css/style.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </head>
 
 <body class="fix-menu">
@@ -81,7 +82,6 @@
                                     <h3 class="text-left txt-primary">Sign In</h3>
                                 </div>
                             </div>
-
                             @if (session()->has('success'))
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                                     {{ session('success') }}
@@ -92,7 +92,7 @@
                             @endif
                             @if (session()->has('error'))
                                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                  {{ session('error') }}
+                                    {{ session('error') }}
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -109,8 +109,8 @@
 
                                 </div>
                                 @if ($errors->has('email'))
-                                        <span class="error">{{ $errors->first('email') }}</span>
-                                    @endif
+                                    <span class="error">{{ $errors->first('email') }}</span>
+                                @endif
                                 <div class="input-group">
                                     <input type="password" class="form-control" name="password" placeholder="Password">
                                     <span class="md-line"></span>
@@ -148,7 +148,6 @@
         </div>
         <!-- end of container-fluid -->
     </section>
-
     <!-- Required Jquery -->
     <script type="text/javascript" src="{{ asset('admin_assets/js/jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('admin_assets/js/jquery-ui.min.js') }}"></script>
@@ -160,6 +159,19 @@
     <script type="text/javascript" src="{{ asset('admin_assets/js/modernizr.js') }}"></script>
     <script type="text/javascript" src="{{ asset('admin_assets/js/css-scrollbars.js') }}"></script>
     <script type="text/javascript" src="{{ asset('admin_assets/js/common-pages.js') }}"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+        @if (Session::has('message'))
+            var type = "{{ Session::get('alert-type', 'info') }}"
+
+            switch (type) {
+                case 'error':
+                    toastr.error("{{ Session::get('message') }}");
+                    break;
+            }
+        @endif
+    </script>
+
 </body>
 
 </html>

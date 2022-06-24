@@ -257,6 +257,7 @@
 <script type="text/javascript " src="{{ asset('admin_assets/js/SmoothScroll.js') }}"></script>
 <script src="{{ asset('admin_assets/js/pcoded.min.js') }}"></script>
 <script src="{{ asset('admin_assets/js/demo-12.js') }}"></script>
+<script src="{{ asset('admin_assets/js/notification.js') }}"></script>
 <script src="{{ asset('admin_assets/js/jquery.mCustomScrollbar.concat.min.js') }}"></script>
 <script>
 var $window = $(window);
