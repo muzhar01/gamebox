@@ -130,16 +130,14 @@
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                            </ul>
-                            <ul class="pcoded-item pcoded-left-item">
-                                <li class="">
-                                    <a href="javascript:void(0)">
-                                        <span class="pcoded-micon"><i class="fa fa-file"></i></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Pages</span>
+
+                                <li class="{{ request()->is('*game*') ? 'active' : '' }}">
+                                    <a href="{{ route('game.index') }}">
+                                        <span class="pcoded-micon"><i class="fa fa-gamepad"></i></span>
+                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Games</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                
                             </ul>
 
                         </div>

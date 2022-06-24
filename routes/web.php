@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\GameController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,4 +33,6 @@ Route::group(['middleware'=>'admin_auth'],function(){
     // Category Route //////
     Route::get('admin/category',[CategoryController::class,'index'])->name('admin-category');
     Route::get('admin/add/category',[CategoryController::class,'create'])->name('admin-add-category');
+    //Resource for game
+    Route::resource('admin/game', GameController::class);
 });
