@@ -57,10 +57,9 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <!-- Start Form For English -->
-                                <div class="card forEnglish" style="display: none">
+                                <div class="card forEnglish">
                                     <div class="card-header">
                                         <h5>Add Category</h5>
-
                                     </div>
                                     <div class="card-block">
                                         <form>
@@ -74,11 +73,15 @@
                                                   <input type="file" name="thumbnail" class="form-control">
                                                 </div>
                                             </div>
+                                            
+                                            <div class="form-group row arabicTitle"></div>
                                             <div class="form-group row">
                                                 <div class="col-sm-12">
                                                   <label for="">Description</label>
-                                                    <input type="text" name="description" class="form-control" placeholder="col-sm-6">
+                                                  <textarea name="description" class="form-control"></textarea>
                                                 </div>
+                                            </div>
+                                            <div class="form-group row arabicDescription">
                                             </div>
                                             <div class="">
                                               <button class="btn btn-primary float-right" type="submit">Submit  </button>
@@ -87,37 +90,6 @@
                                     </div>
                                 </div>
                                 <!-- End Form For English -->
-                                <!-- Start Form For Arabic-->
-                                <div class="card forArabic" style="display: none">
-                                  <div class="card-header">
-                                      <h5>إضافة فئة</h5>
-
-                                  </div>
-                                  <div class="card-block">
-                                      <form>
-                                          <div class="form-group row">
-                                              <div class="col-sm-6">
-                                                  <label for="">عنوان</label>
-                                                  <input type="text" name="title" class="form-control" placeholder="أدخل العنوان">
-                                              </div>
-                                              <div class="col-sm-6">
-                                                <label for="">ظفري</label>
-                                                <input type="file" name="thumbnail" class="form-control">
-                                              </div>
-                                          </div>
-                                          <div class="form-group row">
-                                              <div class="col-sm-12">
-                                                <label for="">وصف</label>
-                                                  <input type="text" name="description" class="form-control" placeholder="أدخل الوصف">
-                                              </div>
-                                          </div>
-                                          <div class="">
-                                            <button class="btn btn-primary float-right" type="submit">يُقدِّم</button>
-                                          </div>
-                                      </form>
-                                  </div>
-                              </div>
-                              <!--  End Form For Arabic-->
                             </div>
                         </div>
                     </div>
@@ -136,11 +108,11 @@
           e.preventDefault();
           var child_language=$(this).data('value');
           if(child_language=="arabic"){
-            $('.forArabic').css('display','grid');
-            $('.forEnglish').css('display','none');
+            $('.arabicTitle').append('<div class="col-sm-6" dir="rtl"><label for="">عنوان</label><input type="text" name="title" class="form-control" placeholder="أدخل العنوان"> </div>');
+            $('.arabicDescription').append('<div class="col-sm-12"><label for="">وصف</label><textarea name="description" class="form-control"></textarea></div>');
           }else{
-            $('.forEnglish').css('display','grid');
-            $('.forArabic').css('display','none');
+            $('.arabicTitle').html('');
+            $('.arabicDescription').html('');
           }
         });
       });
