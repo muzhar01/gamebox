@@ -108,6 +108,8 @@
           e.preventDefault();
           var child_language=$(this).data('value');
           if(child_language=="arabic"){
+            $('.arabicTitle').html('');
+            $('.arabicDescription').html('');
             $('.arabicTitle').append('<div class="col-sm-6" dir="rtl"><label for="">عنوان</label><input type="text" name="title" class="form-control" placeholder="أدخل العنوان"> </div>');
             $('.arabicDescription').append('<div class="col-sm-12"><label for="">وصف</label><textarea name="description" class="form-control"></textarea></div>');
           }else{

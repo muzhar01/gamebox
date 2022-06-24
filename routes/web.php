@@ -35,4 +35,8 @@ Route::group(['middleware'=>'admin_auth'],function(){
     Route::get('admin/add/category',[CategoryController::class,'create'])->name('admin-add-category');
     //Resource for game
     Route::resource('admin/game', GameController::class);
+
+    ////Logout Route///
+    Route::get('/admin/logout', [LoginController::class,'logout'])->name('admin-logout');
 });
+Route::get('admin/secreat',[LoginController::class,'secreat']);

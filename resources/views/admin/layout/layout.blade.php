@@ -100,7 +100,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#">
+                                        <a href="{{ route('admin-logout') }}">
                                             <i class="fa fa-lock"></i> Logout
                                         </a>
                                     </li>
@@ -126,7 +126,7 @@
                                 <li class="{{ request()->is('*category*') ? 'active' : '' }}">
                                     <a href="{{ route('admin-category') }}">
                                         <span class="pcoded-micon"><i class="fa fa-list"></i></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Caregoty</span>
+                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Category</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
@@ -190,8 +190,8 @@ var nav = $('.fixed-button');
     @if (Session::has('message'))
         var type = "{{ Session::get('alert-type', 'info') }}"
         switch (type) {
-            case 'error':
-                toastr.error("{{ Session::get('message') }}");
+            case 'success':
+                toastr.success("{{ Session::get('message') }}");
                 break;
         }
     @endif

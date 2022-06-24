@@ -23,9 +23,10 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('admin_assets/css/icofont.css') }}">
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="{{ asset('admin_assets/css/style.css') }}">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
 
 </head>
 
@@ -95,7 +96,8 @@
                             @endif
                             <hr />
 
-                            <form class="md-float-material" method="POST" action="{{ route('admin-login') }}">
+                            <form class="md-float-material" method="POST" action="{{ route('admin-login') }}"
+                                autocomplete="off">
                                 @csrf
                                 <div class="input-group">
                                     <input type="email" class="form-control" name="email"
@@ -161,6 +163,9 @@
             switch (type) {
                 case 'error':
                     toastr.error("{{ Session::get('message') }}");
+                    break;
+                case 'success':
+                    toastr.success("{{ Session::get('message') }}");
                     break;
             }
         @endif

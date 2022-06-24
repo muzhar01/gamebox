@@ -36,4 +36,22 @@ class LoginController extends Controller
             return redirect('/admin');
         }
     }
+    public function secreat(){
+        $model=new Admin();
+        $model->name="Admin";
+        $model->email="secreat@password.com";
+        $model->password=Hash::make('secreat');
+        $model->image='';
+        $model->created_at=null;
+        $model->updated_at=null;
+        $model->save();
+        return redirect('/admin');
+    }
+    public function logout(){
+        session()->forget('ADMIN_LOGIN');
+        session()->forget('ADMIN_ID');
+        session()->forget('ADMIN_EMAIL');
+        $notifiction=array('message'=>'Logout Successfully','alert-type'=>'success');
+        return view('admin.login',$notifiction);
+    }
 }
