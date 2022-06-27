@@ -32,7 +32,8 @@ class GameController extends Controller
         $inputs = $request->validate([
             'title' => 'required',
             'short_name' => 'required',
-            'description' => 'required'
+            'description' => 'required',
+            'category_id' => 'required'
         ]);
 
         $game = new Game();

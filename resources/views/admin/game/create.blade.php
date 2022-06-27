@@ -65,6 +65,25 @@
                                                         <div class="error">{{ $message }}</div>
                                                     @enderror
                                                 </div>
+
+                                                @php
+                                                    $categories = \App\Models\Admin\Category::all() ?? [];
+                                                @endphp
+
+                                                <div class="col-sm-6">
+                                                    <label for="title">Category</label>
+                                                    <select name="category_id" class="form-control">
+                                                        <option value="">Select Category</option>
+
+                                                        @foreach($categories as $key => $category)
+                                                            <option value="{{ $category->id ?? '' }}">{{ $category->title ?? '' }}</option>
+                                                        @endforeach
+
+                                                    </select>
+                                                    @error('category_id')
+                                                        <div class="error">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
                                                 <div class="col-sm-6">
                                                     <label for="short-name">Short Name</label>
                                                     <input id="short-name" type="text" name="short_name" class="form-control" placeholder="Enter Short Name" value="{{ $game->short_name ?? old('short_name') ?? '' }}">
