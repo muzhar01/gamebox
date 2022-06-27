@@ -50,7 +50,12 @@
 
                                     </div>
                                     <div class="card-block">
-                                        <form action="{{ route('game.store') }}" method="POST" enctype="multipart/form-data">
+                                        @if(isset($game) && $game->id)
+                                            <form action="{{ route('game.update', $game->id) }}" method="POST" enctype="multipart/form-data">
+                                            @method('put')
+                                        @else
+                                            <form action="{{ route('game.store') }}" method="POST" enctype="multipart/form-data">
+                                        @endif
                                             @csrf
                                             <div class="form-group row">
                                                 <div class="col-sm-6">

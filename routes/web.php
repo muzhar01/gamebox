@@ -4,7 +4,10 @@ use App\Http\Controllers\Admin\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\FrontController;
 use App\Http\Controllers\GameController;
+use App\Models\Admin\Category;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,12 +19,12 @@ use App\Http\Controllers\GameController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [FrontController::class, 'index'])->name('home');
+Route::get('/category/{category}', [FrontController::class, 'category'])->name('home.category');
 
 Route::get('/cmd/{cmd}', function ($cmd) {
-    return \Artisan::call("$cmd");
+    \Artisan::call("$cmd");
+    return \Artisan::output();
 });
 
 Route::get('/admin', [LoginController::class, 'index']);
@@ -33,6 +36,9 @@ Route::group(['middleware'=>'admin_auth'],function(){
     // Category Route //////
     Route::get('admin/category',[CategoryController::class,'index'])->name('admin-category');
     Route::get('admin/add/category',[CategoryController::class,'create'])->name('admin-add-category');
+    //Resource for Category
+    Route::resource('admin/category', CategoryController::class, ['as' => 'admin']);
+
     //Resource for game
     Route::resource('admin/game', GameController::class);
 

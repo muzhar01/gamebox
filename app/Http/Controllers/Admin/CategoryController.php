@@ -10,18 +10,15 @@ class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return view('admin.category.index');
+        $categories  = Category::paginate(10);
+        return view('admin.category.index', ['categories'=> $categories]);
     }
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function create()
     {
@@ -30,19 +27,28 @@ class CategoryController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
+        $inputs = $request->validate([
+            'title' => 'required|string|max:254',
+            'description' => 'required|string|max:254',
+            'thumbnail' => 'required|image'
+        ]);
+
+        $imageName = time().'.'.$request->thumbnail->extension();  
+        $request->thumbnail->move(public_path('storage/category'), $imageName);
+
+        $category = new Category();
+        $category->fill($inputs);
+        $category->thumbnail = $imageName;
+        $category->save();
+
+        return redirect()->route('admin.category.index')->with('success', 'Category added Successfully.');
     }
 
     /**
      * Display the specified resource.
-     *
-     * @param  \App\Models\Admin\Category  $category
-     * @return \Illuminate\Http\Response
      */
     public function show(Category $category)
     {
@@ -69,7 +75,28 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $inputs = $request->validate([
+            'title' => 'required|string|max:254',
+            'description' => 'required|string|max:254',
+            'thumbnail' => 'required|image'
+        ]);
+
+        $old_image = public_path('storage/category/') . $category->thumbnail;
+
+        if(file_exists($old_image)){
+            unlink($old_image);
+        }
+
+        $imageName = time().'.'.$request->thumbnail->extension();  
+        $request->thumbnail->move(public_path('storage/category'), $imageName);
+
+        $category = new Category();
+        $category->fill($inputs);
+        $category->thumbnail = $imageName;
+        $category->save();
+
+        return redirect()->route('admin.category.index')->with('success', 'Category added Successfully.');
+        
     }
 
     /**

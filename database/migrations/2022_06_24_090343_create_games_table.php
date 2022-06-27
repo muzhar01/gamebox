@@ -20,6 +20,7 @@ class CreateGamesTable extends Migration
             $table->string('description')->nullable();
             $table->string('thumbnail')->nullable();
             $table->string('start_path')->nullable();
+            $table->unsignedBigInteger('category_id')->nullable();
             $table->integer('status')->default(1);
             $table->timestamps();
         });

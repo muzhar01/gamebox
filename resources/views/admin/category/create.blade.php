@@ -27,7 +27,7 @@
                                         </li>
                                         <li class="breadcrumb-item"><a href="{{ url('admin/dashboard') }}">Home</a>
                                         </li>
-                                        <li class="breadcrumb-item"><a href="#!">Add Category</a>
+                                        <li class="breadcrumb-item"><a href="#">Add Category</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -62,29 +62,42 @@
                                         <h5>Add Category</h5>
                                     </div>
                                     <div class="card-block">
-                                        <form>
+                                        <form action="{{ route('admin.category.store') }}" method="POST" enctype="multipart/form-data">
+                                            @csrf
                                             <div class="form-group row">
                                                 <div class="col-sm-6">
                                                     <label for="">Title</label>
                                                     <input type="text" name="title" class="form-control" placeholder="Enter Title">
+                                                    @error('title')
+                                                        <div class="error">{{ $message }}</div>
+                                                    @enderror
                                                 </div>
                                                 <div class="col-sm-6">
                                                   <label for="">Thumbnail</label>
                                                   <input type="file" name="thumbnail" class="form-control">
+                                                  @error('thumbnail')
+                                                        <div class="error">{{ $message }}</div>
+                                                    @enderror
                                                 </div>
                                             </div>
                                             
-                                            <div class="form-group row arabicTitle"></div>
                                             <div class="form-group row">
                                                 <div class="col-sm-12">
-                                                  <label for="">Description</label>
-                                                  <textarea name="description" class="form-control"></textarea>
+                                                    <label for="">Description</label>
+                                                    <textarea name="description" class="form-control"></textarea>
+                                                    @error('description')
+                                                        <div class="error">{{ $message }}</div>
+                                                    @enderror
                                                 </div>
                                             </div>
-                                            <div class="form-group row arabicDescription">
+
+                                            <div dir="rtl">
+                                                <div class="form-group row arabicTitle"></div>
+                                                <div class="form-group row arabicDescription"></div>
                                             </div>
+
                                             <div class="">
-                                              <button class="btn btn-primary float-right" type="submit">Submit  </button>
+                                              <button class="btn btn-primary float-right" type="submit">Submit</button>
                                             </div>
                                         </form>
                                     </div>
@@ -110,8 +123,8 @@
           if(child_language=="arabic"){
             $('.arabicTitle').html('');
             $('.arabicDescription').html('');
-            $('.arabicTitle').append('<div class="col-sm-6" dir="rtl"><label for="">عنوان</label><input type="text" name="title" class="form-control" placeholder="أدخل العنوان"> </div>');
-            $('.arabicDescription').append('<div class="col-sm-12"><label for="">وصف</label><textarea name="description" class="form-control"></textarea></div>');
+            $('.arabicTitle').append('<div class="col-sm-6" dir="rtl"><label for="">عنوان</label><input type="text" name="ar_title" class="form-control" placeholder="أدخل العنوان"> </div>');
+            $('.arabicDescription').append('<div class="col-sm-12" dir="rtl"><label for="">وصف</label><textarea name="ar_description" class="form-control"></textarea></div>');
           }else{
             $('.arabicTitle').html('');
             $('.arabicDescription').html('');
