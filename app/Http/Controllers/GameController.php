@@ -33,11 +33,20 @@ class GameController extends Controller
             'title' => 'required',
             'short_name' => 'required',
             'description' => 'required',
+            'thumbnail' => 'required|image',
+            'gamefile' => 'required',
             'category_id' => 'required'
         ]);
 
+        $imageName = time().'.'.$request->thumbnail->extension();  
+        $request->thumbnail->move(public_path('storage/game'), $imageName);
+
+        $game_path = DataController::extractZip($request);
+
         $game = new Game();
         $game->fill($inputs);
+        $game->thumbnail = $imageName;
+        $game->start_path = '/storage/games/'. $request->short_name . '/'. $game_path . '/index.html';
         $game->save();
         $notifiction=array('message'=>'Game Added Successfully','alert-type'=>'success');
         return redirect()->route('game.index')->with($notifiction);

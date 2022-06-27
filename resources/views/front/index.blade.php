@@ -8,9 +8,9 @@
         <div class="grid-layout grid-wrapper">
             @foreach($new_games as $key => $new_game)
                 <div class="grid-item  item-grid">
-                    <a href="#">
+                    <a href="{{ $new_game->start_path }}" target="_blank">
                         <div class="list-game">
-                            <div class="list-thumbnail"><img src="/" class="small-thumb" alt="{{ $new_game->title }}"></div>
+                            <div class="list-thumbnail"><img src="{{ '/storage/game/' . ($new_game->thumbnail ?? '') }}" class="small-thumb" alt="{{ $new_game->title }}"></div>
                             <div class="list-title">
                                 <div class="star-rating text-center"><img src="/front_assets/dark-grid/images/star-4.png" alt="rating"></div> {{ $new_game->title }} </div>
                         </div>
@@ -23,13 +23,13 @@
         <!-- Popular games -->
         <h3 class="item-title"><i class="fa fa-certificate" aria-hidden="true"></i>POPULAR GAMES</h3>
         <div class="grid-layout grid-wrapper">
-            @foreach($papular_games as $key => $paular_game)
+            @foreach($papular_games as $key => $papular_game)
                 <div class="grid-item  item-grid">
                     <a href="#">
                         <div class="list-game">
-                            <div class="list-thumbnail"><img src="/" class="small-thumb" alt="{{ $paular_game->title ?? '' }}"></div>
+                            <div class="list-thumbnail"><img src="{{ '/storage/game/' . ($papular_game->thumbnail ?? '') }}" class="small-thumb" alt="{{ $papular_game->title ?? '' }}"></div>
                             <div class="list-title">
-                                <div class="star-rating text-center"><img src="/front_assets/dark-grid/images/star-4.png" alt="rating"></div> {{ $paular_game->title ?? '' }} </div>
+                                <div class="star-rating text-center"><img src="/front_assets/dark-grid/images/star-4.png" alt="rating"></div> {{ $papular_game->title ?? '' }} </div>
                         </div>
                     </a>
                 </div>
@@ -43,7 +43,7 @@
                 <div class="grid-item  item-grid">
                     <a href="#">
                         <div class="list-game">
-                            <div class="list-thumbnail"><img src="/" class="small-thumb" alt="{{ $foryou_game->title ?? '' }}"></div>
+                            <div class="list-thumbnail"><img src="{{ '/storage/game/' . ($foryou_game->thumbnail ?? '') }}" class="small-thumb" alt="{{ $foryou_game->title ?? '' }}"></div>
                             <div class="list-title">
                                 <div class="star-rating text-center"><img src="/front_assets/dark-grid/images/star-4.png" alt="rating"></div> {{ $foryou_game->title ?? '' }} </div>
                         </div>
