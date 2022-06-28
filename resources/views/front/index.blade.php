@@ -25,7 +25,7 @@
         <div class="grid-layout grid-wrapper">
             @foreach($papular_games as $key => $papular_game)
                 <div class="grid-item  item-grid">
-                    <a href="#">
+                    <a href="{{ $papular_game->start_path }}">
                         <div class="list-game">
                             <div class="list-thumbnail"><img src="{{ '/storage/game/' . ($papular_game->thumbnail ?? '') }}" class="small-thumb" alt="{{ $papular_game->title ?? '' }}"></div>
                             <div class="list-title">
@@ -41,7 +41,7 @@
         <div class="grid-layout grid-wrapper">
             @foreach($foryou_games as $key => $foryou_game)
                 <div class="grid-item  item-grid">
-                    <a href="#">
+                    <a href="{{ $foryou_game->start_path }}">
                         <div class="list-game">
                             <div class="list-thumbnail"><img src="{{ '/storage/game/' . ($foryou_game->thumbnail ?? '') }}" class="small-thumb" alt="{{ $foryou_game->title ?? '' }}"></div>
                             <div class="list-title">

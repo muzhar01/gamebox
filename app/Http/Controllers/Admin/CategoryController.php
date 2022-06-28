@@ -50,9 +50,16 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Category $category)
+    public function show(Category $category, Request $request)
     {
-        //
+        $inputs = $request->validate([
+            'status' => 'required'
+        ]);
+
+        $category->status = $inputs['status'] ?? 0;
+        $category->save();
+
+        return back()->with('success', 'Status updated Successfully.');
     }
 
     /**
@@ -63,15 +70,12 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+
+        return view('admin.category.create', ['category' => $category]);
     }
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Admin\Category  $category
-     * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Category $category)
     {
@@ -95,18 +99,22 @@ class CategoryController extends Controller
         $category->thumbnail = $imageName;
         $category->save();
 
-        return redirect()->route('admin.category.index')->with('success', 'Category added Successfully.');
+        return redirect()->route('admin.category.index')->with('success', 'Category updated Successfully.');
         
     }
-
+    
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Admin\Category  $category
-     * @return \Illuminate\Http\Response
      */
     public function destroy(Category $category)
     {
-        //
+        $thumbnail = public_path('/storage/category/' . $category->thumbnail);
+        if(file_exists($thumbnail)){
+            unlink($thumbnail);
+        }
+        
+        Category::destroy($category->id);
+        return back()->with('success', 'Category deleted Successfully.');
     }
+    
 }

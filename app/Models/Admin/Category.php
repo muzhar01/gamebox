@@ -11,4 +11,8 @@ class Category extends Model
 
     protected $fillable = ['title','description','thumbnail'];
 
+    public function scopeActive($q){
+        return $q->whereStatus(1);
+    }
+
 }

@@ -13,7 +13,7 @@
                                 <div class="page-header-title">
                                     <i class="fa fa-file bg-c-blue"></i>
                                     <div class="d-inline">
-                                        <h4>Add Category</h4>
+                                        <h4>{{ isset($category) ? 'Edit' : 'Add' }} Category</h4>
                                     </div>
                                 </div>
                             </div>
@@ -27,7 +27,7 @@
                                         </li>
                                         <li class="breadcrumb-item"><a href="{{ url('admin/dashboard') }}">Home</a>
                                         </li>
-                                        <li class="breadcrumb-item"><a href="#">Add Category</a>
+                                        <li class="breadcrumb-item"><a href="#">{{ isset($category) ? 'Edit' : 'Add' }} Category</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -59,15 +59,18 @@
                                 <!-- Start Form For English -->
                                 <div class="card forEnglish">
                                     <div class="card-header">
-                                        <h5>Add Category</h5>
+                                        <h5>{{ isset($category) ? 'Edit' : 'Add' }} Category</h5>
                                     </div>
                                     <div class="card-block">
-                                        <form action="{{ route('admin.category.store') }}" method="POST" enctype="multipart/form-data">
+                                        <form action="{{ isset($category) ? route('admin.category.update', $category->id) : route('admin.category.store') }}" method="POST" enctype="multipart/form-data">
+                                             @if(isset($category))
+                                                @method('PUT')
+                                             @endif
                                             @csrf
                                             <div class="form-group row">
                                                 <div class="col-sm-6">
                                                     <label for="">Title</label>
-                                                    <input type="text" name="title" class="form-control" placeholder="Enter Title">
+                                                    <input type="text" name="title" class="form-control" placeholder="Enter Title" value="{{ isset($category) ? ($category->title ?? '') : old('title') }}">
                                                     @error('title')
                                                         <div class="error">{{ $message }}</div>
                                                     @enderror
@@ -84,7 +87,7 @@
                                             <div class="form-group row">
                                                 <div class="col-sm-12">
                                                     <label for="">Description</label>
-                                                    <textarea name="description" class="form-control"></textarea>
+                                                    <textarea name="description" class="form-control">{{ isset($category) ? ($category->description ?? '') : old('description') }}</textarea>
                                                     @error('description')
                                                         <div class="error">{{ $message }}</div>
                                                     @enderror

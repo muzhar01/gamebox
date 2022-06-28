@@ -9,4 +9,9 @@ class Game extends Model
 {
     use HasFactory;
     protected $fillable = ['title', 'short_name', 'description', 'start_path', 'category_id', 'status'];
+
+    public function scopeActive($q){
+        return $q->whereStatus(1);
+    }
+
 }

@@ -67,7 +67,7 @@
                                                 </div>
 
                                                 @php
-                                                    $categories = \App\Models\Admin\Category::all() ?? [];
+                                                    $categories = \App\Models\Admin\Category::active()->get() ?? [];
                                                 @endphp
 
                                                 <div class="col-sm-6">

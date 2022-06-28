@@ -117,6 +117,9 @@ class GameController extends Controller
     public function destroy(Game $game)
     {
         if($game->id){
+
+            \Storage::deleteDirectory(public_path('storage/games/'. $game->short_name));
+
             Game::destroy($game->id);
             return back()->with('success', 'Game deleted successfully.');
         }

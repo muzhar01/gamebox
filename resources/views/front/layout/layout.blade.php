@@ -46,13 +46,17 @@
 			</nav>
 
 				@php
-					$categories = \App\Models\Admin\Category::take(7)->get() ?? [];
+					$categories = \App\Models\Admin\Category::active()->orderBy('title','asc')->take(8)->get() ?? [];
 				@endphp
 				
 			<div class="nav-categories">
 				<div class="container">
 					<nav class="greedy">
 						<ul class="links list-categories">
+							<a href="/">
+								<li>All Games</li>
+							</a>
+
 							@foreach($categories as $category)
 								<a href="{{ route('home.category', $category->title) }}">
 									<li>{{ $category->title }}</li>
