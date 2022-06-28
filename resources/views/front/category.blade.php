@@ -10,7 +10,7 @@
                 <div class="grid-item  item-grid">
                     <a href="{{ $cat_game->start_path }}">
                         <div class="list-game">
-                            <div class="list-thumbnail"><img src="/" class="small-thumb" alt="{{ $cat_game->title }}"></div>
+                            <div class="list-thumbnail"><img src="{{ '/storage/game/' . ($cat_game->thumbnail ?? '') }}" class="small-thumb" alt="{{ $cat_game->title }}"></div>
                             <div class="list-title">
                                 <div class="star-rating text-center"><img src="/front_assets/dark-grid/images/star-4.png" alt="rating"></div> {{ $cat_game->title }} </div>
                         </div>
