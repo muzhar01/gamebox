@@ -72,6 +72,7 @@
                                       <th>Title</th>
                                       <th>Thumbnail</th>
                                       <th>Status</th>
+                                      <th>Action</th>
                                   </tr>
                               </thead>
                               <tbody>
@@ -80,7 +81,41 @@
                                         <th scope="row">{{ $loop->iteration }}</th>
                                         <td>{{ $category->title ?? '' }}</td>
                                         <td><img src="{{ '/storage/category/' . ($category->thumbnail ?? '') }}" alt="{{ $category->title ?? '' }}" style="height:50px !important;width:auto;"></td>
-                                        <td>{{ $category->status }}</td>
+                                        
+                                        <td>
+                                            <div class="btn-group">
+                                                @if($category->status == 1)
+                                                    <button type="button" class="btn btn-success">Active</button>
+                                                @else
+                                                    <button type="button" class="btn btn-danger">Deactive</button>
+                                                @endif
+
+                                                <button type="button" class="btn btn-{{ $category->status == 1 ? 'success' : 'danger' }} dropdown-toggle dropdown-icon" data-toggle="dropdown" aria-expanded="false">
+                                                <span class="sr-only">Toggle Dropdown</span>
+                                                </button>
+                                                <div class="dropdown-menu" role="menu" style="">
+                                                    <a class="dropdown-item" href="{{ route('admin.category.show',$category->id) ."?status=1" }}">Active</a>
+                                                    <a class="dropdown-item" href="{{ route('admin.category.show',$category->id) ."?status=0" }}">Deactive</a>
+                                                </div>
+                                            </div>
+                                      </td>
+                                      <td>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-default">Action</button>
+                                            <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown">
+                                              <span class="sr-only">Toggle Dropdown</span>
+                                            </button>
+                                            <div class="dropdown-menu" role="menu">
+                                              <a class="dropdown-item" href="{{ route('admin.category.edit', $category->id) }}">Edit</a>
+                                              <form action="{{ route('admin.category.destroy', $category->id) }}" method="post" class="form-inline m-0 p-0">
+                                                @csrf
+                                                @method('DELETE')
+                                                <a class="dropdown-item" href="#"><button class="border-0" type="submit">Delete</button></a>
+                                              </form>
+                                            </div>
+                                        </div>
+                                      </td>
+
                                     </tr>
                                 @endforeach
                               </tbody>
