@@ -46,7 +46,7 @@ class GameController extends Controller
         $game = new Game();
         $game->fill($inputs);
         $game->thumbnail = $imageName;
-        $game->start_path = '/storage/games/'. $request->short_name . '/'. $game_path . '/index.html';
+        $game->start_path = $game_path;
         $game->save();
         $notifiction=array('message'=>'Game Added Successfully','alert-type'=>'success');
         return redirect()->route('game.index')->with($notifiction);
@@ -98,10 +98,22 @@ class GameController extends Controller
 
         if($game->id){
             $game->fill($inputs);
-            $game->update();
 
+            if($request->has('thumbnail')){
+                $old_file = public_path('storage/game/') . $category->thumbnail;
+                if(file_exists($old_file)){
+                    unlink($old_file);
+                }
+
+                $imageName = time().'.'.$request->thumbnail->extension();  
+                $request->thumbnail->move(public_path('storage/game'), $imageName);
+                $game->thumbnail = $imageName;
+            }
+
+            $game->update();
+            return redirect()->route('game.index')->with('success',"Game updated successfully");
         }else{
-            dd($game);
+            back()->with('error', "Something wrong happend.");
         }
         
         return back();
