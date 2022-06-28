@@ -23,7 +23,7 @@
 			<nav class="navbar navbar-expand-lg navbar-dark top-nav" id="mainNav">
 				<div class="container">
 					<button class="navbar-toggler navbar-toggler-left collapsed" type="button" data-toggle="collapse" data-target="#navb" aria-expanded="false"> <span class="navbar-toggler-icon"></span> </button>
-					<a class="navbar-brand js-scroll-trigger" href="/"><img src="" class="site-logo" alt="Gamebox"></a>
+					<a class="navbar-brand js-scroll-trigger" href="/"><img src="{{ isset($logo) ? $logo : '/front_assets/logo.png' }}" class="site-logo" alt="Gamebox" style="height: 100px !important;"></a>
 					<div class="navbar-collapse collapse justify-content-end" id="navb">
 						<ul class="navbar-nav ml-auto text-uppercase">
 							
