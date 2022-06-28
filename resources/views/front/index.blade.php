@@ -39,8 +39,8 @@
                     <a href="{{ $new_game->start_path }}" target="_blank">
                         <div class="list-game">
                             <div class="list-thumbnail"><img src="{{ '/storage/game/' . ($new_game->thumbnail ?? '') }}" class="small-thumb" alt="{{ $new_game->title }}"></div>
-                            <div class="list-title">
-                                <div class="star-rating text-center"><img src="/front_assets/dark-grid/images/star-4.png" alt="rating"></div> {{ $new_game->title }} </div>
+                            <div class="list-title"><span class="btn btn-sm btn-outline-success">Play Now</span></div>
+                            <div class="game-title">{{ $new_game->title }}</div>
                         </div>
                     </a>
                 </div>
@@ -56,8 +56,8 @@
                     <a href="{{ $papular_game->start_path }}">
                         <div class="list-game">
                             <div class="list-thumbnail"><img src="{{ '/storage/game/' . ($papular_game->thumbnail ?? '') }}" class="small-thumb" alt="{{ $papular_game->title ?? '' }}"></div>
-                            <div class="list-title">
-                                <div class="star-rating text-center"><img src="/front_assets/dark-grid/images/star-4.png" alt="rating"></div> {{ $papular_game->title ?? '' }} </div>
+                            <div class="list-title"><span class="btn btn-sm btn-outline-success">Play Now</span></div>
+                            <div class="game-title">{{ $papular_game->title }}</div>
                         </div>
                     </a>
                 </div>
@@ -72,8 +72,8 @@
                     <a href="{{ $foryou_game->start_path }}">
                         <div class="list-game">
                             <div class="list-thumbnail"><img src="{{ '/storage/game/' . ($foryou_game->thumbnail ?? '') }}" class="small-thumb" alt="{{ $foryou_game->title ?? '' }}"></div>
-                            <div class="list-title">
-                                <div class="star-rating text-center"><img src="/front_assets/dark-grid/images/star-4.png" alt="rating"></div> {{ $foryou_game->title ?? '' }} </div>
+                            <div class="list-title"><span class="btn btn-sm btn-outline-success">Play Now</span></div>
+                            <div class="game-title">{{ $foryou_game->title }}</div>
                         </div>
                     </a>
                 </div>

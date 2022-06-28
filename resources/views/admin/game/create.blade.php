@@ -14,7 +14,7 @@
                                 <div class="page-header-title">
                                     <i class="fa fa-gamepad bg-c-green"></i>
                                     <div class="d-inline my-3">
-                                        <h4>Add Game</h4>
+                                        <h4>{{ isset($game) ? 'Edit' : 'Add' }} Game</h4>
                                     </div>
                                 </div>
                             </div>
@@ -28,7 +28,7 @@
                                         </li>
                                         <li class="breadcrumb-item"><a href="{{ url('admin/dashboard') }}">Home</a>
                                         </li>
-                                        <li class="breadcrumb-item"><a href="#">Add Game</a>
+                                        <li class="breadcrumb-item"><a href="#">{{ isset($game) ? 'Edit' : 'Add' }} Game</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -46,7 +46,7 @@
                                 <!-- Start Form For English -->
                                 <div class="card">
                                     <div class="card-header">
-                                        <h5>Add Game</h5>
+                                        <h5>{{ isset($game) ? 'Edit' : 'Add' }} Game</h5>
 
                                     </div>
                                     <div class="card-block">
@@ -76,7 +76,7 @@
                                                         <option value="">Select Category</option>
 
                                                         @foreach($categories as $key => $category)
-                                                            <option value="{{ $category->id ?? '' }}">{{ $category->title ?? '' }}</option>
+                                                            <option value="{{ $category->id ?? '' }}" {{ isset($game) && ($game->id == $category->id || old('category_id') == $category->id ) ? 'selected' : '' }}>{{ $category->title ?? '' }}</option>
                                                         @endforeach
 
                                                     </select>
@@ -86,7 +86,7 @@
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <label for="short-name">Short Name</label>
-                                                    <input id="short-name" type="text" name="short_name" class="form-control" placeholder="Enter Short Name" value="{{ $game->short_name ?? old('short_name') ?? '' }}">
+                                                    <input id="short-name" type="text" name="short_name" class="form-control" placeholder="Enter Short Name" value="{{ $game->short_name ?? old('short_name') ?? '' }}" {{ isset($game) ? 'readonly' : '' }}>
                                                     @error('short_name')
                                                         <div class="error">{{ $message }}</div>
                                                     @enderror
@@ -134,4 +134,22 @@
  
         </div>
     </div>
+
+@if(!isset($game))
+    <script>
+        const slugify = str =>
+            str.toLowerCase().trim()
+                .replace(/[^\w\s-]/g, '')
+                .replace(/[\s_-]+/g, '-')
+                .replace(/^-+|-+$/g, '');
+
+        $('input[name="title"]').on('change', function(){
+            let short = this.value;
+            let slug = slugify(short);
+            console.log(slug);
+            $('input[name="short_name"]').val(slug);
+        });
+    </script>
+@endif
+
 @endsection
