@@ -1,6 +1,34 @@
 @extends('front.layout.layout')
 
 @section('content')
+    <style>
+        #carouselExampleControls {
+            height: 504px;
+        }
+
+        #carouselExampleControls img {
+            height: 100%;
+            border-radius: 1.5rem;
+        }
+    </style>
+    <div id="carouselExampleControls" class="carousel slide mt-4" data-ride="carousel">
+        <div class="carousel-inner">
+            @foreach($new_games as $key => $new_game)
+                <div class="carousel-item @if($loop->first) active @endif">
+                    <img class="d-block w-100" src="{{ '/storage/game/' . ($new_game->thumbnail ?? '') }}" alt="First slide">
+                </div>
+            @endforeach
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
     <div class="game-container">
 
         <!--New Games -->
