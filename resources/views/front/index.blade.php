@@ -9,7 +9,7 @@
                 <h3 class="h4"><i class="fa fa-plus mx-2" aria-hidden="true"></i>NEW GAMES</h3>
             </div>
             <div class="col-2">
-                <h3 class="h4 text-right"><i class="fa fa-arrow-right" aria-hidden="true"></i></h3>
+                {{-- <h3 class="h4 text-right"><i class="fa fa-arrow-right" aria-hidden="true"></i></h3> --}}
             </div>
         </div>
 
@@ -38,7 +38,7 @@
                 <h3 class="h4"><i class="fa fa-certificate mx-2" aria-hidden="true"></i>POPULAR GAMES</h3>
             </div>
             <div class="col-2">
-                <h3 class="h4 text-right"><i class="fa fa-arrow-right" aria-hidden="true"></i></h3>
+                {{-- <h3 class="h4 text-right"><i class="fa fa-arrow-right" aria-hidden="true"></i></h3> --}}
             </div>
         </div>
 
