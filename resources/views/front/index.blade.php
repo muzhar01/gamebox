@@ -22,7 +22,7 @@
                                 <div class="list-game">
                                     <div class="list-thumbnail mb-1"><img src="{{ '/storage/game/' . ($new_game->thumbnail ?? '') }}" class="small-thumb" alt="{{ $new_game->title }}"></div>
                                     {{-- <div class="list-title"><span class="btn btn-sm btn-outline-success">Play Now</span></div> --}}
-                                    <div class="font-weight-bold text-center text-white">{{ $new_game->title }}</div>
+                                    <div class="font-weight-light text-center text-white">{{ $new_game->title }}</div>
                                 </div>
                             </a>
                         </div>
@@ -51,7 +51,7 @@
                                 <div class="list-game">
                                     <div class="list-thumbnail mb-1"><img src="{{ '/storage/game/' . ($papular_game->thumbnail ?? '') }}" class="small-thumb" alt="{{ $papular_game->title ?? '' }}"></div>
                                     {{-- <div class="list-title"><span class="btn btn-sm btn-outline-success">Play Now</span></div> --}}
-                                    <div class="font-weight-bold text-center text-white">{{ $papular_game->title }}</div>
+                                    <div class="font-weight-light text-center text-white">{{ $papular_game->title }}</div>
                                 </div>
                             </a>
                         </div>
@@ -82,7 +82,7 @@
                                     <div class="list-game">
                                         <div class="list-thumbnail mb-1"><img src="{{ '/storage/game/' . ($game->thumbnail ?? '') }}" class="small-thumb" alt="{{ $game->title ?? '' }}"></div>
                                         {{-- <div class="list-title"><span class="btn btn-sm btn-outline-success">Play Now</span></div> --}}
-                                        <div class="font-weight-bold text-center text-white">{{ $game->title }}</div>
+                                        <div class="font-weight-light text-center text-white">{{ $game->title }}</div>
                                     </div>
                                 </a>
                             </div>
