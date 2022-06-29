@@ -4,55 +4,121 @@
     <div class="game-container">
 
         <!--New Games -->
-        <h3 class="item-title"><i class="fa fa-plus" aria-hidden="true"></i>NEW GAMES</h3>
-        <div class="grid-layout grid-wrapper">
-            @foreach($new_games as $key => $new_game)
-                <div class="grid-item  item-grid">
-                    <a href="{{ $new_game->start_path }}" target="_blank">
-                        <div class="list-game">
-                            <div class="list-thumbnail"><img src="{{ '/storage/game/' . ($new_game->thumbnail ?? '') }}" class="small-thumb" alt="{{ $new_game->title }}"></div>
-                            <div class="list-title"><span class="btn btn-sm btn-outline-success">Play Now</span></div>
-                            <div class="game-title">{{ $new_game->title }}</div>
-                        </div>
-                    </a>
-                </div>
-             @endforeach
-
+        <div class="row mb-3 text-white">
+            <div class="col-10">
+                <h3 class="h4"><i class="fa fa-plus mx-2" aria-hidden="true"></i>NEW GAMES</h3>
+            </div>
+            <div class="col-2">
+                <h3 class="h4 text-right"><i class="fa fa-arrow-right" aria-hidden="true"></i></h3>
+            </div>
         </div>
 
+        <div class="row">
+            <div class="col">
+                <div class="owl-carousel owl-theme">
+                    @foreach($new_games as $key => $new_game)
+                        <div class="grid-item item-grid item shadow-lg">
+                            <a href="{{ $new_game->start_path }}" target="_blank">
+                                <div class="list-game">
+                                    <div class="list-thumbnail mb-1"><img src="{{ '/storage/game/' . ($new_game->thumbnail ?? '') }}" class="small-thumb" alt="{{ $new_game->title }}"></div>
+                                    {{-- <div class="list-title"><span class="btn btn-sm btn-outline-success">Play Now</span></div> --}}
+                                    <div class="font-weight-bold text-center text-white">{{ $new_game->title }}</div>
+                                </div>
+                            </a>
+                        </div>
+                    @endforeach
+
+                </div>
+            </div>
+        </div>
+        <br>
         <!-- Popular games -->
-        <h3 class="item-title"><i class="fa fa-certificate" aria-hidden="true"></i>POPULAR GAMES</h3>
-        <div class="grid-layout grid-wrapper">
-            @foreach($papular_games as $key => $papular_game)
-                <div class="grid-item  item-grid">
-                    <a href="{{ $papular_game->start_path }}">
-                        <div class="list-game">
-                            <div class="list-thumbnail"><img src="{{ '/storage/game/' . ($papular_game->thumbnail ?? '') }}" class="small-thumb" alt="{{ $papular_game->title ?? '' }}"></div>
-                            <div class="list-title"><span class="btn btn-sm btn-outline-success">Play Now</span></div>
-                            <div class="game-title">{{ $papular_game->title }}</div>
-                        </div>
-                    </a>
-                </div>
-            @endforeach
+        <div class="row mb-3 text-white">
+            <div class="col-10">
+                <h3 class="h4"><i class="fa fa-certificate mx-2" aria-hidden="true"></i>POPULAR GAMES</h3>
+            </div>
+            <div class="col-2">
+                <h3 class="h4 text-right"><i class="fa fa-arrow-right" aria-hidden="true"></i></h3>
+            </div>
         </div>
 
-        <!-- You May Like -->
-        <h3 class="item-title"><i class="fa fa-gamepad" aria-hidden="true"></i>YOU MAY LIKE</h3>
-        <div class="grid-layout grid-wrapper">
-            @foreach($foryou_games as $key => $foryou_game)
-                <div class="grid-item  item-grid">
-                    <a href="{{ $foryou_game->start_path }}">
-                        <div class="list-game">
-                            <div class="list-thumbnail"><img src="{{ '/storage/game/' . ($foryou_game->thumbnail ?? '') }}" class="small-thumb" alt="{{ $foryou_game->title ?? '' }}"></div>
-                            <div class="list-title"><span class="btn btn-sm btn-outline-success">Play Now</span></div>
-                            <div class="game-title">{{ $foryou_game->title }}</div>
+        <div class="row">
+            <div class="col">
+                <div class="owl-carousel owl-theme">
+                    @foreach($papular_games as $key => $papular_game)
+                        <div class="grid-item item-grid item shadow-lg">
+                            <a href="{{ $papular_game->start_path }}">
+                                <div class="list-game">
+                                    <div class="list-thumbnail mb-1"><img src="{{ '/storage/game/' . ($papular_game->thumbnail ?? '') }}" class="small-thumb" alt="{{ $papular_game->title ?? '' }}"></div>
+                                    {{-- <div class="list-title"><span class="btn btn-sm btn-outline-success">Play Now</span></div> --}}
+                                    <div class="font-weight-bold text-center text-white">{{ $papular_game->title }}</div>
+                                </div>
+                            </a>
                         </div>
-                    </a>
+                    @endforeach
                 </div>
-            @endforeach
-            
+            </div>
         </div>
+        <br>
 
-    </div>
+        <!-- Category games -->
+        {{-- for each category games --}}
+        @foreach($cat_games as $category)
+            <div class="row mb-3 text-white">
+                <div class="col-10">
+                    <h3 class="h4"><i class="fa fa-gamepad mx-2" aria-hidden="true"></i>{{ $category->title ?? '' }}</h3>
+                </div>
+                <div class="col-2">
+                    <a href="{{ route('home.category', $category->title) }}" class="text-white"><h3 class="h4 text-right"><i class="fa fa-arrow-right" aria-hidden="true"></i></h3></a>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="owl-carousel owl-theme">
+                        @foreach($category->games as $key => $game)
+                            <div class="grid-item item-grid item shadow-lg">
+                                <a href="{{ $game->start_path }}">
+                                    <div class="list-game">
+                                        <div class="list-thumbnail mb-1"><img src="{{ '/storage/game/' . ($game->thumbnail ?? '') }}" class="small-thumb" alt="{{ $game->title ?? '' }}"></div>
+                                        {{-- <div class="list-title"><span class="btn btn-sm btn-outline-success">Play Now</span></div> --}}
+                                        <div class="font-weight-bold text-center text-white">{{ $game->title }}</div>
+                                    </div>
+                                </a>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+            <br>
+        @endforeach
+        {{-- // For each category games --}}
+
+    </div> <!-- //Game Content -->
+
+@endsection
+
+@section('scripts')
+    <script>
+        $(document).ready(function(){
+            var owl = $('.owl-carousel');
+            owl.owlCarousel({
+            margin: 10,
+            nav: false,
+            loop: true,
+            responsive: {
+                0: {
+                items: 4
+                },
+                600: {
+                items: 8
+                },
+                1000: {
+                items: 12
+                }
+            }
+            })
+        })
+    </script>
 
 @endsection

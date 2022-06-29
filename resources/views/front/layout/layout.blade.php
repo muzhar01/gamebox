@@ -9,10 +9,12 @@
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
 	<link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 	<link rel="stylesheet" type="text/css" href="/front_assets/dark-grid/style/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="/front_assets/dark-grid/style/jquery-comments.css">
+	{{-- <link rel="stylesheet" type="text/css" href="/front_assets/dark-grid/style/jquery-comments.css"> --}}
 	<link rel="stylesheet" type="text/css" href="/front_assets/dark-grid/style/user.css">
 	<link rel="stylesheet" type="text/css" href="/front_assets/dark-grid/style/style.css">
-	<link rel="stylesheet" type="text/css" href="/front_assets/dark-grid/style/custom.css">
+	{{-- <link rel="stylesheet" type="text/css" href="/front_assets/dark-grid/style/custom.css"> --}}
+	<link rel="stylesheet" type="text/css" href="/front_assets/css/owl.carousel.min.css">
+	<link rel="stylesheet" type="text/css" href="/front_assets/css/owl.theme.default.min.css">
 	<!-- Font Awesome icons (free version)-->
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> </head>
 
@@ -46,7 +48,7 @@
 			</nav>
 
 				@php
-					$categories = \App\Models\Admin\Category::active()->orderBy('title','asc')->take(8)->get() ?? [];
+					$nav_categories = \App\Models\Admin\Category::active()->orderBy('title','asc')->take(8)->get() ?? [];
 				@endphp
 				
 			<div class="nav-categories">
@@ -57,7 +59,7 @@
 								<li>All Games</li>
 							</a>
 
-							@foreach($categories as $category)
+							@foreach($nav_categories as $category)
 								<a href="{{ route('home.category', $category->title) }}">
 									<li>{{ $category->title }}</li>
 								</a>	
@@ -75,24 +77,6 @@
 
 			</div>
 
-			{{-- <footer class="footer text-center">
-				<div class="container">
-					<div class="row">
-						<div class="col-lg-4 mb-5 mb-lg-0">
-							<h3 class="">FOOTER 1</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-						</div>
-						<div class="col-lg-4 mb-5 mb-lg-0">
-							<h3 class="">FOOTER 2</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-						</div>
-						<div class="col-lg-4">
-							<h3 class="">FOOTER 3</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-						</div>
-					</div>
-				</div>
-			</footer> --}}
 			<div class="copyright py-4 text-center">
 				<div class="container"> Gamebox © 2022. All rights reserved.</div>
 			</div>
@@ -100,10 +84,12 @@
 	</div>
 	<script type="text/javascript" src="/front_assets/dark-grid/js/jquery-3.3.1.min.js"></script>
 	<script type="text/javascript" src="/front_assets/dark-grid/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="https://demo.cloudarcade.net/js/jquery-comments.min.js"></script>
+	<script type="text/javascript" src="/front_assets/js/owl.carousel.min.js"></script>
 	<script type="text/javascript" src="/front_assets/dark-grid/js/script.js"></script>
-	<script type="text/javascript" src="/front_assets/dark-grid/js/custom.js"></script>
-	<script type="text/javascript" src="https://demo.cloudarcade.net/js/stats.js"></script>
+	{{-- <script type="text/javascript" src="/front_assets/dark-grid/js/custom.js"></script> --}}
+
+	@yield('scripts')
+
 </body>
 
 </html>

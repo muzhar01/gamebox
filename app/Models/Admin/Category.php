@@ -15,4 +15,8 @@ class Category extends Model
         return $q->whereStatus(1);
     }
 
+    public function games(){
+        return $this->hasMany(\App\Models\Game::class);
+    }
+
 }

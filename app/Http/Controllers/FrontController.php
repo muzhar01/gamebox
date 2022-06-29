@@ -14,11 +14,15 @@ class FrontController extends Controller
 
     public function index()
     {
-        $new_games = Game::latest()->take(20)->get();
-        $papular_games = Game::take(20)->get();
-        $foryou_games = Game::take(15)->get();
+        $new_games = Game::latest()->active()->take(20)->get();
+        $papular_games = Game::active()->take(20)->get();
+        // $foryou_games = Game::active()->take(15)->get();
+        $cat_games = Category::active()->with(['games' => function($q){
+                return $q->active();
+            }])
+            ->whereHas('games')->take(7)->get();
 
-        return view('front.index', ['new_games' => $new_games, 'papular_games' => $papular_games, 'foryou_games' => $foryou_games]);
+        return view('front.index', ['new_games' => $new_games, 'papular_games' => $papular_games, 'cat_games' => $cat_games]);
     }
     
     /**
