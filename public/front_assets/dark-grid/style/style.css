@@ -109,6 +109,11 @@ https://codepen.io/balazs_sziklai*/
 a.nav-link {
   color: #d1dbe3!important;
 }
+
+a.nav-link.active {
+  color: #ffffffea!important;
+  font-weight: 700;
+}
 li.nav-item:hover {
   background-color: #29254f;
   border-radius: 10px;
@@ -543,6 +548,11 @@ img {
 }
 .nav-item {
   margin: 0 5px;
+}
+
+.nav-item.active {
+  background-color: #bfbbe72b;
+  border-radius: 10px;
 }
 .search-bar {
   margin-left: 10px;

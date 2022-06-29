@@ -53,21 +53,24 @@
 				
 			<div class="nav-categories">
 				<div class="container">
-					<nav class="greedy">
-						<ul class="links list-categories">
-							<a href="/">
-								<li>All Games</li>
-							</a>
+					<div class="row">
+						<div class="col-12">
+							<nav class="">
+								<ul class="nav">
+									<li class="nav-item {{ request()->is('/') ? 'active' : '' }}"><a href="/" class="nav-link {{ request()->is('/') ? 'active' : '' }}">All Games</a></li>
 
-							@foreach($nav_categories as $category)
-								<a href="{{ route('home.category', $category->title) }}">
-									<li>{{ $category->title }}</li>
-								</a>	
-							@endforeach
-						</ul>
-					</nav>
+									@foreach($nav_categories as $category)
+										<li class="nav-item {{ request()->is('*/' . $category->title) ? 'active' : '' }}">
+											<a class="nav-link {{ request()->is('*/' . $category->title) ? 'active' : '' }}" href="{{ route('home.category', $category->title) }}">{{ $category->title }}</a>
+										</li>	
+									@endforeach
+								</ul>
+							</nav>
+						</div>
+					</div>
 				</div>
 			</div>
+
 			<div class="container">
                 {{-- Games Content ========================================= --}}
 
@@ -83,9 +86,11 @@
 		</div>
 	</div>
 	<script type="text/javascript" src="/front_assets/dark-grid/js/jquery-3.3.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="/front_assets/dark-grid/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="/front_assets/js/owl.carousel.min.js"></script>
 	<script type="text/javascript" src="/front_assets/dark-grid/js/script.js"></script>
+	<script type="text/javascript" src="/front_assets/js/greedy-menu.js"></script>
 	{{-- <script type="text/javascript" src="/front_assets/dark-grid/js/custom.js"></script> --}}
 
 	@yield('scripts')
