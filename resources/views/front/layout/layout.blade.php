@@ -46,7 +46,7 @@
 					<div class="navbar-collapse collapse justify-content-end" id="navb">
 						<ul class="navbar-nav ml-auto text-uppercase">
 
-						<li class="nav-item"> <a class="nav-link" href="void:javascript(0)" id="changeLanguageBtn" data-current-language="en" translate="no">العربية</a> </li>
+						<li class="nav-item"> <a class="nav-link" href="#" id="changeLanguageBtn" data-current-language="en" translate="no">العربية</a> </li>
 							<li class="nav-item"> <a class="nav-link" href="#myModal">Login</a> </li>
 
 						</ul>
@@ -276,7 +276,7 @@
 		let changeLanguageBtn = document.querySelector('#changeLanguageBtn');
 		let languageSelect;
 
-		setTimeout(() => {
+	/*	setTimeout(() => {
 			languageSelect = document.querySelector('#google_translate_element .goog-te-combo');
 			if (languageSelect.value === 'en') {
 				changeLanguageBtn.textContent = 'العربية';
@@ -286,6 +286,7 @@
 				document.querySelector('html').dir = 'rtl';
 			}
 		}, 2000);
+		*/
 
 		changeLanguageBtn.addEventListener('click', (e) => {
 			const self = e.target;
