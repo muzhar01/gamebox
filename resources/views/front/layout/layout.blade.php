@@ -15,6 +15,7 @@
 	{{-- <link rel="stylesheet" type="text/css" href="/front_assets/dark-grid/style/custom.css"> --}}
 	<link rel="stylesheet" type="text/css" href="/front_assets/css/owl.carousel.min.css">
 	<link rel="stylesheet" type="text/css" href="/front_assets/css/owl.theme.default.min.css">
+	<link rel="stylesheet" type="text/css" href="/front_assets/css/custom.css">
 	<!-- Font Awesome icons (free version)-->
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -30,7 +31,7 @@
 					<div class="navbar-collapse collapse justify-content-end" id="navb">
 						<ul class="navbar-nav ml-auto text-uppercase">
 							
-							<li class="nav-item"> <a class="nav-link" href="/login">Login</a> </li>
+							<li class="nav-item"> <a href="#myModal" class="nav-link" data-toggle="modal">Login</a> </li>
 						</ul>
 
                         {{-- Search Form  =========== --}}
@@ -106,6 +107,29 @@
 			</div>
 		</div>
 	</div>
+	<!-- Modal HTML -->
+<div id="myModal" class="modal fade">
+	<div class="modal-dialog modal-login">
+		<div class="modal-content">
+			<div class="modal-header">				
+				<h4 class="modal-title">Login</h4>
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			</div>
+			<div class="modal-body">
+				<form action="" method="post">
+					<div class="form-group">
+						<i class="fa fa-phone"></i>
+						<input type="number" class="form-control" placeholder="Number" required="required">
+					</div>
+					<div class="form-group">
+						<input type="submit" class="btn btn-primary btn-block btn-lg" value="Login">
+					</div>
+				</form>				
+				
+			</div>
+		</div>
+	</div>
+</div> 
 	<script type="text/javascript" src="/front_assets/dark-grid/js/jquery-3.3.1.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="/front_assets/dark-grid/js/bootstrap.min.js"></script>
