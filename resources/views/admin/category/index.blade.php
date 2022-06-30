@@ -42,39 +42,82 @@
                   <div class="card-header">
                       <h5>Categories</h5>
                       <div class="card-header-right">    
-                        <a class="btn btn-primary" href="{{ route('admin-add-category') }}"><i class="fa fa-plus text-white"></i>Add</a>
+                        <a class="btn btn-primary" href="{{ route('admin.category.create') }}"><i class="fa fa-plus text-white"></i>Add</a>
                       </div>
                   </div>
                   <div class="card-block table-border-style">
+                    @if(session()->has('success'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('success') }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                    @endif
+
+                    @if(session()->has('error'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {{ session('error') }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                    @endif
+
                       <div class="table-responsive">
                           <table class="table">
                               <thead>
                                   <tr>
                                       <th>#</th>
-                                      <th>First Name</th>
-                                      <th>Last Name</th>
-                                      <th>Username</th>
+                                      <th>Title</th>
+                                      <th>Thumbnail</th>
+                                      <th>Status</th>
+                                      <th>Action</th>
                                   </tr>
                               </thead>
                               <tbody>
-                                  <tr>
-                                      <th scope="row">1</th>
-                                      <td>Mark</td>
-                                      <td>Otto</td>
-                                      <td>@mdo</td>
-                                  </tr>
-                                  <tr>
-                                      <th scope="row">2</th>
-                                      <td>Jacob</td>
-                                      <td>Thornton</td>
-                                      <td>@fat</td>
-                                  </tr>
-                                  <tr>
-                                      <th scope="row">3</th>
-                                      <td>Larry</td>
-                                      <td>the Bird</td>
-                                      <td>@twitter</td>
-                                  </tr>
+                                @foreach($categories as $category)
+                                    <tr>
+                                        <th scope="row">{{ $loop->iteration }}</th>
+                                        <td>{{ $category->title ?? '' }}</td>
+                                        <td><img src="{{ '/storage/category/' . ($category->thumbnail ?? '') }}" alt="{{ $category->title ?? '' }}" style="height:50px !important;width:auto;"></td>
+                                        
+                                        <td>
+                                            <div class="btn-group">
+                                                @if($category->status == 1)
+                                                    <button type="button" class="btn btn-success">Active</button>
+                                                @else
+                                                    <button type="button" class="btn btn-danger">Deactive</button>
+                                                @endif
+
+                                                <button type="button" class="btn btn-{{ $category->status == 1 ? 'success' : 'danger' }} dropdown-toggle dropdown-icon" data-toggle="dropdown" aria-expanded="false">
+                                                <span class="sr-only">Toggle Dropdown</span>
+                                                </button>
+                                                <div class="dropdown-menu" role="menu" style="">
+                                                    <a class="dropdown-item" href="{{ route('admin.category.show',$category->id) ."?status=1" }}">Active</a>
+                                                    <a class="dropdown-item" href="{{ route('admin.category.show',$category->id) ."?status=0" }}">Deactive</a>
+                                                </div>
+                                            </div>
+                                      </td>
+                                      <td>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-default">Action</button>
+                                            <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown">
+                                              <span class="sr-only">Toggle Dropdown</span>
+                                            </button>
+                                            <div class="dropdown-menu" role="menu">
+                                              <a class="dropdown-item" href="{{ route('admin.category.edit', $category->id) }}">Edit</a>
+                                              <form action="{{ route('admin.category.destroy', $category->id) }}" method="post" class="form-inline m-0 p-0">
+                                                @csrf
+                                                @method('DELETE')
+                                                <a class="dropdown-item" href="#"><button class="border-0" type="submit">Delete</button></a>
+                                              </form>
+                                            </div>
+                                        </div>
+                                      </td>
+
+                                    </tr>
+                                @endforeach
                               </tbody>
                           </table>
                       </div>

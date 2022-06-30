@@ -13,7 +13,7 @@
                                 <div class="page-header-title">
                                     <i class="fa fa-file bg-c-blue"></i>
                                     <div class="d-inline">
-                                        <h4>Add Category</h4>
+                                        <h4>{{ isset($category) ? 'Edit' : 'Add' }} Category</h4>
                                     </div>
                                 </div>
                             </div>
@@ -27,7 +27,7 @@
                                         </li>
                                         <li class="breadcrumb-item"><a href="{{ url('admin/dashboard') }}">Home</a>
                                         </li>
-                                        <li class="breadcrumb-item"><a href="#!">Add Category</a>
+                                        <li class="breadcrumb-item"><a href="#">{{ isset($category) ? 'Edit' : 'Add' }} Category</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -59,32 +59,48 @@
                                 <!-- Start Form For English -->
                                 <div class="card forEnglish">
                                     <div class="card-header">
-                                        <h5>Add Category</h5>
+                                        <h5>{{ isset($category) ? 'Edit' : 'Add' }} Category</h5>
                                     </div>
                                     <div class="card-block">
-                                        <form>
+                                        <form action="{{ isset($category) ? route('admin.category.update', $category->id) : route('admin.category.store') }}" method="POST" enctype="multipart/form-data">
+                                             @if(isset($category))
+                                                @method('PUT')
+                                             @endif
+                                            @csrf
                                             <div class="form-group row">
                                                 <div class="col-sm-6">
                                                     <label for="">Title</label>
-                                                    <input type="text" name="title" class="form-control" placeholder="Enter Title">
+                                                    <input type="text" name="title" class="form-control" placeholder="Enter Title" value="{{ isset($category) ? ($category->title ?? '') : old('title') }}">
+                                                    @error('title')
+                                                        <div class="error">{{ $message }}</div>
+                                                    @enderror
                                                 </div>
                                                 <div class="col-sm-6">
                                                   <label for="">Thumbnail</label>
                                                   <input type="file" name="thumbnail" class="form-control">
+                                                  @error('thumbnail')
+                                                        <div class="error">{{ $message }}</div>
+                                                    @enderror
                                                 </div>
                                             </div>
                                             
-                                            <div class="form-group row arabicTitle"></div>
                                             <div class="form-group row">
                                                 <div class="col-sm-12">
-                                                  <label for="">Description</label>
-                                                  <textarea name="description" class="form-control"></textarea>
+                                                    <label for="">Description</label>
+                                                    <textarea name="description" class="form-control">{{ isset($category) ? ($category->description ?? '') : old('description') }}</textarea>
+                                                    @error('description')
+                                                        <div class="error">{{ $message }}</div>
+                                                    @enderror
                                                 </div>
                                             </div>
-                                            <div class="form-group row arabicDescription">
+
+                                            <div dir="rtl">
+                                                <div class="form-group row arabicTitle"></div>
+                                                <div class="form-group row arabicDescription"></div>
                                             </div>
+
                                             <div class="">
-                                              <button class="btn btn-primary float-right" type="submit">Submit  </button>
+                                              <button class="btn btn-primary float-right" type="submit">{{ isset($category) ? 'Update': 'Submit' }}</button>
                                             </div>
                                         </form>
                                     </div>
@@ -110,8 +126,8 @@
           if(child_language=="arabic"){
             $('.arabicTitle').html('');
             $('.arabicDescription').html('');
-            $('.arabicTitle').append('<div class="col-sm-6" dir="rtl"><label for="">عنوان</label><input type="text" name="title" class="form-control" placeholder="أدخل العنوان"> </div>');
-            $('.arabicDescription').append('<div class="col-sm-12"><label for="">وصف</label><textarea name="description" class="form-control"></textarea></div>');
+            $('.arabicTitle').append('<div class="col-sm-6" dir="rtl"><label for="">عنوان</label><input type="text" name="ar_title" class="form-control" placeholder="أدخل العنوان"> </div>');
+            $('.arabicDescription').append('<div class="col-sm-12" dir="rtl"><label for="">وصف</label><textarea name="ar_description" class="form-control"></textarea></div>');
           }else{
             $('.arabicTitle').html('');
             $('.arabicDescription').html('');

@@ -124,7 +124,7 @@
                                     </a>
                                 </li>
                                 <li class="{{ request()->is('*category*') ? 'active' : '' }}">
-                                    <a href="{{ route('admin-category') }}">
+                                    <a href="{{ route('admin.category.index') }}">
                                         <span class="pcoded-micon"><i class="fa fa-list"></i></span>
                                         <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Category</span>
                                         <span class="pcoded-mcaret"></span>
