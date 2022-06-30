@@ -53,7 +53,7 @@
 
                         {{-- Search Form  =========== --}}
 
-						{{-- <form class="form-inline my-2 my-lg-0 search-bar" action="/">
+                        {{-- <form class="form-inline my-2 my-lg-0 search-bar" action="/">
 							<div class="input-group">
 								<input type="hidden" name="viewpage" value="search">
 								<input type="text" class="form-control rounded-left search" placeholder="Search game" name="slug" minlength="2" required="">
@@ -88,75 +88,182 @@
 			</div>
 			@endif
 
-				@php
-					$nav_categories = \App\Models\Admin\Category::active()->orderBy('title','asc')->take(8)->get() ?? [];
-				@endphp
-				
-			<div class="nav-categories">
-				<div class="container">
-					<div class="row">
-						<div class="col-12">
-							<nav class="">
-								<ul class="nav">
-									<li class="nav-item {{ request()->is('/') ? 'active' : '' }}"><a href="/" class="nav-link {{ request()->is('/') ? 'active' : '' }}">All Games</a></li>
+            @php
+                $nav_categories =
+                    \App\Models\Admin\Category::active()
+                        ->orderBy('title', 'asc')
+                        ->take(8)
+                        ->get() ?? [];
+            @endphp
 
-									@foreach($nav_categories as $category)
-										<li class="nav-item {{ request()->is('*/' . $category->title) ? 'active' : '' }}">
-											<a class="nav-link {{ request()->is('*/' . $category->title) ? 'active' : '' }}" href="{{ route('home.category', $category->title) }}">{{ $category->title }}</a>
-										</li>	
-									@endforeach
-								</ul>
-							</nav>
-						</div>
-					</div>
-				</div>
-			</div>
+            <div class="nav-categories">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <nav class="">
+                                <ul class="nav">
+                                    <li class="nav-item {{ request()->is('/') ? 'active' : '' }}"><a href="/"
+                                            class="nav-link {{ request()->is('/') ? 'active' : '' }}">All Games</a>
+                                    </li>
 
-			<div class="container">
+                                    @foreach ($nav_categories as $category)
+                                        <li
+                                            class="nav-item {{ request()->is('*/' . $category->title) ? 'active' : '' }}">
+                                            <a class="nav-link {{ request()->is('*/' . $category->title) ? 'active' : '' }}"
+                                                href="{{ route('home.category', $category->title) }}">{{ $category->title }}</a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
                 {{-- Games Content ========================================= --}}
 
                 @yield('content')
 
                 {{-- // Games Content ========================================= --}}
 
-			</div>
+            </div>
 
-			<div class="copyright py-4 text-center">
-				<div class="container"> Gamebox © 2022. All rights reserved.</div>
-			</div>
-		</div>
-	</div>
-	<!-- Modal HTML -->
-<div id="myModal" class="modal fade">
-	<div class="modal-dialog modal-login">
-		<div class="modal-content">
-			<div class="modal-header">				
-				<h4 class="modal-title">Login</h4>
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			</div>
-			<div class="modal-body">
-				<form action="" method="post">
-					<div class="form-group">
-						<i class="fa fa-phone"></i>
-						<input type="number" class="form-control" placeholder="Number" required="required">
-					</div>
-					<div class="form-group">
-						<input type="submit" class="btn btn-primary btn-block btn-lg" value="Login">
-					</div>
-				</form>				
-				
-			</div>
-		</div>
-	</div>
-</div> 
-	<script type="text/javascript" src="/front_assets/dark-grid/js/jquery-3.3.1.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-	<script type="text/javascript" src="/front_assets/dark-grid/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="/front_assets/js/owl.carousel.min.js"></script>
-	<script type="text/javascript" src="/front_assets/dark-grid/js/script.js"></script>
-	<script type="text/javascript" src="/front_assets/js/greedy-menu.js"></script>
-	{{-- <script type="text/javascript" src="/front_assets/dark-grid/js/custom.js"></script> --}}
+            <div class="copyright py-4 text-center">
+                <div class="container"> Gamebox © 2022. All rights reserved.</div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade login" id="loginModal">
+        <div class="modal-dialog login animated">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Login</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="box">
+                        <div class="content">
+                            <div class="error"></div>
+                            <div class="form loginBox">
+                                <form id="user_login" action="" accept-charset="UTF-8">
+                                    <input id="u_number" class="form-control" type="number" placeholder="Phone"
+                                        name="phone">
+                                    <input id="u_password" class="form-control" type="password"
+                                        placeholder="Password" name="password">
+                                    <input class="btn btn-default btn-login" type="submit" value="Login">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="content registerBox" style="display:none;">
+                            <div class="form">
+                                <form id="user_register" method="" html="{:multipart=>true}" data-remote="true"
+                                    action="" accept-charset="UTF-8">
 
+                                    <input id="username" class="form-control" type="text" placeholder="Name"
+                                        name="name">
+                                    <input id="useremail" class="form-control" type="email" placeholder="Email"
+                                        name="email">
+                                    <input id="usernumber" class="form-control" type="number" placeholder="Phone"
+                                        name="phone">
+                                    <input id="userpassword" class="form-control" type="password"
+                                        placeholder="Password" name="password">
+                                    <input id="userpassword_confirmation" class="form-control" type="password"
+                                        placeholder="Repeat Password" name="password_confirmation">
+                                    <input class="btn btn-default btn-register" type="submit" value="Create account"
+                                        name="commit">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="forgot login-footer">
+                        <span>Looking to
+                            <a href="javascript: showRegisterForm();">create an account</a>
+                            ?</span>
+                    </div>
+                    <div class="forgot register-footer" style="display:none">
+                        <span>Already have an account?</span>
+                        <a href="javascript: showLoginForm();">Login</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="/front_assets/dark-grid/js/jquery-3.3.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="/front_assets/dark-grid/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/front_assets/js/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="/front_assets/dark-grid/js/script.js"></script>
+    <script type="text/javascript" src="/front_assets/js/greedy-menu.js"></script>
+    <script type="text/javascript" src="/front_assets/js/custom.js"></script>
+    {{-- <script type="text/javascript" src="/front_assets/dark-grid/js/custom.js"></script> --}}
+    <script>
+        $(document).ready(function() {
+            $('#user_register').submit(function(e) {
+                e.preventDefault();
+                var name = $('#username').val();
+                var email = $('#useremail').val();
+                var phone = $('#usernumber').val();
+                var password = $('#userpassword').val();
+                var password_confirmation = $('#userpassword_confirmation').val();
+                console.log(name);
+
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                    },
+                    type: "post",
+                    url: "{{ route('user-register') }}",
+                    data: {
+                        'name': name,
+                        'email': email,
+                        'phone': phone,
+                        'password': password,
+                        'password_confirmation': password_confirmation
+                    },
+                    success: function(response) {
+                        console.log(response);
+                        if (response.errors) {
+                            console.log("Error");
+
+                        }
+                    }
+                });
+            });
+            $('#user_login').submit(function(e) {
+                e.preventDefault();
+                var phone = $('#u_number').val();
+                var password = $('#u_password').val();
+                console.log(name);
+
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                    },
+                    type: "post",
+                    url: "{{ route('user-login') }}",
+                    data: {
+                        'phone': phone,
+                        'password': password,
+                    },
+                    success: function(response) {
+                        console.log(response);
+                        if (response.errors) {
+                            console.log("Error");
+
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+    @yield('scripts')
 	<script type="text/javascript">
 	function googleTranslateElementInit() {
 	new google.translate.TranslateElement({includedLanguages: "ar,en"}, 'google_translate_element');

@@ -9,6 +9,7 @@ use App\Http\Controllers\FrontController;
 use App\Http\Controllers\GameController;
 use App\Models\Admin\Category;
 use App\Http\Controllers\Admin\SliderController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,3 +62,5 @@ Route::group(['middleware'=>'admin_auth'],function(){
 ////Logout Route///
 Route::get('/admin/logout', [LoginController::class,'logout'])->name('admin-logout');
 Route::get('admin/secreat',[LoginController::class,'secreat']);
+Route::post('user/register',[UserController::class,'register'])->name('user-register');
+Route::post('user/login',[UserController::class,'login'])->name('user-login');
