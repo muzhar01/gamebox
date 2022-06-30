@@ -11,25 +11,6 @@
             border-radius: 1.5rem;
         }
     </style>
-    <div id="carouselExampleControls" class="carousel slide mt-4" data-ride="carousel">
-        <div class="carousel-inner">
-            @foreach($sliders as $slider)
-                <div class="carousel-item @if($loop->first) active @endif">
-                    <a href="{{ $slider->link }}">
-                        <img class="d-block w-100" src="{{ '/storage/sliders/' . ($slider->banner ?? '') }}" alt="">
-                    </a>
-                </div>
-            @endforeach
-        </div>
-        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
-    </div>
 
     <div class="game-container">
 
