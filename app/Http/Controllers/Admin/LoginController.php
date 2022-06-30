@@ -52,6 +52,6 @@ class LoginController extends Controller
         session()->forget('ADMIN_ID');
         session()->forget('ADMIN_EMAIL');
         $notifiction=array('message'=>'Logout Successfully','alert-type'=>'success');
-        return view('admin.login',$notifiction);
+        return redirect('/admin')->with($notifiction);
     }
 }

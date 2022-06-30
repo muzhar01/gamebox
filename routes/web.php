@@ -36,7 +36,7 @@ Route::group(['middleware'=>'admin_auth'],function(){
     //Resource for game
     Route::resource('admin/game', GameController::class);
 
-    ////Logout Route///
-    Route::get('/admin/logout', [LoginController::class,'logout'])->name('admin-logout');
 });
+////Logout Route///
+Route::get('/admin/logout', [LoginController::class,'logout'])->name('admin-logout');
 Route::get('admin/secreat',[LoginController::class,'secreat']);
