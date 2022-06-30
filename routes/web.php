@@ -44,6 +44,7 @@ Route::group(['middleware'=>'admin_auth'],function(){
     //Resource for game
     Route::resource('admin/game', GameController::class);
 
+
     // Customization
     Route::prefix('admin/customize')->name('admin.customize.')->group(function () {
         Route::get('homepage', [CustomizeController::class, 'editHomePage'])->name('homepage');
@@ -54,4 +55,6 @@ Route::group(['middleware'=>'admin_auth'],function(){
     ////Logout Route///
     Route::get('/admin/logout', [LoginController::class,'logout'])->name('admin-logout');
 });
+////Logout Route///
+Route::get('/admin/logout', [LoginController::class,'logout'])->name('admin-logout');
 Route::get('admin/secreat',[LoginController::class,'secreat']);
