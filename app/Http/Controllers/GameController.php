@@ -12,7 +12,7 @@ class GameController extends Controller
      */
     public function index()
     {
-        $games = Game::paginate(10);
+        $games = Game::all();
         return view('admin.game.index', ['games' => $games]);
     }
     
@@ -32,7 +32,7 @@ class GameController extends Controller
         $inputs = $request->validate([
             'title' => 'required',
             'short_name' => 'required',
-            'description' => 'required',
+            'description' => '',
             'thumbnail' => 'required|image',
             'gamefile' => 'required',
             'category_id' => 'required'
@@ -93,7 +93,7 @@ class GameController extends Controller
         $inputs = $request->validate([
             'title' => 'required',
             'short_name' => 'required',
-            'description' => 'required',
+            'description' => '',
         ]);
 
         if($game->id){
