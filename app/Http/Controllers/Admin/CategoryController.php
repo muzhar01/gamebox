@@ -32,7 +32,7 @@ class CategoryController extends Controller
     {
         $inputs = $request->validate([
             'title' => 'required|string|max:254',
-            'description' => 'required|string|max:254',
+            'description' => '',
             'thumbnail' => 'required|image'
         ]);
 
@@ -81,22 +81,23 @@ class CategoryController extends Controller
     {
         $inputs = $request->validate([
             'title' => 'required|string|max:254',
-            'description' => 'required|string|max:254',
+            'description' => '',
             'thumbnail' => ''
         ]);
 
-        $old_image = public_path('storage/category/') . $category->thumbnail;
-
-        if(file_exists($old_image)){
-            unlink($old_image);
-        }
-
-        $imageName = time().'.'.$request->thumbnail->extension();  
-        $request->thumbnail->move(public_path('storage/category'), $imageName);
-
-        // $category = new Category();
         $category->fill($inputs);
-        $category->thumbnail = $imageName;
+
+        if($request->has('thumbnail')){
+            $old_image = public_path('storage/category/') . $category->thumbnail;
+            if(file_exists($old_image)){
+                unlink($old_image);
+            }
+
+            $imageName = time().'.'.$request->thumbnail->extension();  
+            $request->thumbnail->move(public_path('storage/category'), $imageName);
+            $category->thumbnail = $imageName;
+        }
+        
         $category->save();
 
         return redirect()->route('admin.category.index')->with('success', 'Category updated Successfully.');

@@ -1,27 +1,25 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Gamebox | Play Games Online</title>
-    <meta name="description" content="Play Games Online">
-    <!-- Google fonts-->
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet"
-        type="text/css">
-    <link rel="stylesheet" type="text/css" href="/front_assets/dark-grid/style/bootstrap.min.css">
-    {{-- <link rel="stylesheet" type="text/css" href="/front_assets/dark-grid/style/jquery-comments.css"> --}}
-    <link rel="stylesheet" type="text/css" href="/front_assets/dark-grid/style/user.css">
-    <link rel="stylesheet" type="text/css" href="/front_assets/dark-grid/style/style.css">
-    {{-- <link rel="stylesheet" type="text/css" href="/front_assets/dark-grid/style/custom.css"> --}}
-    <link rel="stylesheet" type="text/css" href="/front_assets/css/owl.carousel.min.css">
-    <link rel="stylesheet" type="text/css" href="/front_assets/css/owl.theme.default.min.css">
-    <link rel="stylesheet" type="text/css" href="/front_assets/css/custom.css">
-    <!-- Font Awesome icons (free version)-->
-    <link rel="stylesheet" type="text/css"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Gamebox | Play Games Online</title>
+	<meta name="description" content="Play Games Online">
+	<!-- Google fonts-->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" type="text/css" href="/front_assets/dark-grid/style/bootstrap.min.css">
+	{{-- <link rel="stylesheet" type="text/css" href="/front_assets/dark-grid/style/jquery-comments.css"> --}}
+	<link rel="stylesheet" type="text/css" href="/front_assets/dark-grid/style/user.css">
+	<link rel="stylesheet" type="text/css" href="/front_assets/dark-grid/style/style.css">
+	{{-- <link rel="stylesheet" type="text/css" href="/front_assets/dark-grid/style/custom.css"> --}}
+	<link rel="stylesheet" type="text/css" href="/front_assets/css/owl.carousel.min.css">
+	<link rel="stylesheet" type="text/css" href="/front_assets/css/owl.theme.default.min.css">
+	<link rel="stylesheet" type="text/css" href="/front_assets/css/custom.css">
+	<!-- Font Awesome icons (free version)-->
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+</head>
 <body id="page-top">
     <!-- Navigation-->
 
@@ -56,26 +54,25 @@
                 </div>
             </nav>
 
-            <div id="carouselExampleControls" class="carousel slide m-4" data-ride="carousel">
-                <div class="carousel-inner">
-                    @foreach ($sliders as $slider)
-                        <div class="carousel-item @if ($loop->first) active @endif">
-                            <a href="{{ $slider->link }}">
-                                <img class="d-block w-100" src="{{ '/storage/sliders/' . ($slider->banner ?? '') }}"
-                                    alt="">
-                            </a>
-                        </div>
-                    @endforeach
-                </div>
-                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
-            </div>
+			<div id="carouselExampleControls" class="carousel slide m-4 h-auto" data-ride="carousel">
+				<div class="carousel-inner">
+					@foreach($sliders as $slider)
+						<div class="carousel-item @if($loop->first) active @endif">
+							<a href="{{ $slider->link }}">
+								<img class="d-block w-100 h-auto" src="{{ '/storage/sliders/' . ($slider->banner ?? '') }}" alt="">
+							</a>
+						</div>
+					@endforeach
+				</div>
+				<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					<span class="sr-only">Previous</span>
+				</a>
+				<a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+					<span class="sr-only">Next</span>
+				</a>
+			</div>
 
             @php
                 $nav_categories =
@@ -136,9 +133,9 @@
                             <div class="error"></div>
                             <div class="form loginBox">
                                 <form id="user_login" action="" accept-charset="UTF-8">
-                                    <input id="number" class="form-control" type="number" placeholder="Phone"
+                                    <input id="u_number" class="form-control" type="number" placeholder="Phone"
                                         name="phone">
-                                    <input id="password" class="form-control" type="password"
+                                    <input id="u_password" class="form-control" type="password"
                                         placeholder="Password" name="password">
                                     <input class="btn btn-default btn-login" type="submit" value="Login">
                                 </form>
@@ -215,6 +212,31 @@
                         'phone': phone,
                         'password': password,
                         'password_confirmation': password_confirmation
+                    },
+                    success: function(response) {
+                        console.log(response);
+                        if (response.errors) {
+                            console.log("Error");
+
+                        }
+                    }
+                });
+            });
+            $('#user_login').submit(function(e) {
+                e.preventDefault();
+                var phone = $('#u_number').val();
+                var password = $('#u_password').val();
+                console.log(name);
+
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                    },
+                    type: "post",
+                    url: "{{ route('user-login') }}",
+                    data: {
+                        'phone': phone,
+                        'password': password,
                     },
                     success: function(response) {
                         console.log(response);
