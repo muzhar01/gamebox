@@ -19,25 +19,37 @@
 	<!-- Font Awesome icons (free version)-->
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+	<style>
+
+		body{
+			background-image: url('/front_assets/background/bg.png');
+			background-repeat: no-repeat;
+			background-size: cover;
+			top: 0 !important;
+		}
+		.skiptranslate {
+			display: none !important;
+		}
+	</style>
+
 </head>
+
 <body id="page-top">
-    <!-- Navigation-->
+<div id="google_translate_element" class="d-none"></div>
+	<!-- Navigation-->
+	<div class="container site-container">
+		<div class="site-content">
+			<nav class="navbar navbar-expand-lg navbar-dark top-nav" id="mainNav">
+				<div class="container">
+					<button class="navbar-toggler navbar-toggler-left collapsed" type="button" data-toggle="collapse" data-target="#navb" aria-expanded="false"> <span class="navbar-toggler-icon"></span> </button>
+					<a class="navbar-brand js-scroll-trigger" href="/"><img src="{{ isset($logo) ? $logo : '/front_assets/logo.png' }}" class="site-logo" alt="Gamebox" style="height: 100px !important;"></a>
+					<div class="navbar-collapse collapse justify-content-end" id="navb">
+						<ul class="navbar-nav ml-auto text-uppercase">
 
-    <div class="container site-container">
-        <div class="site-content">
-            <nav class="navbar navbar-expand-lg navbar-dark top-nav" id="mainNav">
-                <div class="container">
-                    <button class="navbar-toggler navbar-toggler-left collapsed" type="button" data-toggle="collapse"
-                        data-target="#navb" aria-expanded="false"> <span class="navbar-toggler-icon"></span> </button>
-                    <a class="navbar-brand js-scroll-trigger" href="/"><img
-                            src="{{ isset($logo) ? $logo : '/front_assets/logo.png' }}" class="site-logo"
-                            alt="Gamebox" style="height: 100px !important;"></a>
-                    <div class="navbar-collapse collapse justify-content-end" id="navb">
-                        <ul class="navbar-nav ml-auto text-uppercase">
+						<li class="nav-item"> <a class="nav-link" href="void:javascript(0)" id="changeLanguageBtn" data-current-language="en" translate="no">العربية</a> </li>
+							<li class="nav-item"> <a class="nav-link" href="#myModal">Login</a> </li>
 
-                            <li class="nav-item"> <a class="nav-link" data-toggle="modal" href="javascript:void(0)"
-                                    onclick="openLoginModal();">Login \ Register</a> </li>
-                        </ul>
+						</ul>
 
                         {{-- Search Form  =========== --}}
 
@@ -50,9 +62,10 @@
 								</div>
 							</div>
 						</form> --}}
-                    </div>
-                </div>
-            </nav>
+					</div>
+				</div>
+			</nav>		
+			@if (isset($sliders))
 
 			<div id="carouselExampleControls" class="carousel slide m-4 h-auto" data-ride="carousel">
 				<div class="carousel-inner">
@@ -73,6 +86,7 @@
 					<span class="sr-only">Next</span>
 				</a>
 			</div>
+			@endif
 
             @php
                 $nav_categories =
@@ -250,6 +264,74 @@
         });
     </script>
     @yield('scripts')
+	<script type="text/javascript">
+	function googleTranslateElementInit() {
+	new google.translate.TranslateElement({includedLanguages: "ar,en"}, 'google_translate_element');
+	}
+	</script>
+
+	<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+	<script>
+		let changeLanguageBtn = document.querySelector('#changeLanguageBtn');
+		let languageSelect;
+
+		setTimeout(() => {
+			languageSelect = document.querySelector('#google_translate_element .goog-te-combo');
+			if (languageSelect.value === 'en') {
+				changeLanguageBtn.textContent = 'العربية';
+				document.querySelector('html').dir = 'ltr';
+			} else {
+				changeLanguageBtn.textContent = 'English';
+				document.querySelector('html').dir = 'rtl';
+			}
+		}, 2000);
+
+		changeLanguageBtn.addEventListener('click', (e) => {
+			const self = e.target;
+
+			if (!languageSelect) return;
+
+			if (self.dataset.currentLanguage === 'en') {
+				// Change language to arabic
+				self.dataset.currentLanguage = 'ar';
+				self.textContent = 'English';
+				languageSelect.querySelector('[value="ar"]').selected = true;
+
+				// Fire onchange event
+				if ("createEvent" in document) {
+					var evt = document.createEvent("HTMLEvents");
+					evt.initEvent("change", false, true);
+					languageSelect.dispatchEvent(evt);
+				}
+				else {
+					languageSelect.fireEvent("onchange");
+				}
+
+				document.querySelector('html').dir = 'rtl';
+
+			} else {
+				// Change language to english
+				self.dataset.currentLanguage = 'en';
+				self.textContent = 'العربية';
+				languageSelect.querySelector('[value="en"]').selected = true;
+
+				// Fire onchange event
+				if ("createEvent" in document) {
+					var evt = document.createEvent("HTMLEvents");
+					evt.initEvent("change", false, true);
+					languageSelect.dispatchEvent(evt);
+				}
+				else {
+					languageSelect.fireEvent("onchange");
+				}
+
+				document.querySelector('html').dir = 'ltr';
+			}
+		}, false);
+	</script>
+
+	@yield('scripts')
 
 </body>
 
