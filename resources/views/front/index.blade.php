@@ -1,6 +1,17 @@
 @extends('front.layout.layout')
 
 @section('content')
+    <style>
+        #carouselExampleControls {
+            height: 504px;
+        }
+
+        #carouselExampleControls img {
+            height: 100%;
+            border-radius: 1.5rem;
+        }
+    </style>
+
     <div class="game-container">
 
         <!--New Games -->

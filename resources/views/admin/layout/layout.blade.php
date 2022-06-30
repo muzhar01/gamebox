@@ -138,6 +138,14 @@
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
+
+                                <li class="{{ request()->is('*customize/home-page*') ? 'active' : '' }}">
+                                    <a href="{{ route('admin.customize.homepage') }}">
+                                        <span class="pcoded-micon"><i class="fa fa-gamepad"></i></span>
+                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Customize Home Page</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
                             </ul>
 
                         </div>

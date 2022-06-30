@@ -1,12 +1,14 @@
 <?php
 
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\CustomizeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\GameController;
 use App\Models\Admin\Category;
+use App\Http\Controllers\Admin\SliderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +44,16 @@ Route::group(['middleware'=>'admin_auth'],function(){
     //Resource for game
     Route::resource('admin/game', GameController::class);
 
+
+    // Customization
+    Route::prefix('admin/customize')->name('admin.customize.')->group(function () {
+        Route::get('homepage', [CustomizeController::class, 'editHomePage'])->name('homepage');
+    });
+
+    Route::resource('admin/slider', SliderController::class, ['as' => 'admin']);
+
+    ////Logout Route///
+    Route::get('/admin/logout', [LoginController::class,'logout'])->name('admin-logout');
 });
 ////Logout Route///
 Route::get('/admin/logout', [LoginController::class,'logout'])->name('admin-logout');

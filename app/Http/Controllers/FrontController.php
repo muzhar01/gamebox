@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Admin\Category;
 use App\Models\Game;
+use App\Models\Slider;
 
 class FrontController extends Controller
 {
@@ -13,16 +14,17 @@ class FrontController extends Controller
      */
 
     public function index()
-    {
+    { 
         $new_games = Game::latest()->active()->take(20)->get();
         $papular_games = Game::active()->take(20)->get();
         // $foryou_games = Game::active()->take(15)->get();
+        $sliders = Slider::where('status', 1)->get();
         $cat_games = Category::active()->with(['games' => function($q){
                 return $q->active();
             }])
             ->whereHas('games')->take(7)->get();
 
-        return view('front.index', ['new_games' => $new_games, 'papular_games' => $papular_games, 'cat_games' => $cat_games]);
+        return view('front.index', ['sliders' => $sliders, 'new_games' => $new_games, 'papular_games' => $papular_games, 'cat_games' => $cat_games]);
     }
     
     /**
