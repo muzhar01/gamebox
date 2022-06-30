@@ -100,7 +100,7 @@
                                             </div>
 
                                             <div class="">
-                                              <button class="btn btn-primary float-right" type="submit">Submit</button>
+                                              <button class="btn btn-primary float-right" type="submit">{{ isset($category) ? 'Update': 'Submit' }}</button>
                                             </div>
                                         </form>
                                     </div>

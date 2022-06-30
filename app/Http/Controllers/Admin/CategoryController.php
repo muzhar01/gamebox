@@ -94,7 +94,7 @@ class CategoryController extends Controller
         $imageName = time().'.'.$request->thumbnail->extension();  
         $request->thumbnail->move(public_path('storage/category'), $imageName);
 
-        $category = new Category();
+        // $category = new Category();
         $category->fill($inputs);
         $category->thumbnail = $imageName;
         $category->save();
