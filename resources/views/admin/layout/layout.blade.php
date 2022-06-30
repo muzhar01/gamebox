@@ -94,11 +94,11 @@
                                     <i class="fa fa-angle-down"></i>
                                 </a>
                                 <ul class="show-notification profile-notification">
-                                    <li>
+                                    {{-- <li>
                                         <a href="#">
                                             <i class="fa fa-user"></i> Profile
                                         </a>
-                                    </li>
+                                    </li> --}}
                                     <li>
                                         <a href="{{ route('admin-logout') }}">
                                             <i class="fa fa-lock"></i> Logout

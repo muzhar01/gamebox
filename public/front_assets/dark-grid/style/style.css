@@ -85,14 +85,14 @@ https://codepen.io/balazs_sziklai*/
 /*End Grid*/
 
 .site-content {
-  background-color: #120e31;
+  background-color: #120e319c;
 }
 .site-container {
   max-width: 1440px;
 }
 .top-nav {
   font-weight: bold;
-  background-color: #120e31;
+  background-color: #120e31bf;
   padding: 0;
 }
 
