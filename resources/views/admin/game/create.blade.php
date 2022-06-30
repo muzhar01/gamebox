@@ -76,7 +76,7 @@
                                                         <option value="">Select Category</option>
 
                                                         @foreach($categories as $key => $category)
-                                                            <option value="{{ $category->id ?? '' }}" {{ isset($game) && ($game->id == $category->id || old('category_id') == $category->id ) ? 'selected' : '' }}>{{ $category->title ?? '' }}</option>
+                                                            <option value="{{ $category->id ?? '' }}" {{ isset($game) && ($game->category_id == $category->id || old('category_id') == $category->id ) ? 'selected' : '' }}>{{ $category->title ?? '' }}</option>
                                                         @endforeach
 
                                                     </select>

@@ -100,7 +100,7 @@ class GameController extends Controller
             $game->fill($inputs);
 
             if($request->has('thumbnail')){
-                $old_file = public_path('storage/game/') . $category->thumbnail;
+                $old_file = public_path('storage/game/') . $game->thumbnail;
                 if(file_exists($old_file)){
                     unlink($old_file);
                 }

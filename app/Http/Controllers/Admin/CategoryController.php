@@ -82,7 +82,7 @@ class CategoryController extends Controller
         $inputs = $request->validate([
             'title' => 'required|string|max:254',
             'description' => 'required|string|max:254',
-            'thumbnail' => 'required|image'
+            'thumbnail' => ''
         ]);
 
         $old_image = public_path('storage/category/') . $category->thumbnail;
@@ -94,7 +94,7 @@ class CategoryController extends Controller
         $imageName = time().'.'.$request->thumbnail->extension();  
         $request->thumbnail->move(public_path('storage/category'), $imageName);
 
-        $category = new Category();
+        // $category = new Category();
         $category->fill($inputs);
         $category->thumbnail = $imageName;
         $category->save();
