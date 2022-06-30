@@ -13,9 +13,11 @@
     </style>
     <div id="carouselExampleControls" class="carousel slide mt-4" data-ride="carousel">
         <div class="carousel-inner">
-            @foreach($new_games as $key => $new_game)
+            @foreach($sliders as $slider)
                 <div class="carousel-item @if($loop->first) active @endif">
-                    <img class="d-block w-100" src="{{ '/storage/game/' . ($new_game->thumbnail ?? '') }}" alt="First slide">
+                    <a href="{{ $slider->link }}">
+                        <img class="d-block w-100" src="{{ '/storage/sliders/' . ($slider->banner ?? '') }}" alt="">
+                    </a>
                 </div>
             @endforeach
         </div>

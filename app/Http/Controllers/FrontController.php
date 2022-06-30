@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Admin\Category;
 use App\Models\Game;
+use App\Models\Slider;
 
 class FrontController extends Controller
 {
@@ -17,8 +18,9 @@ class FrontController extends Controller
         $new_games = Game::latest()->take(20)->get();
         $papular_games = Game::take(20)->get();
         $foryou_games = Game::take(15)->get();
+        $sliders = Slider::where('status', 1)->get();
 
-        return view('front.index', ['new_games' => $new_games, 'papular_games' => $papular_games, 'foryou_games' => $foryou_games]);
+        return view('front.index', ['sliders' => $sliders, 'new_games' => $new_games, 'papular_games' => $papular_games, 'foryou_games' => $foryou_games]);
     }
     
     /**
