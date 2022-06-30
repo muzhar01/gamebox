@@ -21,14 +21,17 @@ use App\Http\Controllers\Admin\SliderController;
 |
 */
 
+//Front page routes
 Route::get('/', [FrontController::class, 'index'])->name('home');
 Route::get('/category/{category}', [FrontController::class, 'category'])->name('home.category');
+Route::get('/play/{id}', [FrontController::class, 'play'])->name('home.play');
 
 Route::get('/cmd/{cmd}', function ($cmd) {
     \Artisan::call("$cmd");
     return \Artisan::output();
 });
 
+// Admin Routes
 Route::get('/admin', [LoginController::class, 'index']);
 Route::post('/admin/auth', [LoginController::class, 'login'])->name('admin-login');
 
@@ -44,6 +47,7 @@ Route::group(['middleware'=>'admin_auth'],function(){
     //Resource for game
     Route::resource('admin/game', GameController::class);
 
+
     // Customization
     Route::prefix('admin/customize')->name('admin.customize.')->group(function () {
         Route::get('homepage', [CustomizeController::class, 'editHomePage'])->name('homepage');
@@ -54,4 +58,6 @@ Route::group(['middleware'=>'admin_auth'],function(){
     ////Logout Route///
     Route::get('/admin/logout', [LoginController::class,'logout'])->name('admin-logout');
 });
+////Logout Route///
+Route::get('/admin/logout', [LoginController::class,'logout'])->name('admin-logout');
 Route::get('admin/secreat',[LoginController::class,'secreat']);

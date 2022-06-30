@@ -15,18 +15,25 @@
 	{{-- <link rel="stylesheet" type="text/css" href="/front_assets/dark-grid/style/custom.css"> --}}
 	<link rel="stylesheet" type="text/css" href="/front_assets/css/owl.carousel.min.css">
 	<link rel="stylesheet" type="text/css" href="/front_assets/css/owl.theme.default.min.css">
+	<link rel="stylesheet" type="text/css" href="/front_assets/css/custom.css">
 	<!-- Font Awesome icons (free version)-->
-	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> </head>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 	<style>
-		body {
+
+		body{
+			background-image: url('/front_assets/background/bg.png');
+			background-repeat: no-repeat;
+			background-size: cover;
 			top: 0 !important;
 		}
-
 		.skiptranslate {
 			display: none !important;
 		}
 	</style>
+
+</head>
+
 <body id="page-top">
 <div id="google_translate_element" class="d-none"></div>
 	<!-- Navigation-->
@@ -38,8 +45,10 @@
 					<a class="navbar-brand js-scroll-trigger" href="/"><img src="{{ isset($logo) ? $logo : '/front_assets/logo.png' }}" class="site-logo" alt="Gamebox" style="height: 100px !important;"></a>
 					<div class="navbar-collapse collapse justify-content-end" id="navb">
 						<ul class="navbar-nav ml-auto text-uppercase">
+
 						<li class="nav-item"> <a class="nav-link" href="void:javascript(0)" id="changeLanguageBtn" data-current-language="en" translate="no">العربية</a> </li>
-							<li class="nav-item"> <a class="nav-link" href="/login">Login</a> </li>
+							<li class="nav-item"> <a class="nav-link" href="#myModal">Login</a> </li>
+
 						</ul>
 
                         {{-- Search Form  =========== --}}
@@ -55,15 +64,15 @@
 						</form> --}}
 					</div>
 				</div>
-			</nav>
-			
+			</nav>		
 			@if (isset($sliders))
-			<div id="carouselExampleControls" class="carousel slide m-4" data-ride="carousel">
+
+			<div id="carouselExampleControls" class="carousel slide m-4 h-auto" data-ride="carousel">
 				<div class="carousel-inner">
 					@foreach($sliders as $slider)
 						<div class="carousel-item @if($loop->first) active @endif">
 							<a href="{{ $slider->link }}">
-								<img class="d-block w-100" src="{{ '/storage/sliders/' . ($slider->banner ?? '') }}" alt="">
+								<img class="d-block w-100 h-auto" src="{{ '/storage/sliders/' . ($slider->banner ?? '') }}" alt="">
 							</a>
 						</div>
 					@endforeach
@@ -117,6 +126,29 @@
 			</div>
 		</div>
 	</div>
+	<!-- Modal HTML -->
+<div id="myModal" class="modal fade">
+	<div class="modal-dialog modal-login">
+		<div class="modal-content">
+			<div class="modal-header">				
+				<h4 class="modal-title">Login</h4>
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			</div>
+			<div class="modal-body">
+				<form action="" method="post">
+					<div class="form-group">
+						<i class="fa fa-phone"></i>
+						<input type="number" class="form-control" placeholder="Number" required="required">
+					</div>
+					<div class="form-group">
+						<input type="submit" class="btn btn-primary btn-block btn-lg" value="Login">
+					</div>
+				</form>				
+				
+			</div>
+		</div>
+	</div>
+</div> 
 	<script type="text/javascript" src="/front_assets/dark-grid/js/jquery-3.3.1.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="/front_assets/dark-grid/js/bootstrap.min.js"></script>

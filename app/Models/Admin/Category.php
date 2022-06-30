@@ -9,7 +9,7 @@ class Category extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title','description','thumbnail'];
+    protected $fillable = ['title','description'];
 
     public function scopeActive($q){
         return $q->whereStatus(1);
