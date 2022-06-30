@@ -21,14 +21,17 @@ use App\Http\Controllers\Admin\SliderController;
 |
 */
 
+//Front page routes
 Route::get('/', [FrontController::class, 'index'])->name('home');
 Route::get('/category/{category}', [FrontController::class, 'category'])->name('home.category');
+Route::get('/play/{id}', [FrontController::class, 'play'])->name('home.play');
 
 Route::get('/cmd/{cmd}', function ($cmd) {
     \Artisan::call("$cmd");
     return \Artisan::output();
 });
 
+// Admin Routes
 Route::get('/admin', [LoginController::class, 'index']);
 Route::post('/admin/auth', [LoginController::class, 'login'])->name('admin-login');
 

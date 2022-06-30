@@ -8,7 +8,7 @@
         <div class="grid-layout grid-wrapper">
             @foreach($cat_games as $key => $cat_game)
                 <div class="grid-item item-grid item shadow-lg">
-                    <a href="{{ $cat_game->start_path }}">
+                    <a href="{{ route('home.play', $cat_game->id) }}">
                         <div class="list-game mb-3">
                             <div class="list-thumbnail mb-1"><img src="{{ '/storage/game/' . ($cat_game->thumbnail ?? '') }}" class="small-thumb" alt="{{ $cat_game->title }}"></div>
                             {{-- <div class="list-title"><span class="btn btn-sm btn-outline-success">Play Now</span></div> --}}

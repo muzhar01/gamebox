@@ -39,11 +39,12 @@ class FrontController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Game play page
      */
-    public function store(Request $request)
+    public function play($id)
     {
-        //
+        $game = Game::findOrFail($id);
+        return view('front.game', ['game' => $game]);
     }
 
     /**

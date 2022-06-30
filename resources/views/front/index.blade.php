@@ -29,7 +29,7 @@
                 <div class="owl-carousel owl-theme">
                     @foreach($new_games as $key => $new_game)
                         <div class="grid-item item-grid item shadow-lg">
-                            <a href="{{ $new_game->start_path }}" target="_blank">
+                            <a href="{{ route('home.play', $new_game->id) }}" target="_blank">
                                 <div class="list-game">
                                     <div class="list-thumbnail mb-1"><img src="{{ '/storage/game/' . ($new_game->thumbnail ?? '') }}" class="small-thumb" alt="{{ $new_game->title }}"></div>
                                     {{-- <div class="list-title"><span class="btn btn-sm btn-outline-success">Play Now</span></div> --}}
@@ -58,7 +58,7 @@
                 <div class="owl-carousel owl-theme">
                     @foreach($papular_games as $key => $papular_game)
                         <div class="grid-item item-grid item shadow-lg">
-                            <a href="{{ $papular_game->start_path }}">
+                            <a href="{{ route('home.play', $papular_game->id) }}">
                                 <div class="list-game">
                                     <div class="list-thumbnail mb-1"><img src="{{ '/storage/game/' . ($papular_game->thumbnail ?? '') }}" class="small-thumb" alt="{{ $papular_game->title ?? '' }}"></div>
                                     {{-- <div class="list-title"><span class="btn btn-sm btn-outline-success">Play Now</span></div> --}}
@@ -89,7 +89,7 @@
                     <div class="owl-carousel owl-theme">
                         @foreach($category->games as $key => $game)
                             <div class="grid-item item-grid item shadow-lg">
-                                <a href="{{ $game->start_path }}">
+                                <a href="{{ route('home.play', $game->id) }}">
                                     <div class="list-game">
                                         <div class="list-thumbnail mb-1"><img src="{{ '/storage/game/' . ($game->thumbnail ?? '') }}" class="small-thumb" alt="{{ $game->title ?? '' }}"></div>
                                         {{-- <div class="list-title"><span class="btn btn-sm btn-outline-success">Play Now</span></div> --}}
@@ -114,20 +114,16 @@
         $(document).ready(function(){
             var owl = $('.owl-carousel');
             owl.owlCarousel({
-            margin: 10,
-            nav: false,
-            loop: false,
-            responsive: {
-                0: {
-                items: 4
-                },
-                600: {
-                items: 8
-                },
-                1000: {
-                items: 12
+                margin: 10,
+                nav: false,
+                loop: false,
+                responsive: {
+                    0: {items: 2},
+                    200: {items: 3},
+                    320: {items: 4},
+                    768: {items: 7},
+                    1024: {items: 10}
                 }
-            }
             })
         })
     </script>

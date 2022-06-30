@@ -16,8 +16,9 @@
 	<link rel="stylesheet" type="text/css" href="/front_assets/css/owl.carousel.min.css">
 	<link rel="stylesheet" type="text/css" href="/front_assets/css/owl.theme.default.min.css">
 	<!-- Font Awesome icons (free version)-->
-	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> </head>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+</head>
 <body id="page-top">
 	<!-- Navigation-->
 	<div class="container site-container">
@@ -47,12 +48,12 @@
 				</div>
 			</nav>
 
-			<div id="carouselExampleControls" class="carousel slide m-4" data-ride="carousel">
+			<div id="carouselExampleControls" class="carousel slide m-4 h-auto" data-ride="carousel">
 				<div class="carousel-inner">
 					@foreach($sliders as $slider)
 						<div class="carousel-item @if($loop->first) active @endif">
 							<a href="{{ $slider->link }}">
-								<img class="d-block w-100" src="{{ '/storage/sliders/' . ($slider->banner ?? '') }}" alt="">
+								<img class="d-block w-100 h-auto" src="{{ '/storage/sliders/' . ($slider->banner ?? '') }}" alt="">
 							</a>
 						</div>
 					@endforeach
