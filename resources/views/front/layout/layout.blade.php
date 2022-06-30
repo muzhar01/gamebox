@@ -19,6 +19,14 @@
 	<!-- Font Awesome icons (free version)-->
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+	<style>
+		body{
+			background-image: url('/front_assets/background/bg.png');
+			background-repeat: no-repeat;
+			background-size: cover;
+		}
+	</style>
+
 </head>
 <body id="page-top">
 	<!-- Navigation-->
