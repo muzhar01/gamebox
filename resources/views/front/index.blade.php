@@ -105,7 +105,7 @@
             owl.owlCarousel({
             margin: 10,
             nav: false,
-            loop: true,
+            loop: false,
             responsive: {
                 0: {
                 items: 4
