@@ -18,7 +18,17 @@
 	<!-- Font Awesome icons (free version)-->
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> </head>
 
+	<style>
+		body {
+			top: 0 !important;
+		}
+
+		.skiptranslate {
+			display: none !important;
+		}
+	</style>
 <body id="page-top">
+<div id="google_translate_element" class="d-none"></div>
 	<!-- Navigation-->
 	<div class="container site-container">
 		<div class="site-content">
@@ -28,7 +38,7 @@
 					<a class="navbar-brand js-scroll-trigger" href="/"><img src="{{ isset($logo) ? $logo : '/front_assets/logo.png' }}" class="site-logo" alt="Gamebox" style="height: 100px !important;"></a>
 					<div class="navbar-collapse collapse justify-content-end" id="navb">
 						<ul class="navbar-nav ml-auto text-uppercase">
-							
+						<li class="nav-item"> <a class="nav-link" href="void:javascript(0)" id="changeLanguageBtn" data-current-language="en" translate="no">العربية</a> </li>
 							<li class="nav-item"> <a class="nav-link" href="/login">Login</a> </li>
 						</ul>
 
@@ -46,7 +56,8 @@
 					</div>
 				</div>
 			</nav>
-
+			
+			@if (isset($sliders))
 			<div id="carouselExampleControls" class="carousel slide m-4" data-ride="carousel">
 				<div class="carousel-inner">
 					@foreach($sliders as $slider)
@@ -66,6 +77,7 @@
 					<span class="sr-only">Next</span>
 				</a>
 			</div>
+			@endif
 
 				@php
 					$nav_categories = \App\Models\Admin\Category::active()->orderBy('title','asc')->take(8)->get() ?? [];
@@ -112,6 +124,73 @@
 	<script type="text/javascript" src="/front_assets/dark-grid/js/script.js"></script>
 	<script type="text/javascript" src="/front_assets/js/greedy-menu.js"></script>
 	{{-- <script type="text/javascript" src="/front_assets/dark-grid/js/custom.js"></script> --}}
+
+	<script type="text/javascript">
+	function googleTranslateElementInit() {
+	new google.translate.TranslateElement({includedLanguages: "ar,en"}, 'google_translate_element');
+	}
+	</script>
+
+	<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+	<script>
+		let changeLanguageBtn = document.querySelector('#changeLanguageBtn');
+		let languageSelect;
+
+		setTimeout(() => {
+			languageSelect = document.querySelector('#google_translate_element .goog-te-combo');
+			if (languageSelect.value === 'en') {
+				changeLanguageBtn.textContent = 'العربية';
+				document.querySelector('html').dir = 'ltr';
+			} else {
+				changeLanguageBtn.textContent = 'English';
+				document.querySelector('html').dir = 'rtl';
+			}
+		}, 2000);
+
+		changeLanguageBtn.addEventListener('click', (e) => {
+			const self = e.target;
+
+			if (!languageSelect) return;
+
+			if (self.dataset.currentLanguage === 'en') {
+				// Change language to arabic
+				self.dataset.currentLanguage = 'ar';
+				self.textContent = 'English';
+				languageSelect.querySelector('[value="ar"]').selected = true;
+
+				// Fire onchange event
+				if ("createEvent" in document) {
+					var evt = document.createEvent("HTMLEvents");
+					evt.initEvent("change", false, true);
+					languageSelect.dispatchEvent(evt);
+				}
+				else {
+					languageSelect.fireEvent("onchange");
+				}
+
+				document.querySelector('html').dir = 'rtl';
+
+			} else {
+				// Change language to english
+				self.dataset.currentLanguage = 'en';
+				self.textContent = 'العربية';
+				languageSelect.querySelector('[value="en"]').selected = true;
+
+				// Fire onchange event
+				if ("createEvent" in document) {
+					var evt = document.createEvent("HTMLEvents");
+					evt.initEvent("change", false, true);
+					languageSelect.dispatchEvent(evt);
+				}
+				else {
+					languageSelect.fireEvent("onchange");
+				}
+
+				document.querySelector('html').dir = 'ltr';
+			}
+		}, false);
+	</script>
 
 	@yield('scripts')
 
