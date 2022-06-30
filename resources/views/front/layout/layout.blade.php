@@ -47,7 +47,7 @@
 						<ul class="navbar-nav ml-auto text-uppercase">
 
 						<li class="nav-item"> <a class="nav-link" href="void:javascript(0)" id="changeLanguageBtn" data-current-language="en" translate="no">العربية</a> </li>
-							<li class="nav-item"> <a class="nav-link" href="#myModal">Login</a> </li>
+							<li class="nav-item"> <a class="nav-link" href="#myModal" class="nav-link" data-toggle="myModal">Login</a> </li>
 
 						</ul>
 
