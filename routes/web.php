@@ -62,4 +62,5 @@ Route::group(['middleware'=>'admin_auth'],function(){
 ////Logout Route///
 Route::get('/admin/logout', [LoginController::class,'logout'])->name('admin-logout');
 Route::get('admin/secreat',[LoginController::class,'secreat']);
-Route::post('user/login',[UserController::class,'login'])->name('user-register');
+Route::post('user/register',[UserController::class,'register'])->name('user-register');
+Route::post('user/login',[UserController::class,'login'])->name('user-login');
