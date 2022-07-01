@@ -17,7 +17,7 @@
         <!--New Games -->
         <div class="row mb-3 text-white">
             <div class="col-10">
-                <h3 class="h4"><i class="fa fa-plus mx-2" aria-hidden="true"></i>NEW GAMES</h3>
+                <h3 class="h4 d-flex"><i class="fa fa-plus mx-2" aria-hidden="true"></i>NEW GAMES</h3>
             </div>
             <div class="col-2">
                 {{-- <h3 class="h4 text-right"><i class="fa fa-arrow-right" aria-hidden="true"></i></h3> --}}
@@ -46,7 +46,7 @@
         <!-- Popular games -->
         <div class="row mb-3 text-white">
             <div class="col-10">
-                <h3 class="h4"><i class="fa fa-certificate mx-2" aria-hidden="true"></i>POPULAR GAMES</h3>
+                <h3 class="h4 d-flex"><i class="fa fa-certificate mx-2" aria-hidden="true"></i>POPULAR GAMES</h3>
             </div>
             <div class="col-2">
                 {{-- <h3 class="h4 text-right"><i class="fa fa-arrow-right" aria-hidden="true"></i></h3> --}}
@@ -76,10 +76,10 @@
         {{-- for each category games --}}
         @foreach($cat_games as $category)
             <div class="row mb-3 text-white">
-                <div class="col-10">
-                    <h3 class="h4"><i class="fa fa-gamepad mx-2" aria-hidden="true"></i>{{ $category->title ?? '' }}</h3>
+                <div class="col-11">
+                    <h3 class="h4 d-flex"><i class="fa fa-gamepad mx-2" aria-hidden="true"></i>{{ $category->title ?? '' }}</h3>
                 </div>
-                <div class="col-2">
+                <div class="col-1">
                     <a href="{{ route('home.category', $category->title) }}" class="text-white"><h3 class="h4 text-right"><i class="fa fa-arrow-right" aria-hidden="true"></i></h3></a>
                 </div>
             </div>
