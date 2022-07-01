@@ -29,10 +29,32 @@
             top: 0 !important;
         }
 
-        .skiptranslate {
-            display: none !important;
+		body{
+			background-image: url('/front_assets/background/bg.png');
+			background-repeat: no-repeat;
+			background-size: cover;
+			top: 0 !important;
+		}
+		.skiptranslate {
+			display: none !important;
+		}
+
+        .home-page-slider {
+            height: 35vw !important;
         }
-    </style>
+
+        @media (min-width: 1000px) {
+            .home-page-slider {
+                height: 30vw !important;
+            }
+        }
+
+        @media (min-width: 1500px) {
+            .home-page-slider {
+                height: 504px !important;
+            }
+        }
+	</style>
 
 </head>
 
@@ -79,27 +101,26 @@
             </nav>
             @if (isset($sliders))
 
-                <div id="carouselExampleControls" class="carousel slide m-4 h-auto" data-ride="carousel">
-                    <div class="carousel-inner">
-                        @foreach ($sliders as $slider)
-                            <div class="carousel-item @if ($loop->first) active @endif">
-                                <a href="{{ $slider->link }}">
-                                    <img class="d-block w-100 h-auto"
-                                        src="{{ '/storage/sliders/' . ($slider->banner ?? '') }}" alt="">
-                                </a>
-                            </div>
-                        @endforeach
-                    </div>
-                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
-                </div>
-            @endif
+			<div id="carouselExampleControls" class="home-page-slider carousel slide m-4" data-ride="carousel">
+				<div class="carousel-inner">
+					@foreach($sliders as $slider)
+						<div class="carousel-item @if($loop->first) active @endif">
+							<a href="{{ $slider->link }}">
+								<img class="d-block w-100" src="{{ '/storage/sliders/' . ($slider->banner ?? '') }}" alt="">
+							</a>
+						</div>
+					@endforeach
+				</div>
+				<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					<span class="sr-only">Previous</span>
+				</a>
+				<a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+					<span class="sr-only">Next</span>
+				</a>
+			</div>
+			@endif
 
             @php
                 $nav_categories =
@@ -299,15 +320,19 @@
 				changeLanguageBtn.textContent = 'العربية';
 				document.querySelector('html').dir = 'ltr';
                 document.querySelector('body').dir = 'ltr';
-                let arrowIcon = document.querySelector('.fa-arrow-right');
-                arrowIcon.classList.remove('fa-flip-horizontal');
-			} else {
+                let arrowIcons = document.querySelectorAll('.fa-arrow-right');
+                arrowIcons.forEach((el) => {
+                    el.classList.remove('fa-flip-horizontal');
+                })
+			} else if(languageSelect.value === 'ar') {
                 changeLanguageBtn.dataset.currentLanguage = 'ar';
 				changeLanguageBtn.textContent = 'English';
 				document.querySelector('html').dir = 'rtl';
                 document.querySelector('body').dir = 'rtl';
-                let arrowIcon = document.querySelector('.fa-arrow-right');
-                arrowIcon.classList.add('fa-flip-horizontal');
+                let arrowIcons = document.querySelectorAll('.fa-arrow-right');
+                arrowIcons.forEach((el) => {
+                    el.classList.add('fa-flip-horizontal');
+                })
 			}
 		}, 2000);
 		
@@ -334,8 +359,10 @@
 
 				document.querySelector('html').dir = 'rtl';
                 document.querySelector('body').dir = 'rtl';
-                let arrowIcon = document.querySelector('.fa-arrow-right');
-                arrowIcon.classList.add('fa-flip-horizontal');
+                let arrowIcons = document.querySelectorAll('.fa-arrow-right');
+                arrowIcons.forEach((el) => {
+                    el.classList.add('fa-flip-horizontal');
+                })
 
             } else {
                 // Change language to english
@@ -355,8 +382,10 @@
 				document.querySelector('html').dir = 'ltr';
                 document.querySelector('body').dir = 'ltr';
 
-                let arrowIcon = document.querySelector('.fa-arrow-right');
-                arrowIcon.classList.remove('fa-flip-horizontal');
+                let arrowIcons = document.querySelectorAll('.fa-arrow-right');
+                arrowIcons.forEach((el) => {
+                    el.classList.remove('fa-flip-horizontal');
+                })
 			}
 		}, false);
 	</script>
