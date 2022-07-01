@@ -292,21 +292,30 @@
         let changeLanguageBtn = document.querySelector('#changeLanguageBtn');
         let languageSelect;
 
-        setTimeout(() => {
-            languageSelect = document.querySelector('#google_translate_element .goog-te-combo');
-            if (languageSelect.value === 'en') {
-                changeLanguageBtn.textContent = 'العربية';
-                document.querySelector('html').dir = 'ltr';
-            } else {
-                changeLanguageBtn.textContent = 'English';
-                document.querySelector('html').dir = 'rtl';
-            }
-        }, 2000);
+	    setTimeout(function () {
+			languageSelect = document.querySelector('#google_translate_element .goog-te-combo');
+			if (languageSelect.value === 'en') {
+                changeLanguageBtn.dataset.currentLanguage = 'en';
+				changeLanguageBtn.textContent = 'العربية';
+				document.querySelector('html').dir = 'ltr';
+                document.querySelector('body').dir = 'ltr';
+                let arrowIcon = document.querySelector('.fa-arrow-right');
+                arrowIcon.classList.remove('fa-flip-horizontal');
+			} else {
+                changeLanguageBtn.dataset.currentLanguage = 'ar';
+				changeLanguageBtn.textContent = 'English';
+				document.querySelector('html').dir = 'rtl';
+                document.querySelector('body').dir = 'rtl';
+                let arrowIcon = document.querySelector('.fa-arrow-right');
+                arrowIcon.classList.add('fa-flip-horizontal');
+			}
+		}, 2000);
+		
 
-        changeLanguageBtn.addEventListener('click', (e) => {
-            const self = e.target;
-
-            if (!languageSelect) return;
+		changeLanguageBtn.addEventListener('click', (e) => {
+			const self = e.target;
+            
+			if (!languageSelect) return;
 
             if (self.dataset.currentLanguage === 'en') {
                 // Change language to arabic
@@ -323,7 +332,10 @@
                     languageSelect.fireEvent("onchange");
                 }
 
-                document.querySelector('html').dir = 'rtl';
+				document.querySelector('html').dir = 'rtl';
+                document.querySelector('body').dir = 'rtl';
+                let arrowIcon = document.querySelector('.fa-arrow-right');
+                arrowIcon.classList.add('fa-flip-horizontal');
 
             } else {
                 // Change language to english
@@ -340,10 +352,14 @@
                     languageSelect.fireEvent("onchange");
                 }
 
-                document.querySelector('html').dir = 'ltr';
-            }
-        }, false);
-    </script>
+				document.querySelector('html').dir = 'ltr';
+                document.querySelector('body').dir = 'ltr';
+
+                let arrowIcon = document.querySelector('.fa-arrow-right');
+                arrowIcon.classList.remove('fa-flip-horizontal');
+			}
+		}, false);
+	</script>
 
     <script>
         @if (Session::has('message'))
