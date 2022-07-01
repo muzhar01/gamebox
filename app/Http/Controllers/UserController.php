@@ -49,7 +49,7 @@ class UserController extends Controller
             if (Hash::check($password, $result->password)) {
                 $request->session()->put('USER_LOGIN', true);
                 $request->session()->put('USER_ID', $result->id);
-                $request->session()->put('USER_EMAIL',  $phone);
+                $request->session()->put('USER_PHONE',  $phone);
                 return redirect('/');
             } else {
                 $request->session()->flash('error', 'Please Enter Valid Password');
@@ -60,5 +60,12 @@ class UserController extends Controller
             $request->session()->flash('error', 'Please Enter Valid Number');
             return redirect('/');
         }
+    }
+    public function logout(){
+        session()->forget('USER_LOGIN');
+        session()->forget('USER_ID');
+        session()->forget('USER_PHONE');
+        $notifiction=array('message'=>'Logout Successfully','alert-type'=>'success');
+        return redirect('/')->with($notifiction);
     }
 }

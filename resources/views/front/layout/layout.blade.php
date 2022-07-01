@@ -1,55 +1,67 @@
 <html lang="en">
 
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<title>Gamebox | Play Games Online</title>
-	<meta name="description" content="Play Games Online">
-	<!-- Google fonts-->
-	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-	<link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
-	<link rel="stylesheet" type="text/css" href="/front_assets/dark-grid/style/bootstrap.min.css">
-	{{-- <link rel="stylesheet" type="text/css" href="/front_assets/dark-grid/style/jquery-comments.css"> --}}
-	<link rel="stylesheet" type="text/css" href="/front_assets/dark-grid/style/user.css">
-	<link rel="stylesheet" type="text/css" href="/front_assets/dark-grid/style/style.css">
-	{{-- <link rel="stylesheet" type="text/css" href="/front_assets/dark-grid/style/custom.css"> --}}
-	<link rel="stylesheet" type="text/css" href="/front_assets/css/owl.carousel.min.css">
-	<link rel="stylesheet" type="text/css" href="/front_assets/css/owl.theme.default.min.css">
-	<link rel="stylesheet" type="text/css" href="/front_assets/css/custom.css">
-	<!-- Font Awesome icons (free version)-->
-	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Gamebox | Play Games Online</title>
+    <meta name="description" content="Play Games Online">
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet"
+        type="text/css">
+    <link rel="stylesheet" type="text/css" href="/front_assets/dark-grid/style/bootstrap.min.css">
+    {{-- <link rel="stylesheet" type="text/css" href="/front_assets/dark-grid/style/jquery-comments.css"> --}}
+    <link rel="stylesheet" type="text/css" href="/front_assets/dark-grid/style/user.css">
+    <link rel="stylesheet" type="text/css" href="/front_assets/dark-grid/style/style.css">
+    {{-- <link rel="stylesheet" type="text/css" href="/front_assets/dark-grid/style/custom.css"> --}}
+    <link rel="stylesheet" type="text/css" href="/front_assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" type="text/css" href="/front_assets/css/owl.theme.default.min.css">
+    <!-- Font Awesome icons (free version)-->
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-	<style>
+        <link rel="stylesheet" type="text/css" href="/front_assets/css/custom.css">
+    <style>
+        body {
+            background-image: url('/front_assets/background/bg.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            top: 0 !important;
+        }
 
-		body{
-			background-image: url('/front_assets/background/bg.png');
-			background-repeat: no-repeat;
-			background-size: cover;
-			top: 0 !important;
-		}
-		.skiptranslate {
-			display: none !important;
-		}
-	</style>
+        .skiptranslate {
+            display: none !important;
+        }
+    </style>
 
 </head>
 
 <body id="page-top">
-<div id="google_translate_element" class="d-none"></div>
-	<!-- Navigation-->
-	<div class="container site-container">
-		<div class="site-content">
-			<nav class="navbar navbar-expand-lg navbar-dark top-nav" id="mainNav">
-				<div class="container">
-					<button class="navbar-toggler navbar-toggler-left collapsed" type="button" data-toggle="collapse" data-target="#navb" aria-expanded="false"> <span class="navbar-toggler-icon"></span> </button>
-					<a class="navbar-brand js-scroll-trigger" href="/"><img src="{{ isset($logo) ? $logo : '/front_assets/logo.png' }}" class="site-logo" alt="Gamebox" style="height: 100px !important;"></a>
-					<div class="navbar-collapse collapse justify-content-end" id="navb">
-						<ul class="navbar-nav ml-auto text-uppercase">
+    <div id="google_translate_element" class="d-none"></div>
+    <!-- Navigation-->
+    <div class="container site-container">
+        <div class="site-content">
+            <nav class="navbar navbar-expand-lg navbar-dark top-nav" id="mainNav">
+                <div class="container">
+                    <button class="navbar-toggler navbar-toggler-left collapsed" type="button" data-toggle="collapse"
+                        data-target="#navb" aria-expanded="false"> <span class="navbar-toggler-icon"></span> </button>
+                    <a class="navbar-brand js-scroll-trigger" href="/"><img
+                            src="{{ isset($logo) ? $logo : '/front_assets/logo.png' }}" class="site-logo"
+                            alt="Gamebox" style="height: 100px !important;"></a>
+                    <div class="navbar-collapse collapse justify-content-end" id="navb">
+                        <ul class="navbar-nav ml-auto text-uppercase">
 
-						<li class="nav-item"> <a class="nav-link" href="void:javascript(0)" id="changeLanguageBtn" data-current-language="en" translate="no">العربية</a> </li>
-							<li class="nav-item"> <a class="nav-link" href="#myModal" class="nav-link" data-toggle="myModal">Login</a> </li>
+                            <li class="nav-item"> <a class="nav-link" href="void:javascript(0)" id="changeLanguageBtn"
+                                    data-current-language="en" translate="no">العربية</a> </li>
+                            @if (session()->has('USER_LOGIN'))
+                                <li class="nav-item"> <a class="nav-link" href="{{ route('user-logout') }}"
+                                        class="nav-link">Logout</a> </li>
+                            @else
+                                <li class="nav-item">  <a class="nav-link" data-toggle="modal" href="javascript:void(0)"
+                                    onclick="openLoginModal();">Login \ Register</a> </li>
+                            @endif
 
-						</ul>
+                        </ul>
 
                         {{-- Search Form  =========== --}}
 
@@ -62,31 +74,32 @@
 								</div>
 							</div>
 						</form> --}}
-					</div>
-				</div>
-			</nav>		
-			@if (isset($sliders))
+                    </div>
+                </div>
+            </nav>
+            @if (isset($sliders))
 
-			<div id="carouselExampleControls" class="carousel slide m-4 h-auto" data-ride="carousel">
-				<div class="carousel-inner">
-					@foreach($sliders as $slider)
-						<div class="carousel-item @if($loop->first) active @endif">
-							<a href="{{ $slider->link }}">
-								<img class="d-block w-100 h-auto" src="{{ '/storage/sliders/' . ($slider->banner ?? '') }}" alt="">
-							</a>
-						</div>
-					@endforeach
-				</div>
-				<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-					<span class="sr-only">Previous</span>
-				</a>
-				<a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-					<span class="carousel-control-next-icon" aria-hidden="true"></span>
-					<span class="sr-only">Next</span>
-				</a>
-			</div>
-			@endif
+                <div id="carouselExampleControls" class="carousel slide m-4 h-auto" data-ride="carousel">
+                    <div class="carousel-inner">
+                        @foreach ($sliders as $slider)
+                            <div class="carousel-item @if ($loop->first) active @endif">
+                                <a href="{{ $slider->link }}">
+                                    <img class="d-block w-100 h-auto"
+                                        src="{{ '/storage/sliders/' . ($slider->banner ?? '') }}" alt="">
+                                </a>
+                            </div>
+                        @endforeach
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            @endif
 
             @php
                 $nav_categories =
@@ -264,74 +277,85 @@
         });
     </script>
     @yield('scripts')
-	<script type="text/javascript">
-	function googleTranslateElementInit() {
-	new google.translate.TranslateElement({includedLanguages: "ar,en"}, 'google_translate_element');
-	}
-	</script>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                includedLanguages: "ar,en"
+            }, 'google_translate_element');
+        }
+    </script>
 
-	<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+    </script>
 
-	<script>
-		let changeLanguageBtn = document.querySelector('#changeLanguageBtn');
-		let languageSelect;
+    <script>
+        let changeLanguageBtn = document.querySelector('#changeLanguageBtn');
+        let languageSelect;
 
-		setTimeout(() => {
-			languageSelect = document.querySelector('#google_translate_element .goog-te-combo');
-			if (languageSelect.value === 'en') {
-				changeLanguageBtn.textContent = 'العربية';
-				document.querySelector('html').dir = 'ltr';
-			} else {
-				changeLanguageBtn.textContent = 'English';
-				document.querySelector('html').dir = 'rtl';
-			}
-		}, 2000);
+        setTimeout(() => {
+            languageSelect = document.querySelector('#google_translate_element .goog-te-combo');
+            if (languageSelect.value === 'en') {
+                changeLanguageBtn.textContent = 'العربية';
+                document.querySelector('html').dir = 'ltr';
+            } else {
+                changeLanguageBtn.textContent = 'English';
+                document.querySelector('html').dir = 'rtl';
+            }
+        }, 2000);
 
-		changeLanguageBtn.addEventListener('click', (e) => {
-			const self = e.target;
+        changeLanguageBtn.addEventListener('click', (e) => {
+            const self = e.target;
 
-			if (!languageSelect) return;
+            if (!languageSelect) return;
 
-			if (self.dataset.currentLanguage === 'en') {
-				// Change language to arabic
-				self.dataset.currentLanguage = 'ar';
-				self.textContent = 'English';
-				languageSelect.querySelector('[value="ar"]').selected = true;
+            if (self.dataset.currentLanguage === 'en') {
+                // Change language to arabic
+                self.dataset.currentLanguage = 'ar';
+                self.textContent = 'English';
+                languageSelect.querySelector('[value="ar"]').selected = true;
 
-				// Fire onchange event
-				if ("createEvent" in document) {
-					var evt = document.createEvent("HTMLEvents");
-					evt.initEvent("change", false, true);
-					languageSelect.dispatchEvent(evt);
-				}
-				else {
-					languageSelect.fireEvent("onchange");
-				}
+                // Fire onchange event
+                if ("createEvent" in document) {
+                    var evt = document.createEvent("HTMLEvents");
+                    evt.initEvent("change", false, true);
+                    languageSelect.dispatchEvent(evt);
+                } else {
+                    languageSelect.fireEvent("onchange");
+                }
 
-				document.querySelector('html').dir = 'rtl';
+                document.querySelector('html').dir = 'rtl';
 
-			} else {
-				// Change language to english
-				self.dataset.currentLanguage = 'en';
-				self.textContent = 'العربية';
-				languageSelect.querySelector('[value="en"]').selected = true;
+            } else {
+                // Change language to english
+                self.dataset.currentLanguage = 'en';
+                self.textContent = 'العربية';
+                languageSelect.querySelector('[value="en"]').selected = true;
 
-				// Fire onchange event
-				if ("createEvent" in document) {
-					var evt = document.createEvent("HTMLEvents");
-					evt.initEvent("change", false, true);
-					languageSelect.dispatchEvent(evt);
-				}
-				else {
-					languageSelect.fireEvent("onchange");
-				}
+                // Fire onchange event
+                if ("createEvent" in document) {
+                    var evt = document.createEvent("HTMLEvents");
+                    evt.initEvent("change", false, true);
+                    languageSelect.dispatchEvent(evt);
+                } else {
+                    languageSelect.fireEvent("onchange");
+                }
 
-				document.querySelector('html').dir = 'ltr';
-			}
-		}, false);
-	</script>
+                document.querySelector('html').dir = 'ltr';
+            }
+        }, false);
+    </script>
 
-	@yield('scripts')
+    <script>
+        @if (Session::has('message'))
+            var type = "{{ Session::get('alert-type', 'info') }}"
+            switch (type) {
+                case 'success':
+                    toastr.success("{{ Session::get('message') }}");
+                    break;
+            }
+        @endif
+    </script>
+    @yield('scripts')
 
 </body>
 
