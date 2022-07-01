@@ -46,7 +46,7 @@
 					<div class="navbar-collapse collapse justify-content-end" id="navb">
 						<ul class="navbar-nav ml-auto text-uppercase">
 
-						<li class="nav-item"> <a class="nav-link" href="#" id="changeLanguageBtn" data-current-language="en" translate="no">العربية</a> </li>
+						    <li class="nav-item"> <a class="nav-link" href="#" id="changeLanguageBtn" data-current-language="en" translate="no">العربية</a> </li>
 							<li class="nav-item"> <a class="nav-link" href="#myModal">Login</a> </li>
 
 						</ul>
@@ -67,12 +67,12 @@
 			</nav>		
 			@if (isset($sliders))
 
-			<div id="carouselExampleControls" class="carousel slide m-4 h-auto" data-ride="carousel">
+			<div id="carouselExampleControls" class="carousel slide m-4" data-ride="carousel">
 				<div class="carousel-inner">
 					@foreach($sliders as $slider)
 						<div class="carousel-item @if($loop->first) active @endif">
 							<a href="{{ $slider->link }}">
-								<img class="d-block w-100 h-auto" src="{{ '/storage/sliders/' . ($slider->banner ?? '') }}" alt="">
+								<img class="d-block w-100" src="{{ '/storage/sliders/' . ($slider->banner ?? '') }}" alt="">
 							</a>
 						</div>
 					@endforeach
@@ -276,21 +276,29 @@
 		let changeLanguageBtn = document.querySelector('#changeLanguageBtn');
 		let languageSelect;
 
-	/*	setTimeout(() => {
+	    setTimeout(function () {
 			languageSelect = document.querySelector('#google_translate_element .goog-te-combo');
 			if (languageSelect.value === 'en') {
+                changeLanguageBtn.dataset.currentLanguage = 'en';
 				changeLanguageBtn.textContent = 'العربية';
 				document.querySelector('html').dir = 'ltr';
+                document.querySelector('body').dir = 'ltr';
+                let arrowIcon = document.querySelector('.fa-arrow-right');
+                arrowIcon.classList.remove('fa-flip-horizontal');
 			} else {
+                changeLanguageBtn.dataset.currentLanguage = 'ar';
 				changeLanguageBtn.textContent = 'English';
 				document.querySelector('html').dir = 'rtl';
+                document.querySelector('body').dir = 'rtl';
+                let arrowIcon = document.querySelector('.fa-arrow-right');
+                arrowIcon.classList.add('fa-flip-horizontal');
 			}
 		}, 2000);
-		*/
+		
 
 		changeLanguageBtn.addEventListener('click', (e) => {
 			const self = e.target;
-
+            
 			if (!languageSelect) return;
 
 			if (self.dataset.currentLanguage === 'en') {
@@ -310,6 +318,9 @@
 				}
 
 				document.querySelector('html').dir = 'rtl';
+                document.querySelector('body').dir = 'rtl';
+                let arrowIcon = document.querySelector('.fa-arrow-right');
+                arrowIcon.classList.add('fa-flip-horizontal');
 
 			} else {
 				// Change language to english
@@ -328,6 +339,10 @@
 				}
 
 				document.querySelector('html').dir = 'ltr';
+                document.querySelector('body').dir = 'ltr';
+
+                let arrowIcon = document.querySelector('.fa-arrow-right');
+                arrowIcon.classList.remove('fa-flip-horizontal');
 			}
 		}, false);
 	</script>
