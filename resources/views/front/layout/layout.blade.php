@@ -30,6 +30,22 @@
 		.skiptranslate {
 			display: none !important;
 		}
+
+        .home-page-slider {
+            height: 35vw !important;
+        }
+
+        @media (min-width: 1000px) {
+            .home-page-slider {
+                height: 30vw !important;
+            }
+        }
+
+        @media (min-width: 1500px) {
+            .home-page-slider {
+                height: 504px !important;
+            }
+        }
 	</style>
 
 </head>
@@ -67,7 +83,7 @@
 			</nav>		
 			@if (isset($sliders))
 
-			<div id="carouselExampleControls" class="carousel slide m-4" data-ride="carousel">
+			<div id="carouselExampleControls" class="home-page-slider carousel slide m-4" data-ride="carousel">
 				<div class="carousel-inner">
 					@foreach($sliders as $slider)
 						<div class="carousel-item @if($loop->first) active @endif">
@@ -283,15 +299,19 @@
 				changeLanguageBtn.textContent = 'العربية';
 				document.querySelector('html').dir = 'ltr';
                 document.querySelector('body').dir = 'ltr';
-                let arrowIcon = document.querySelector('.fa-arrow-right');
-                arrowIcon.classList.remove('fa-flip-horizontal');
-			} else {
+                let arrowIcons = document.querySelectorAll('.fa-arrow-right');
+                arrowIcons.forEach((el) => {
+                    el.classList.remove('fa-flip-horizontal');
+                })
+			} else if(languageSelect.value === 'ar') {
                 changeLanguageBtn.dataset.currentLanguage = 'ar';
 				changeLanguageBtn.textContent = 'English';
 				document.querySelector('html').dir = 'rtl';
                 document.querySelector('body').dir = 'rtl';
-                let arrowIcon = document.querySelector('.fa-arrow-right');
-                arrowIcon.classList.add('fa-flip-horizontal');
+                let arrowIcons = document.querySelectorAll('.fa-arrow-right');
+                arrowIcons.forEach((el) => {
+                    el.classList.add('fa-flip-horizontal');
+                })
 			}
 		}, 2000);
 		
@@ -319,8 +339,10 @@
 
 				document.querySelector('html').dir = 'rtl';
                 document.querySelector('body').dir = 'rtl';
-                let arrowIcon = document.querySelector('.fa-arrow-right');
-                arrowIcon.classList.add('fa-flip-horizontal');
+                let arrowIcons = document.querySelectorAll('.fa-arrow-right');
+                arrowIcons.forEach((el) => {
+                    el.classList.add('fa-flip-horizontal');
+                })
 
 			} else {
 				// Change language to english
@@ -341,8 +363,10 @@
 				document.querySelector('html').dir = 'ltr';
                 document.querySelector('body').dir = 'ltr';
 
-                let arrowIcon = document.querySelector('.fa-arrow-right');
-                arrowIcon.classList.remove('fa-flip-horizontal');
+                let arrowIcons = document.querySelectorAll('.fa-arrow-right');
+                arrowIcons.forEach((el) => {
+                    el.classList.remove('fa-flip-horizontal');
+                })
 			}
 		}, false);
 	</script>
