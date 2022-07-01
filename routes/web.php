@@ -24,8 +24,6 @@ use App\Http\Controllers\UserController;
 
 //Front page routes
 Route::get('/', [FrontController::class, 'index'])->name('home');
-Route::get('/category/{category}', [FrontController::class, 'category'])->name('home.category');
-Route::get('/play/{id}', [FrontController::class, 'play'])->name('home.play');
 
 Route::get('/cmd/{cmd}', function ($cmd) {
     \Artisan::call("$cmd");
@@ -61,6 +59,14 @@ Route::group(['middleware'=>'admin_auth'],function(){
 });
 ////Logout Route///
 Route::get('/admin/logout', [LoginController::class,'logout'])->name('admin-logout');
+
+////User Route////
+
 Route::get('admin/secreat',[LoginController::class,'secreat']);
 Route::post('user/register',[UserController::class,'register'])->name('user-register');
 Route::post('user/login',[UserController::class,'login'])->name('user-login');
+Route::group(['middleware'=>'user_auth'],function(){
+    Route::get('/category/{category}', [FrontController::class, 'category'])->name('home.category');
+    Route::get('/play/{id}', [FrontController::class, 'play'])->name('home.play');
+});
+Route::get('/user/logout', [UserController::class,'logout'])->name('user-logout');

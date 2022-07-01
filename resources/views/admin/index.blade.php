@@ -48,9 +48,9 @@
                                   <span class="text-c-green f-w-600">Users</span>
                                   <h4>{{ $user_count ?? 0 }}</h4>
                                   <div>
-                                      {{-- <span class="f-left m-t-10 text-muted">
+                                      <span class="f-left m-t-10 text-muted">
                                           <i class="text-c-green f-16 fa fa-tag m-r-10"></i>More
-                                      </span> --}}
+                                      </span>
                                   </div>
                               </div>
                           </div>
