@@ -1,5 +1,6 @@
 @php
 $lang = session()->get('lang') ?? 'en';
+$logo = App\Models\Setting::where('key', 'logo')->first();
 @endphp
 
 <html lang="{{ $lang ?? 'en' }}" dir="{{ $lang && $lang == 'ar' ? 'rtl' : '' }}">
@@ -72,7 +73,7 @@ $lang = session()->get('lang') ?? 'en';
                     <button class="navbar-toggler navbar-toggler-left collapsed" type="button" data-toggle="collapse"
                         data-target="#navb" aria-expanded="false"> <span class="navbar-toggler-icon"></span> </button>
                     <a class="navbar-brand js-scroll-trigger" href="/"><img
-                            src="{{ isset($logo) ? $logo : '/front_assets/logo.png' }}" class="site-logo"
+                            src="{{ isset($logo) ? asset('storage/logo/'.$logo->value) : '/front_assets/logo.png' }}" class="site-logo"
                             alt="Gamebox" style="height: 100px !important;"></a>
                     <div class="navbar-collapse collapse justify-content-end" id="navb">
                         <ul class="navbar-nav ml-auto text-uppercase">
