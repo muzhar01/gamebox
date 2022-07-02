@@ -1,3 +1,6 @@
+@php
+$logo = App\Models\Setting::where('key', 'logo')->first();
+@endphp
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,9 +19,9 @@
       <!-- Google font-->
       <link rel="stylesheet" type="text/css" href="{{ asset('admin_assets/css/bootstrap.min.css') }}">
       <!-- themify-icons line icon -->
-      <link rel="stylesheet" type="text/css" href="{{ asset('admin_assets/css/themify-icons.css') }}">
+      <link rel="stylesheet" type="text/css" href="{{ asset('admin_assets/icon/themify-icons/themify-icons.css') }}">
       <!-- ico font -->
-      <link rel="stylesheet" type="text/css" href="{{ asset('admin_assets/css/icofont.css') }}">
+      <link rel="stylesheet" type="text/css" href="{{ asset('admin_assets/icon/icofont/css/icofont.css') }}">
       <!-- Style.css -->
       <link rel="stylesheet" type="text/css" href="{{ asset('admin_assets/css/style.css') }}">
       <link rel="stylesheet" type="text/css" href="{{ asset('admin_assets/css/jquery.mCustomScrollbar.css')}}">
@@ -78,7 +81,7 @@
                             <i class="fa fa-bars" aria-hidden="true"></i>
                         </a>
                         <a href="{{ url('/admin/dashboard') }}">
-                            <img class="img-fluid" src="{{ asset('admin_assets/img/logo.png') }}" alt="Theme-Logo" />
+                            <img class="img-fluid" src="{{ asset('storage/logo/'.$logo->value) }}" alt="Theme-Logo" style="height:75px;" />
                         </a>
                         <a class="mobile-options">
                             <i class="fa fa-angle-down"></i>
@@ -143,6 +146,14 @@
                                     <a href="{{ route('admin.customize.homepage') }}">
                                         <span class="pcoded-micon"><i class="fa fa-gamepad"></i></span>
                                         <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Customize Home Page</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+
+                                <li class="{{ request()->is('*settings*') ? 'active' : '' }}">
+                                    <a href="{{ route('admin.settings.index') }}">
+                                        <span class="pcoded-micon"><i class="ti-settings"></i></span>
+                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Settings</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>

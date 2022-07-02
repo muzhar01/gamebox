@@ -5,11 +5,13 @@ use App\Http\Controllers\Admin\CustomizeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\GameController;
 use App\Models\Admin\Category;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\UserController;
+use App\Models\Setting;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,6 +55,11 @@ Route::group(['middleware'=>'admin_auth'],function(){
     });
 
     Route::resource('admin/slider', SliderController::class, ['as' => 'admin']);
+
+    Route::prefix('admin/settings')->name('admin.settings.')->group(function () {
+        Route::get('/', [SettingController::class, 'index'])->name('index');
+        Route::post('/logo', [SettingController::class, 'logo'])->name('set_logo');
+    });
 
     ////Logout Route///
     Route::get('/admin/logout', [LoginController::class,'logout'])->name('admin-logout');
