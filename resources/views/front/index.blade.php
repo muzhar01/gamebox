@@ -126,6 +126,7 @@ $lang = session()->get('lang') ?? 'en';
                 margin: 10,
                 nav: false,
                 loop: false,
+               {{ $lang && $lang == 'ar' ? 'rtl:true,' : '' }}
                 responsive: {
                     0: {items: 2},
                     200: {items: 3},

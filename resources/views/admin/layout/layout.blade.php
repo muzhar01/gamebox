@@ -81,7 +81,7 @@ $logo = App\Models\Setting::where('key', 'logo')->first();
                             <i class="fa fa-bars" aria-hidden="true"></i>
                         </a>
                         <a href="{{ url('/admin/dashboard') }}">
-                            <img class="img-fluid" src="{{ asset('storage/logo/'. isset($logo) && isset($logo->value) ? $logo->value : '') }}" alt="Theme-Logo" style="height:75px;" />
+                            <img class="img-fluid" src="{{ asset(isset($logo) && isset($logo->value) ? ('storage/logo/' . $logo->value) : 'front_assets/logo.png') }}" alt="Gamebox Admin" style="height:75px;" />
                         </a>
                         <a class="mobile-options">
                             <i class="fa fa-angle-down"></i>
