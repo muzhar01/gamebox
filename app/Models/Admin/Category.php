@@ -23,8 +23,9 @@ class Category extends Model
     public function getTitleAttribute($value){
 
         $lang = session()->get('lang') ?? 'en';
+        $is_admin = session()->has('ADMIN_LOGIN');
 
-        if($lang == 'ar'){
+        if($lang == 'ar' && !$is_admin){
             return $this->ar_title ?? $value;
         }
         
@@ -34,8 +35,9 @@ class Category extends Model
     public function getDescriptionAttribute($value){
 
         $lang = session()->get('lang') ?? 'en';
+        $is_admin = session()->has('ADMIN_LOGIN');
 
-        if($lang == 'ar'){
+        if($lang == 'ar' && !$is_admin){
             return $this->ar_description ?? $value;
         }
 
