@@ -65,7 +65,10 @@ Route::get('/admin/logout', [LoginController::class,'logout'])->name('admin-logo
 Route::get('admin/secreat',[LoginController::class,'secreat']);
 Route::post('user/register',[UserController::class,'register'])->name('user-register');
 Route::post('user/login',[UserController::class,'login'])->name('user-login');
-Route::get('/category/{category}', [FrontController::class, 'category'])->name('home.category');
+Route::get('/category/{id}', [FrontController::class, 'category'])->name('home.category');
+
+Route::get('/language/{language}', [FrontController::class, 'language'])->name('home.language');
+
 Route::group(['middleware'=>'user_auth'],function(){
     Route::get('/play/{id}', [FrontController::class, 'play'])->name('home.play');
 });

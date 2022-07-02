@@ -47,6 +47,10 @@ class GameController extends Controller
         $game->fill($inputs);
         $game->thumbnail = $imageName;
         $game->start_path = $game_path;
+        //for arabic
+        $game->ar_title = $request->ar_title ?? '';
+        $game->ar_description = $request->ar_description ?? '';
+
         $game->save();
         $notifiction=array('message'=>'Game Added Successfully','alert-type'=>'success');
         return redirect()->route('game.index')->with($notifiction);
@@ -108,6 +112,16 @@ class GameController extends Controller
                 $imageName = time().'.'.$request->thumbnail->extension();  
                 $request->thumbnail->move(public_path('storage/game'), $imageName);
                 $game->thumbnail = $imageName;
+            }
+
+            //for arabic
+            if(isset($request->ar_title)){
+                $game->ar_title = $request->ar_title ?? '';
+                
+            }
+            if(isset($request->ar_description)){
+                $game->ar_description = $request->ar_description ?? '';
+    
             }
 
             $game->update();

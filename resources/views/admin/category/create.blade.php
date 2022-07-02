@@ -126,8 +126,8 @@
           if(child_language=="arabic"){
             $('.arabicTitle').html('');
             $('.arabicDescription').html('');
-            $('.arabicTitle').append('<div class="col-sm-6" dir="rtl"><label for="">عنوان</label><input type="text" name="ar_title" class="form-control" placeholder="أدخل العنوان"> </div>');
-            $('.arabicDescription').append('<div class="col-sm-12" dir="rtl"><label for="">وصف</label><textarea name="ar_description" class="form-control"></textarea></div>');
+            $('.arabicTitle').append('<div class="col-sm-6" dir="rtl"><label for="">عنوان</label><input type="text" name="ar_title" class="form-control" value="{{ isset($category) ? ($category->ar_title ?? "") : old("ar_title") }}" placeholder="أدخل العنوان"> </div>');
+            $('.arabicDescription').append('<div class="col-sm-12" dir="rtl"><label for="">وصف</label><textarea name="ar_description" class="form-control">{{ isset($category) ? ($category->ar_description ?? "") : old("ar_description") }}</textarea></div>');
           }else{
             $('.arabicTitle').html('');
             $('.arabicDescription').html('');

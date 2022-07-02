@@ -71,7 +71,7 @@
                                                 @endphp
 
                                                 <div class="col-sm-6">
-                                                    <label for="title">Category</label>
+                                                    <label for="title" class="">Category</label>
                                                     <select name="category_id" class="form-control">
                                                         <option value="">Select Category</option>
 
@@ -117,6 +117,13 @@
                                                     @enderror
                                                 </div>
                                             </div>
+                                            <br>
+                                            <!-- for arabic -->
+                                            <div dir="rtl">
+                                                <div class="form-group row arabicTitle"><div class="col-sm-6" dir="rtl"><label for="">عنوان</label><input type="text" name="ar_title" class="form-control" value="{{ $game->ar_title ?? old('ar_title') ?? '' }}" placeholder="أدخل العنوان"></div></div>
+                                                <div class="form-group row arabicDescription"><div class="col-sm-12" dir="rtl"><label for="">وصف</label><textarea name="ar_description" class="form-control">{{ $game->ar_description ?? old('ar_description') ?? '' }}</textarea></div></div>
+                                            </div>
+                                            <!-- // for arabic -->
                                             <div class="mt-3">
                                               <button class="btn btn-primary float-right" type="submit">Submit</button>
                                             </div>

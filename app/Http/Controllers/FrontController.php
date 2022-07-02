@@ -30,10 +30,10 @@ class FrontController extends Controller
     /**
      * Show category specific resource.
      */
-    public function category($category)
+    public function category($id)
     {
-        $cat = Category::whereTitle($category)->first();
-        $cat_name = $category ?? 'Game';
+        $cat = Category::findOrFail($id);
+        $cat_name = $category->title ?? 'Game';
         $cat_games = Game::whereCategoryId($cat->id)->get();
         return view('front.category',['cat_name' => $cat_name, 'cat_games' => $cat_games]);
     }
@@ -48,14 +48,18 @@ class FrontController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * Change Language
      */
-    public function show($id)
+    public function language($language)
     {
-        //
+        if($language == 'ar'){
+            session()->put('lang', 'ar');
+        }else{
+            session()->put('lang', 'en');    
+        }
+
+        return back();
+
     }
 
     /**

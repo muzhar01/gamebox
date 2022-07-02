@@ -1,4 +1,8 @@
-<html lang="en">
+@php
+$lang = session()->get('lang') ?? 'en';
+@endphp
+
+<html lang="{{ $lang ?? 'en' }}" dir="{{ $lang && $lang == 'ar' ? 'rtl' : '' }}">
 
 <head>
     <meta charset="utf-8">
@@ -58,7 +62,7 @@
 
 </head>
 
-<body id="page-top">
+<body id="page-top" dir="{{ $lang && $lang == 'ar' ? 'rtl' : '' }}">
     <div id="google_translate_element" class="d-none"></div>
     <!-- Navigation-->
     <div class="container site-container">
@@ -73,8 +77,14 @@
                     <div class="navbar-collapse collapse justify-content-end" id="navb">
                         <ul class="navbar-nav ml-auto text-uppercase">
 
-                            <li class="nav-item"> <a class="nav-link" href="void:javascript(0)" id="changeLanguageBtn"
-                                    data-current-language="en" translate="no">العربية</a> </li>
+                            {{-- <li class="nav-item"> <a class="nav-link" href="void:javascript(0)" id="changeLanguageBtn"
+                                    data-current-language="en" translate="no">العربية</a> </li> --}}
+                            @if($lang && $lang == 'ar')
+                                <li class="nav-item"> <a class="nav-link" href="{{ route('home.language', 'en') }}" id="changeLanguageBtn">English</a> </li>
+                            @else
+                                <li class="nav-item"> <a class="nav-link" href="{{ route('home.language', 'ar') }}" id="changeLanguageBtn">العربية</a> </li>
+                            @endif
+
                             @if (session()->has('USER_LOGIN'))
                                 <li class="nav-item"> <a class="nav-link" href="{{ route('user-logout') }}"
                                         class="nav-link">Logout</a> </li>
@@ -126,7 +136,6 @@
                 $nav_categories =
                     \App\Models\Admin\Category::active()
                         ->orderBy('title', 'asc')
-                        ->take(8)
                         ->get() ?? [];
             @endphp
 
@@ -144,7 +153,7 @@
                                         <li
                                             class="nav-item {{ request()->is('*/' . $category->title) ? 'active' : '' }}">
                                             <a class="nav-link {{ request()->is('*/' . $category->title) ? 'active' : '' }}"
-                                                href="{{ route('home.category', $category->title) }}">{{ $category->title }}</a>
+                                                href="{{ route('home.category', ($category->id ?? 0)) }}">{{ $category->title }}</a>
                                         </li>
                                     @endforeach
                                 </ul>
@@ -297,7 +306,11 @@
             });
         });
     </script>
+
     @yield('scripts')
+
+{{-- google_language --}}
+@if(isset($google_lang))
     <script type="text/javascript">
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({
@@ -389,6 +402,7 @@
 			}
 		}, false);
 	</script>
+@endif
 
     <script>
         @if (Session::has('message'))
