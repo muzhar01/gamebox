@@ -152,8 +152,8 @@ $logo = App\Models\Setting::where('key', 'logo')->first();
 
                                     @foreach ($nav_categories as $category)
                                         <li
-                                            class="nav-item {{ request()->is('*/' . $category->title) ? 'active' : '' }}">
-                                            <a class="nav-link {{ request()->is('*/' . $category->title) ? 'active' : '' }}"
+                                            class="nav-item {{ request()->is('*/' . $category->id) ? 'active' : '' }}">
+                                            <a class="nav-link {{ request()->is('*/' . $category->id) ? 'active' : '' }}"
                                                 href="{{ route('home.category', ($category->id ?? 0)) }}">{{ $category->title }}</a>
                                         </li>
                                     @endforeach
