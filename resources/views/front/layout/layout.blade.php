@@ -246,6 +246,8 @@ $logo = App\Models\Setting::where('key', 'logo')->first();
     <script type="text/javascript" src="/front_assets/dark-grid/js/script.js"></script>
     <script type="text/javascript" src="/front_assets/js/greedy-menu.js"></script>
     <script type="text/javascript" src="/front_assets/js/custom.js"></script>
+    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     {{-- <script type="text/javascript" src="/front_assets/dark-grid/js/custom.js"></script> --}}
     <script>
         $(document).ready(function() {
@@ -272,11 +274,8 @@ $logo = App\Models\Setting::where('key', 'logo')->first();
                         'password_confirmation': password_confirmation
                     },
                     success: function(response) {
+                            $('#loginModal').hide();
                         console.log(response);
-                        if (response.errors) {
-                            console.log("Error");
-
-                        }
                     }
                 });
             });
@@ -297,6 +296,7 @@ $logo = App\Models\Setting::where('key', 'logo')->first();
                         'password': password,
                     },
                     success: function(response) {
+$('#loginModal').closest('.modal').modal('toggle');
                         console.log(response);
                         if (response.errors) {
                             console.log("Error");
