@@ -12,7 +12,8 @@ class SettingController extends Controller
     public function index()
     {
         $logo = Setting::where('key', 'logo')->first();
-        return view('admin.settings', compact('logo'));
+        $backgroundImage = Setting::where('key', 'background_image')->first();
+        return view('admin.settings', compact('logo', 'backgroundImage'));
     }
 
     //Update front logo
@@ -70,8 +71,8 @@ class SettingController extends Controller
         $setting = Setting::where('key', 'background_image')->first() ?? new Setting;
         
         if ($request->has('background_image')) {
-            $imageName = time().'.'.$request->logo->extension();
-            $request->logo->move(public_path('storage/background'), $imageName);
+            $imageName = time().'.'.$request->background_image->extension();
+            $request->background_image->move(public_path('storage/background'), $imageName);
         }
         
         if (isset($imageName) && isset($setting->value)) {

@@ -59,6 +59,7 @@ Route::group(['middleware'=>'admin_auth'],function(){
     Route::prefix('admin/settings')->name('admin.settings.')->group(function () {
         Route::get('/', [SettingController::class, 'index'])->name('index');
         Route::post('/logo', [SettingController::class, 'logo'])->name('set_logo');
+        Route::post('/background_image', [SettingController::class, 'backgroundImage'])->name('set_background_image');
     });
 
     ////Logout Route///

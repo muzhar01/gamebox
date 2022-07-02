@@ -1,6 +1,12 @@
 @php
 $lang = session()->get('lang') ?? 'en';
 $logo = App\Models\Setting::where('key', 'logo')->first();
+$backgroundImage = App\Models\Setting::where('key', 'background_image')->first();
+if ($backgroundImage !== null) {
+    $backgroundImage = asset('storage/background/'.$backgroundImage->value);
+} else {
+    $backgroundImage = '/front_assets/background/bg.png';
+}
 @endphp
 
 <html lang="{{ $lang ?? 'en' }}" dir="{{ $lang && $lang == 'ar' ? 'rtl' : '' }}">
@@ -28,14 +34,7 @@ $logo = App\Models\Setting::where('key', 'logo')->first();
     <link rel="stylesheet" type="text/css" href="/front_assets/css/custom.css">
     <style>
         body {
-            background-image: url('/front_assets/background/bg.png');
-            background-repeat: no-repeat;
-            background-size: cover;
-            top: 0 !important;
-        }
-
-        body {
-            background-image: url('/front_assets/background/bg.png');
+            background-image: url('{{ $backgroundImage }}');
             background-repeat: no-repeat;
             background-size: cover;
             top: 0 !important;
