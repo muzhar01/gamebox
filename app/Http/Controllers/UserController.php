@@ -50,7 +50,7 @@ class UserController extends Controller
                 $request->session()->put('USER_LOGIN', true);
                 $request->session()->put('USER_ID', $result->id);
                 $request->session()->put('USER_PHONE',  $phone);
-                return redirect('/');
+                return response()->json('Login Success');
             } else {
                 $request->session()->flash('error', 'Please Enter Valid Password');
                 $notifiction=array('message'=>'Access Denied','alert-type'=>'error');
