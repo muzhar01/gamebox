@@ -10,61 +10,64 @@ class UserController extends Controller
 {
     public function register(Request $request)
     {
-        $validation =\Validator::make($request->all(), [
+        $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'phone' => 'required|unique:users,phone',
             'password' => 'required',
             'password_confirmation' => 'required|same:password',
         ]);
-        if($validation->fails()) {
-            return Response::json(array(
-                'success' => false,
-                'errors' => $validation->getMessageBag()->toArray()
-
-            ), 400); // 400 being the HTTP code for an invalid request.
-        }else{
             $model=new User();
             $model->name=$request->input('name');
             $model->email=$request->input('email');
             $model->phone=$request->input('phone');
             $model->password=Hash::make($request->input('password'));
+
             if($model->save()){
+                \Auth::login($model);
                 return response()->json('Registered Successfully');
             }else{
                 return response()->json('Failed to Register');
             }
-
-        }
     }
     public function login(Request $request){
         $request->validate([
             'phone'=>'required',
             'password'=>'required'
         ]);
-        $phone = $request->post('phone');
-        $password = $request->post('password');
-        $result = User::where(['phone' => $phone])->first();
-        if ($result) {
-            if (Hash::check($password, $result->password)) {
-                $request->session()->put('USER_LOGIN', true);
-                $request->session()->put('USER_ID', $result->id);
-                $request->session()->put('USER_PHONE',  $phone);
-                return response()->json('Login Success');
-            } else {
-                $request->session()->flash('error', 'Please Enter Valid Password');
-                $notifiction=array('message'=>'Access Denied','alert-type'=>'error');
-                return back()->with($notifiction);
-            }
-        } else {
-            $request->session()->flash('error', 'Please Enter Valid Number');
-            return redirect('/');
+
+        if(\Auth::attempt($credentials) && \Auth::check()){
+            
+            return response()->json('Login Success');
+        }else{
+            
+            return response()->json('Login Failed');
         }
+
+        // $phone = $request->post('phone');
+        // $password = $request->post('password');
+        // $result = User::where(['phone' => $phone])->first();
+        // if ($result) {
+        //     if (Hash::check($password, $result->password)) {
+        //         $request->session()->put('USER_LOGIN', true);
+        //         $request->session()->put('USER_ID', $result->id);
+        //         $request->session()->put('USER_PHONE',  $phone);
+        //         return response()->json('Login Success');
+        //     } else {
+        //         $request->session()->flash('error', 'Please Enter Valid Password');
+        //         $notifiction=array('message'=>'Access Denied','alert-type'=>'error');
+        //         return back()->with($notifiction);
+        //     }
+        // } else {
+        //     $request->session()->flash('error', 'Please Enter Valid Number');
+        //     return redirect('/');
+        // }
     }
     public function logout(){
-        session()->forget('USER_LOGIN');
-        session()->forget('USER_ID');
-        session()->forget('USER_PHONE');
+        \Auth::logout();
+        // session()->forget('USER_LOGIN');
+        // session()->forget('USER_ID');
+        // session()->forget('USER_PHONE');
         $notifiction=array('message'=>'Logout Successfully','alert-type'=>'success');
         return redirect('/')->with($notifiction);
     }

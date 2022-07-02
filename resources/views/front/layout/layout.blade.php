@@ -25,7 +25,7 @@ $logo = App\Models\Setting::where('key', 'logo')->first();
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-        <link rel="stylesheet" type="text/css" href="/front_assets/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="/front_assets/css/custom.css">
     <style>
         body {
             background-image: url('/front_assets/background/bg.png');
@@ -34,15 +34,16 @@ $logo = App\Models\Setting::where('key', 'logo')->first();
             top: 0 !important;
         }
 
-		body{
-			background-image: url('/front_assets/background/bg.png');
-			background-repeat: no-repeat;
-			background-size: cover;
-			top: 0 !important;
-		}
-		.skiptranslate {
-			display: none !important;
-		}
+        body {
+            background-image: url('/front_assets/background/bg.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            top: 0 !important;
+        }
+
+        .skiptranslate {
+            display: none !important;
+        }
 
         .home-page-slider {
             height: 35vw !important;
@@ -59,8 +60,9 @@ $logo = App\Models\Setting::where('key', 'logo')->first();
                 height: 504px !important;
             }
         }
-	</style>
+    </style>
 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
 </head>
 
 <body id="page-top" dir="{{ $lang && $lang == 'ar' ? 'rtl' : '' }}">
@@ -73,26 +75,28 @@ $logo = App\Models\Setting::where('key', 'logo')->first();
                     <button class="navbar-toggler navbar-toggler-left collapsed" type="button" data-toggle="collapse"
                         data-target="#navb" aria-expanded="false"> <span class="navbar-toggler-icon"></span> </button>
                     <a class="navbar-brand js-scroll-trigger" href="/"><img
-                            src="{{ isset($logo) ? asset('storage/logo/'.$logo->value) : '/front_assets/logo.png' }}" class="site-logo"
-                            alt="Gamebox" style="height: 100px !important;"></a>
+                            src="{{ isset($logo) ? asset('storage/logo/' . $logo->value) : '/front_assets/logo.png' }}"
+                            class="site-logo" alt="Gamebox" style="height: 100px !important;"></a>
                     <div class="navbar-collapse collapse justify-content-end" id="navb">
                         <ul class="navbar-nav ml-auto text-uppercase">
 
                             {{-- <li class="nav-item"> <a class="nav-link" href="void:javascript(0)" id="changeLanguageBtn"
                                     data-current-language="en" translate="no">العربية</a> </li> --}}
-                            @if($lang && $lang == 'ar')
-                                <li class="nav-item"> <a class="nav-link" href="{{ route('home.language', 'en') }}" id="changeLanguageBtn">English</a> </li>
+                            @if ($lang && $lang == 'ar')
+                                <li class="nav-item"> <a class="nav-link" href="{{ route('home.language', 'en') }}"
+                                        id="changeLanguageBtn">English</a> </li>
                             @else
-                                <li class="nav-item"> <a class="nav-link" href="{{ route('home.language', 'ar') }}" id="changeLanguageBtn">العربية</a> </li>
+                                <li class="nav-item"> <a class="nav-link" href="{{ route('home.language', 'ar') }}"
+                                        id="changeLanguageBtn">العربية</a> </li>
                             @endif
 
-                            @if (session()->has('USER_LOGIN'))
+                            @auth
                                 <li class="nav-item"> <a class="nav-link" href="{{ route('user-logout') }}"
                                         class="nav-link">Logout</a> </li>
                             @else
-                                <li class="nav-item">  <a class="nav-link" data-toggle="modal" href="javascript:void(0)"
-                                    onclick="openLoginModal();">Login \ Register</a> </li>
-                            @endif
+                                <li class="nav-item"> <a class="nav-link" data-toggle="modal" href="javascript:void(0)"
+                                        onclick="openLoginModal();">Login \ Register</a> </li>
+                            @endauth
 
                         </ul>
 
@@ -112,26 +116,27 @@ $logo = App\Models\Setting::where('key', 'logo')->first();
             </nav>
             @if (isset($sliders))
 
-			<div id="carouselExampleControls" class="home-page-slider carousel slide m-4" data-ride="carousel">
-				<div class="carousel-inner">
-					@foreach($sliders as $slider)
-						<div class="carousel-item @if($loop->first) active @endif">
-							<a href="{{ $slider->link }}">
-								<img class="d-block w-100" src="{{ '/storage/sliders/' . ($slider->banner ?? '') }}" alt="">
-							</a>
-						</div>
-					@endforeach
-				</div>
-				<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-					<span class="sr-only">Previous</span>
-				</a>
-				<a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-					<span class="carousel-control-next-icon" aria-hidden="true"></span>
-					<span class="sr-only">Next</span>
-				</a>
-			</div>
-			@endif
+                <div id="carouselExampleControls" class="home-page-slider carousel slide m-4" data-ride="carousel">
+                    <div class="carousel-inner">
+                        @foreach ($sliders as $slider)
+                            <div class="carousel-item @if ($loop->first) active @endif">
+                                <a href="{{ $slider->link }}">
+                                    <img class="d-block w-100"
+                                        src="{{ '/storage/sliders/' . ($slider->banner ?? '') }}" alt="">
+                                </a>
+                            </div>
+                        @endforeach
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            @endif
 
             @php
                 $nav_categories =
@@ -151,10 +156,10 @@ $logo = App\Models\Setting::where('key', 'logo')->first();
                                     </li>
 
                                     @foreach ($nav_categories as $category)
-                                        <li
-                                            class="nav-item {{ request()->is('*/' . $category->id) ? 'active' : '' }}">
+                                        <li class="nav-item {{ request()->is('*/' . $category->id) ? 'active' : '' }}">
                                             <a class="nav-link {{ request()->is('*/' . $category->id) ? 'active' : '' }}"
                                                 href="{{ route('home.category', ($category->id ?? 0)) }}">{{ $category->title }}</a>
+
                                         </li>
                                     @endforeach
                                 </ul>
@@ -246,7 +251,7 @@ $logo = App\Models\Setting::where('key', 'logo')->first();
     <script type="text/javascript" src="/front_assets/dark-grid/js/script.js"></script>
     <script type="text/javascript" src="/front_assets/js/greedy-menu.js"></script>
     <script type="text/javascript" src="/front_assets/js/custom.js"></script>
-    
+
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     {{-- <script type="text/javascript" src="/front_assets/dark-grid/js/custom.js"></script> --}}
     <script>
@@ -274,9 +279,18 @@ $logo = App\Models\Setting::where('key', 'logo')->first();
                         'password_confirmation': password_confirmation
                     },
                     success: function(response) {
-                            $('#loginModal').hide();
+                        $('#loginModal').closest('.modal').modal('toggle');
+                        toastr.success(response);
                         console.log(response);
+                        setTimeout(function() {
+                            window.location.reload(true);
+                        }, 2000);
+                    },
+                    error:function(response){
+                        var error=response.responseJSON;
+                        $.each(error.errors,(x,y) => toastr.error(y,{timeOut: 5000}));
                     }
+
                 });
             });
             $('#user_login').submit(function(e) {
@@ -296,12 +310,22 @@ $logo = App\Models\Setting::where('key', 'logo')->first();
                         'password': password,
                     },
                     success: function(response) {
-$('#loginModal').closest('.modal').modal('toggle');
+
+                        toastr.success(response);
+                        $('#loginModal').closest('.modal').modal('toggle');
+
+                        setTimeout(function() {
+                            window.location.reload(true);
+                        }, 2000);
                         console.log(response);
                         if (response.errors) {
                             console.log("Error");
 
                         }
+                    },
+                    error:function(response){
+                        var error=response.responseJSON;
+                        $.each(error.errors,(x,y) => toastr.error(y,{timeOut: 5000}));
                     }
                 });
             });
@@ -310,100 +334,100 @@ $('#loginModal').closest('.modal').modal('toggle');
 
     @yield('scripts')
 
-{{-- google_language --}}
-@if(isset($google_lang))
-    <script type="text/javascript">
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({
-                includedLanguages: "ar,en"
-            }, 'google_translate_element');
-        }
-    </script>
+    {{-- google_language --}}
+    @if (isset($google_lang))
+        <script type="text/javascript">
+            function googleTranslateElementInit() {
+                new google.translate.TranslateElement({
+                    includedLanguages: "ar,en"
+                }, 'google_translate_element');
+            }
+        </script>
 
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
-    </script>
+        <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+        </script>
 
-    <script>
-        let changeLanguageBtn = document.querySelector('#changeLanguageBtn');
-        let languageSelect;
+        <script>
+            let changeLanguageBtn = document.querySelector('#changeLanguageBtn');
+            let languageSelect;
 
-	    setTimeout(function () {
-			languageSelect = document.querySelector('#google_translate_element .goog-te-combo');
-			if (languageSelect.value === 'en') {
-                changeLanguageBtn.dataset.currentLanguage = 'en';
-				changeLanguageBtn.textContent = 'العربية';
-				document.querySelector('html').dir = 'ltr';
-                document.querySelector('body').dir = 'ltr';
-                let arrowIcons = document.querySelectorAll('.fa-arrow-right');
-                arrowIcons.forEach((el) => {
-                    el.classList.remove('fa-flip-horizontal');
-                })
-			} else if(languageSelect.value === 'ar') {
-                changeLanguageBtn.dataset.currentLanguage = 'ar';
-				changeLanguageBtn.textContent = 'English';
-				document.querySelector('html').dir = 'rtl';
-                document.querySelector('body').dir = 'rtl';
-                let arrowIcons = document.querySelectorAll('.fa-arrow-right');
-                arrowIcons.forEach((el) => {
-                    el.classList.add('fa-flip-horizontal');
-                })
-			}
-		}, 2000);
-		
-
-		changeLanguageBtn.addEventListener('click', (e) => {
-			const self = e.target;
-            
-			if (!languageSelect) return;
-
-            if (self.dataset.currentLanguage === 'en') {
-                // Change language to arabic
-                self.dataset.currentLanguage = 'ar';
-                self.textContent = 'English';
-                languageSelect.querySelector('[value="ar"]').selected = true;
-
-                // Fire onchange event
-                if ("createEvent" in document) {
-                    var evt = document.createEvent("HTMLEvents");
-                    evt.initEvent("change", false, true);
-                    languageSelect.dispatchEvent(evt);
-                } else {
-                    languageSelect.fireEvent("onchange");
+            setTimeout(function() {
+                languageSelect = document.querySelector('#google_translate_element .goog-te-combo');
+                if (languageSelect.value === 'en') {
+                    changeLanguageBtn.dataset.currentLanguage = 'en';
+                    changeLanguageBtn.textContent = 'العربية';
+                    document.querySelector('html').dir = 'ltr';
+                    document.querySelector('body').dir = 'ltr';
+                    let arrowIcons = document.querySelectorAll('.fa-arrow-right');
+                    arrowIcons.forEach((el) => {
+                        el.classList.remove('fa-flip-horizontal');
+                    })
+                } else if (languageSelect.value === 'ar') {
+                    changeLanguageBtn.dataset.currentLanguage = 'ar';
+                    changeLanguageBtn.textContent = 'English';
+                    document.querySelector('html').dir = 'rtl';
+                    document.querySelector('body').dir = 'rtl';
+                    let arrowIcons = document.querySelectorAll('.fa-arrow-right');
+                    arrowIcons.forEach((el) => {
+                        el.classList.add('fa-flip-horizontal');
+                    })
                 }
+            }, 2000);
 
-				document.querySelector('html').dir = 'rtl';
-                document.querySelector('body').dir = 'rtl';
-                let arrowIcons = document.querySelectorAll('.fa-arrow-right');
-                arrowIcons.forEach((el) => {
-                    el.classList.add('fa-flip-horizontal');
-                })
 
-            } else {
-                // Change language to english
-                self.dataset.currentLanguage = 'en';
-                self.textContent = 'العربية';
-                languageSelect.querySelector('[value="en"]').selected = true;
+            changeLanguageBtn.addEventListener('click', (e) => {
+                const self = e.target;
 
-                // Fire onchange event
-                if ("createEvent" in document) {
-                    var evt = document.createEvent("HTMLEvents");
-                    evt.initEvent("change", false, true);
-                    languageSelect.dispatchEvent(evt);
+                if (!languageSelect) return;
+
+                if (self.dataset.currentLanguage === 'en') {
+                    // Change language to arabic
+                    self.dataset.currentLanguage = 'ar';
+                    self.textContent = 'English';
+                    languageSelect.querySelector('[value="ar"]').selected = true;
+
+                    // Fire onchange event
+                    if ("createEvent" in document) {
+                        var evt = document.createEvent("HTMLEvents");
+                        evt.initEvent("change", false, true);
+                        languageSelect.dispatchEvent(evt);
+                    } else {
+                        languageSelect.fireEvent("onchange");
+                    }
+
+                    document.querySelector('html').dir = 'rtl';
+                    document.querySelector('body').dir = 'rtl';
+                    let arrowIcons = document.querySelectorAll('.fa-arrow-right');
+                    arrowIcons.forEach((el) => {
+                        el.classList.add('fa-flip-horizontal');
+                    })
+
                 } else {
-                    languageSelect.fireEvent("onchange");
+                    // Change language to english
+                    self.dataset.currentLanguage = 'en';
+                    self.textContent = 'العربية';
+                    languageSelect.querySelector('[value="en"]').selected = true;
+
+                    // Fire onchange event
+                    if ("createEvent" in document) {
+                        var evt = document.createEvent("HTMLEvents");
+                        evt.initEvent("change", false, true);
+                        languageSelect.dispatchEvent(evt);
+                    } else {
+                        languageSelect.fireEvent("onchange");
+                    }
+
+                    document.querySelector('html').dir = 'ltr';
+                    document.querySelector('body').dir = 'ltr';
+
+                    let arrowIcons = document.querySelectorAll('.fa-arrow-right');
+                    arrowIcons.forEach((el) => {
+                        el.classList.remove('fa-flip-horizontal');
+                    })
                 }
-
-				document.querySelector('html').dir = 'ltr';
-                document.querySelector('body').dir = 'ltr';
-
-                let arrowIcons = document.querySelectorAll('.fa-arrow-right');
-                arrowIcons.forEach((el) => {
-                    el.classList.remove('fa-flip-horizontal');
-                })
-			}
-		}, false);
-	</script>
-@endif
+            }, false);
+        </script>
+    @endif
 
     <script>
         @if (Session::has('message'))
@@ -411,6 +435,10 @@ $('#loginModal').closest('.modal').modal('toggle');
             switch (type) {
                 case 'success':
                     toastr.success("{{ Session::get('message') }}");
+
+                    break;
+                case 'error':
+                    toastr.error("{{ Session::get('message') }}");
                     break;
             }
         @endif
