@@ -34,7 +34,11 @@ $lang = session()->get('lang') ?? 'en';
                 <div class="owl-carousel owl-theme">
                     @foreach($new_games as $key => $new_game)
                         <div class="grid-item item-grid item shadow-lg">
+                            @auth
                             <a href="{{ route('home.play', $new_game->id) }}" target="_blank">
+                               @else
+                               <a href="#" onclick="openLoginModal();"> 
+                            @endauth
                                 <div class="list-game">
                                     <div class="list-thumbnail mb-1"><img src="{{ '/storage/game/' . ($new_game->thumbnail ?? '') }}" class="small-thumb" alt="{{ $new_game->title }}"></div>
                                     {{-- <div class="list-title"><span class="btn btn-sm btn-outline-success">Play Now</span></div> --}}

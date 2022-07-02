@@ -76,7 +76,7 @@ Route::get('/category/{id}', [FrontController::class, 'category'])->name('home.c
 
 Route::get('/language/{language}', [FrontController::class, 'language'])->name('home.language');
 
-Route::group(['middleware'=>'user_auth'],function(){
+Route::group(['middleware'=>'auth'],function(){
     Route::get('/play/{id}', [FrontController::class, 'play'])->name('home.play');
 });
 Route::get('/user/logout', [UserController::class,'logout'])->name('user-logout');
