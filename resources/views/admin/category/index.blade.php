@@ -70,6 +70,7 @@
                                   <tr>
                                       <th>#</th>
                                       <th>Title</th>
+                                      <th>Arabic Title</th>
                                       <th>Thumbnail</th>
                                       <th>Status</th>
                                       <th>Action</th>
@@ -80,6 +81,7 @@
                                     <tr>
                                         <th scope="row">{{ $loop->iteration }}</th>
                                         <td>{{ $category->title ?? '' }}</td>
+                                        <td>{{ $category->ar_title ?? '' }}</td>
                                         <td><img src="{{ '/storage/category/' . ($category->thumbnail ?? '') }}" alt="{{ $category->title ?? '' }}" style="height:50px !important;width:auto;"></td>
                                         
                                         <td>

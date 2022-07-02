@@ -73,6 +73,7 @@
                                   <tr>
                                       <th>#</th>
                                       <th>Title</th>
+                                      <th>Arabic Title</th>
                                       <th>Short Name</th>
                                       <th>Status</th>
                                   </tr>
@@ -82,6 +83,7 @@
                                   <tr>
                                       <th scope="row">{{ $loop->iteration ?? '#' }}</th>
                                       <td>{{ $game->title ?? '' }}</td>
+                                      <td>{{ $game->ar_title ?? '' }}</td>
                                       <td>{{ $game->short_name ?? '' }}</td>
                                       <td>
                                         <div class="btn-group">

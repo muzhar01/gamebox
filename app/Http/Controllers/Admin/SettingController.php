@@ -12,7 +12,8 @@ class SettingController extends Controller
     public function index()
     {
         $logo = Setting::where('key', 'logo')->first();
-        return view('admin.settings', compact('logo'));
+        $backgroundImage = Setting::where('key', 'background_image')->first();
+        return view('admin.settings', compact('logo', 'backgroundImage'));
     }
 
     //Update front logo
@@ -50,6 +51,43 @@ class SettingController extends Controller
         $setting->save();
 
         return back()->with('success', 'Logo updated successfully!');
+    }
+
+    //Update front backgroundImage
+    public function backgroundImage(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'background_image' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return back()
+                    ->withErrors($validator, 'addBackgroundImage')
+                    ->withInput();
+        }
+
+        $validated = $validator->validated();
+        
+        $setting = Setting::where('key', 'background_image')->first() ?? new Setting;
+        
+        if ($request->has('background_image')) {
+            $imageName = time().'.'.$request->background_image->extension();
+            $request->background_image->move(public_path('storage/background'), $imageName);
+        }
+        
+        if (isset($imageName) && isset($setting->value)) {
+            $old_log = public_path('storage/background/'. $setting->value);
+            if(file_exists($old_log)){
+                \Storage::delete($old_log);
+            }
+        }
+        
+        $setting->key = 'background_image';
+        $setting->value = $imageName;
+
+        $setting->save();
+
+        return back()->with('success', 'Background Image updated successfully!');
     }
 
 
