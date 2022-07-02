@@ -151,7 +151,7 @@ if ($backgroundImage !== null) {
                             <nav class="">
                                 <ul class="nav">
                                     <li class="nav-item {{ request()->is('/') ? 'active' : '' }}"><a href="/"
-                                            class="nav-link {{ request()->is('/') ? 'active' : '' }}">All Games</a>
+                                            class="nav-link {{ request()->is('/') ? 'active' : '' }}"> {{ $lang && $lang == 'ar' ? 'كل الألعاب' : 'All Games' }}</a>
                                     </li>
 
                                     @foreach ($nav_categories as $category)
