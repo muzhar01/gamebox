@@ -5,11 +5,13 @@ use App\Http\Controllers\Admin\CustomizeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\GameController;
 use App\Models\Admin\Category;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\UserController;
+use App\Models\Setting;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,6 +56,11 @@ Route::group(['middleware'=>'admin_auth'],function(){
 
     Route::resource('admin/slider', SliderController::class, ['as' => 'admin']);
 
+    Route::prefix('admin/settings')->name('admin.settings.')->group(function () {
+        Route::get('/', [SettingController::class, 'index'])->name('index');
+        Route::post('/logo', [SettingController::class, 'logo'])->name('set_logo');
+    });
+
     ////Logout Route///
     Route::get('/admin/logout', [LoginController::class,'logout'])->name('admin-logout');
 });
@@ -65,7 +72,10 @@ Route::get('/admin/logout', [LoginController::class,'logout'])->name('admin-logo
 Route::get('admin/secreat',[LoginController::class,'secreat']);
 Route::post('user/register',[UserController::class,'register'])->name('user-register');
 Route::post('user/login',[UserController::class,'login'])->name('user-login');
-Route::get('/category/{category}', [FrontController::class, 'category'])->name('home.category');
+Route::get('/category/{id}', [FrontController::class, 'category'])->name('home.category');
+
+Route::get('/language/{language}', [FrontController::class, 'language'])->name('home.language');
+
 Route::group(['middleware'=>'user_auth'],function(){
     Route::get('/play/{id}', [FrontController::class, 'play'])->name('home.play');
 });

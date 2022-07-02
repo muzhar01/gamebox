@@ -42,6 +42,8 @@ class CategoryController extends Controller
         $category = new Category();
         $category->fill($inputs);
         $category->thumbnail = $imageName;
+        $category->ar_title = $request->ar_title ?? '';
+        $category->ar_description = $request->ar_description ?? '';
         $category->save();
 
         return redirect()->route('admin.category.index')->with('success', 'Category added Successfully.');
@@ -96,6 +98,14 @@ class CategoryController extends Controller
             $imageName = time().'.'.$request->thumbnail->extension();  
             $request->thumbnail->move(public_path('storage/category'), $imageName);
             $category->thumbnail = $imageName;
+        }
+        if(isset($request->ar_title)){
+            $category->ar_title = $request->ar_title ?? '';
+            
+        }
+        if(isset($request->ar_description)){
+            $category->ar_description = $request->ar_description ?? '';
+
         }
         
         $category->save();

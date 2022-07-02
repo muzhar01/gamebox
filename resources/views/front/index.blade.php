@@ -1,6 +1,11 @@
 @extends('front.layout.layout')
 
 @section('content')
+
+@php
+$lang = session()->get('lang') ?? 'en';
+@endphp
+
     <style>
         #carouselExampleControls {
             height: 504px;
@@ -80,7 +85,7 @@
                     <h3 class="h4 d-flex"><i class="fa fa-gamepad mx-2" aria-hidden="true"></i>{{ $category->title ?? '' }}</h3>
                 </div>
                 <div class="col-1">
-                    <a href="{{ route('home.category', $category->title) }}" class="text-white"><h3 class="h4 text-right"><i class="fa fa-arrow-right" aria-hidden="true"></i></h3></a>
+                    <a href="{{ route('home.category', ($category->id ?? 0)) }}" class="text-white"><h3 class="h4 text-right"><i class="fa fa-arrow-right {{ $lang && $lang == 'ar' ? 'fa-flip-horizontal' : '' }}" aria-hidden="true"></i></h3></a>
                 </div>
             </div>
 

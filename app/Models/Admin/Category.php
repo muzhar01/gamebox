@@ -19,4 +19,29 @@ class Category extends Model
         return $this->hasMany(\App\Models\Game::class);
     }
 
+    // Get title wrt language
+    public function getTitleAttribute($value){
+
+        $lang = session()->get('lang') ?? 'en';
+        $is_admin = session()->has('ADMIN_LOGIN');
+
+        if($lang == 'ar' && !$is_admin){
+            return $this->ar_title ?? $value;
+        }
+        
+        return $value;
+    }
+    // get desctription wrt language
+    public function getDescriptionAttribute($value){
+
+        $lang = session()->get('lang') ?? 'en';
+        $is_admin = session()->has('ADMIN_LOGIN');
+
+        if($lang == 'ar' && !$is_admin){
+            return $this->ar_description ?? $value;
+        }
+
+        return $value;
+    }
+
 }
