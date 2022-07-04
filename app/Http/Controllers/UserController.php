@@ -41,7 +41,7 @@ class UserController extends Controller
             return response()->json('Login Success');
         }else{
             
-            return response()->json('Login Failed');
+            return response()->json(['errors' => ['login_error' => 'Login Failed']], 422);
         }
 
         // $phone = $request->post('phone');

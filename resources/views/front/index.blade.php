@@ -67,7 +67,11 @@ $lang = session()->get('lang') ?? 'en';
                 <div class="owl-carousel owl-theme">
                     @foreach($papular_games as $key => $papular_game)
                         <div class="grid-item item-grid item shadow-lg">
+                            @auth
                             <a href="{{ route('home.play', $papular_game->id) }}">
+                            @else
+                               <a href="#" onclick="openLoginModal();"> 
+                            @endauth
                                 <div class="list-game">
                                     <div class="list-thumbnail mb-1"><img src="{{ '/storage/game/' . ($papular_game->thumbnail ?? '') }}" class="small-thumb" alt="{{ $papular_game->title ?? '' }}"></div>
                                     {{-- <div class="list-title"><span class="btn btn-sm btn-outline-success">Play Now</span></div> --}}
@@ -98,7 +102,11 @@ $lang = session()->get('lang') ?? 'en';
                     <div class="owl-carousel owl-theme">
                         @foreach($category->games as $key => $game)
                             <div class="grid-item item-grid item shadow-lg">
+                                @auth
                                 <a href="{{ route('home.play', $game->id) }}">
+                                @else
+                                <a href="#" onclick="openLoginModal();"> 
+                                @endauth
                                     <div class="list-game">
                                         <div class="list-thumbnail mb-1"><img src="{{ '/storage/game/' . ($game->thumbnail ?? '') }}" class="small-thumb" alt="{{ $game->title ?? '' }}"></div>
                                         {{-- <div class="list-title"><span class="btn btn-sm btn-outline-success">Play Now</span></div> --}}

@@ -1,6 +1,7 @@
 @extends('admin.layout.layout')
 
 @section('container')
+<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
 <div class="pcoded-content">
   <div class="pcoded-inner-content">
       <!-- Main-body start -->
@@ -75,7 +76,10 @@
                                       <th>Title</th>
                                       <th>Arabic Title</th>
                                       <th>Short Name</th>
+                                      <th>Category</th>
                                       <th>Status</th>
+                                      <th>Marked as New</th>
+                                      <th>Marked as Popular</th>
                                   </tr>
                               </thead>
                               <tbody>
@@ -85,6 +89,7 @@
                                       <td>{{ $game->title ?? '' }}</td>
                                       <td>{{ $game->ar_title ?? '' }}</td>
                                       <td>{{ $game->short_name ?? '' }}</td>
+                                      <td>{{ $game->category->title }}</td>
                                       <td>
                                         <div class="btn-group">
                                             @if($game->status == 1)
@@ -101,6 +106,20 @@
                                             </div>
                                           </div>
                                       </td>
+                                      <td class="is-new-label-{{$game->id}}">
+                                        @if ($game->is_new == 1)
+                                          <span class="badge badge-success">Yes</span>
+                                        @else
+                                          <span class="badge badge-warning">No</span>
+                                        @endif
+                                      </td>
+                                      <td class="is-new-popular-{{$game->id}}">
+                                        @if ($game->is_popular == 1)
+                                          <span class="badge badge-success">Yes</span>
+                                        @else
+                                          <span class="badge badge-warning">No</span>
+                                        @endif
+                                      </td>
                                       <td>
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-default">Action</button>
@@ -108,11 +127,25 @@
                                               <span class="sr-only">Toggle Dropdown</span>
                                             </button>
                                             <div class="dropdown-menu" role="menu">
-                                              <a class="dropdown-item" href="{{ route('game.edit', $game->id) }}">Edit</a>
+                                              <button type="button" class="dropdown-item mark-as-new" data-id="{{ $game->id }}">
+                                                @if ($game->is_new == 1)
+                                                  Unmark as New
+                                                @else
+                                                  Mark as New
+                                                @endif
+                                              </button>
+                                              <button type="button" class="dropdown-item mark-as-popular" data-id="{{ $game->id }}">
+                                                @if ($game->is_popular == 1)
+                                                  Unmark as Popular
+                                                @else
+                                                  Mark as Popular
+                                                @endif
+                                              </button>
+                                              <button class="dropdown-item" onclick="window.location ='{{ route('game.edit', $game->id) }}'">Edit</button>
                                               <form action="{{ route('game.destroy', $game->id) }}" method="post" class="form-inline m-0 p-0">
                                                 @csrf
                                                 @method('DELETE')
-                                                <a class="dropdown-item" href="#"><button class="border-0" type="submit">Delete</button></a>
+                                                <button class="dropdown-item" type="submit">Delete</button>
                                               </form>
                                             </div>
                                         </div>
@@ -136,4 +169,55 @@
 
   </div>
 </div>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script>
+  $('.mark-as-new').click(function () {
+    const self = this;
+    let id = self.dataset.id;
+    $.ajax({
+      url: '{{ route("admin.game.toggle_mark_new") }}',
+      method: 'POST',
+      data: {
+        _token: '{{ csrf_token() }}',
+        id: id 
+      },
+      success: function (response) {
+        if (response == 1) {
+          self.textContent = "Unmark as New";
+          toastr.success("Game marked as new");
+          $('.is-new-label-' + id).html('<span class="badge badge-success">Yes</span>');
+        } else {
+          self.textContent = "Mark as New";
+          toastr.success("Game unmarked as new");
+          $('.is-new-label-' + id).html('<span class="badge badge-warning">No</span>');
+        }
+      }
+    });
+  });
+
+  $('.mark-as-popular').click(function () {
+    const self = this;
+    let id = self.dataset.id;
+    $.ajax({
+      url: '{{ route("admin.game.toggle_mark_popular") }}',
+      method: 'POST',
+      data: {
+        _token: '{{ csrf_token() }}',
+        id: id 
+      },
+      success: function (response) {
+        if (response == 1) {
+          self.textContent = "Unmark as Popular";
+          toastr.success("Game marked as popular");
+          $('.is-new-popular-' + id).html('<span class="badge badge-success">Yes</span>');
+        } else {
+          self.textContent = "Mark as Popular";
+          toastr.success("Game marked as popular");
+          $('.is-new-popular-' + id).html('<span class="badge badge-warning">No</span>');
+        }
+      }
+    });
+  });
+
+</script>
 @endsection

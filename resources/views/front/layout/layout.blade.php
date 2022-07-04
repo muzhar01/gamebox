@@ -119,10 +119,17 @@ if ($backgroundImage !== null) {
                     <div class="carousel-inner">
                         @foreach ($sliders as $slider)
                             <div class="carousel-item @if ($loop->first) active @endif">
+                            @auth
                                 <a href="{{ $slider->link }}">
                                     <img class="d-block w-100"
                                         src="{{ '/storage/sliders/' . ($slider->banner ?? '') }}" alt="">
                                 </a>
+                            @else
+                               <a href="#" onclick="openLoginModal();">
+                                    <img class="d-block w-100"
+                                        src="{{ '/storage/sliders/' . ($slider->banner ?? '') }}" alt="">
+                                </a>
+                            @endauth
                             </div>
                         @endforeach
                     </div>
@@ -324,6 +331,7 @@ if ($backgroundImage !== null) {
                     },
                     error:function(response){
                         var error=response.responseJSON;
+                        console.log(error);
                         $.each(error.errors,(x,y) => toastr.error(y,{timeOut: 5000}));
                     }
                 });

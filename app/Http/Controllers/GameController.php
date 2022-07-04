@@ -153,4 +153,30 @@ class GameController extends Controller
         return back()->with('error', 'Error: Something wrong.');
     }
 
+    public function toggleMarkNew(Request $request)
+    {
+        $game = Game::find($request->id);
+
+        if ($game->is_new === 0)
+            $game->is_new = 1;
+        else
+            $game->is_new = 0;
+        $game->save();
+        
+        return $game->is_new;
+    }
+
+    public function toggleMarkPopular(Request $request)
+    {
+        $game = Game::find($request->id);
+
+        if ($game->is_popular === 0)
+            $game->is_popular = 1;
+        else
+            $game->is_popular = 0;
+        $game->save();
+
+        return $game->is_popular;
+    }
+
 }

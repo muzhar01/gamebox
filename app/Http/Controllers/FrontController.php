@@ -15,12 +15,12 @@ class FrontController extends Controller
 
     public function index()
     { 
-        $new_games = Game::latest()->active()->take(20)->get();
-        $papular_games = Game::active()->take(20)->get();
+        $new_games = Game::where('is_new', 1)->latest()->active()->take(20)->get();
+        $papular_games = Game::where('is_popular', 1)->latest()->active()->take(20)->get();
         // $foryou_games = Game::active()->take(15)->get();
         $sliders = Slider::where('status', 1)->get();
         $cat_games = Category::active()->with(['games' => function($q){
-                return $q->active();
+                return $q->latest()->active();
             }])
             ->whereHas('games')->take(7)->get();
 
@@ -34,7 +34,7 @@ class FrontController extends Controller
     {
         $cat = Category::findOrFail($id);
         // $cat_name = $category->title ?? 'Game';
-        $cat_games = Game::whereCategoryId($cat->id)->get();
+        $cat_games = Game::whereCategoryId($cat->id)->active()->get();
         return view('front.category',['cat' => $cat, 'cat_games' => $cat_games]);
     }
 
