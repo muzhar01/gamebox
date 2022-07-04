@@ -4,7 +4,7 @@
     <div class="game-container">
 
         <!--Category Games -->
-        <h3 class="item-title"><i class="fa fa-gamepad" aria-hidden="true"></i>{{ $cat_name ?? 'Games' }}</h3>
+        <h3 class="item-title"><i class="fa fa-gamepad" aria-hidden="true"></i>{{ $cat->title ?? 'Games' }}</h3>
         <div class="grid-layout grid-wrapper">
             @foreach($cat_games as $key => $cat_game)
                 <div class="grid-item item-grid item shadow-lg">
