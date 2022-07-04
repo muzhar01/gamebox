@@ -22,7 +22,7 @@ $lang = session()->get('lang') ?? 'en';
         <!--New Games -->
         <div class="row mb-3 text-white">
             <div class="col-10">
-                <h3 class="h4 d-flex"><i class="fa fa-plus mx-2" aria-hidden="true"></i>NEW GAMES</h3>
+                <h3 class="h4 d-flex"><i class="fa fa-plus mx-2" aria-hidden="true"></i>{{ $lang && $lang == 'ar' ? 'ألعاب جديدة' : 'NEW GAMES' }}</h3>
             </div>
             <div class="col-2">
                 {{-- <h3 class="h4 text-right"><i class="fa fa-arrow-right" aria-hidden="true"></i></h3> --}}
@@ -55,7 +55,7 @@ $lang = session()->get('lang') ?? 'en';
         <!-- Popular games -->
         <div class="row mb-3 text-white">
             <div class="col-10">
-                <h3 class="h4 d-flex"><i class="fa fa-certificate mx-2" aria-hidden="true"></i>POPULAR GAMES</h3>
+                <h3 class="h4 d-flex"><i class="fa fa-certificate mx-2" aria-hidden="true"></i>{{ $lang && $lang == 'ar' ? 'الألعاب الشعبية' : 'POPULAR GAMES' }}</h3>
             </div>
             <div class="col-2">
                 {{-- <h3 class="h4 text-right"><i class="fa fa-arrow-right" aria-hidden="true"></i></h3> --}}
