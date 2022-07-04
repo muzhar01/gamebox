@@ -33,9 +33,9 @@ class FrontController extends Controller
     public function category($id)
     {
         $cat = Category::findOrFail($id);
-        // $cat_name = $category->title ?? 'Game';
+        $cat_name = $category->title ?? 'Game';
         $cat_games = Game::whereCategoryId($cat->id)->get();
-        return view('front.category',['cat' => $cat, 'cat_games' => $cat_games]);
+        return view('front.category',['cat_name' => $cat_name, 'cat_games' => $cat_games]);
     }
 
     /**
