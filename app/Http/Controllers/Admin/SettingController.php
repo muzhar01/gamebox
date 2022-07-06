@@ -13,7 +13,8 @@ class SettingController extends Controller
     {
         $logo = Setting::where('key', 'logo')->first();
         $backgroundImage = Setting::where('key', 'background_image')->first();
-        return view('admin.settings', compact('logo', 'backgroundImage'));
+        $theme = Setting::where('key', 'theme')->first();
+        return view('admin.settings', compact('logo', 'backgroundImage', 'theme'));
     }
 
     //Update front logo
@@ -88,6 +89,23 @@ class SettingController extends Controller
         $setting->save();
 
         return back()->with('success', 'Background Image updated successfully!');
+    }
+
+    //Update front theme
+    public function theme(Request $request)
+    {
+        $validator = $request->validate([
+            'theme' => 'required',
+        ]);
+        
+        $setting = Setting::where('key', 'theme')->first() ?? new Setting;
+        
+        $setting->key = 'theme';
+        $setting->value = $validator['theme'] ?? '';
+
+        $setting->save();
+
+        return back()->with('success', 'Homepage Theme updated successfully!');
     }
 
 

@@ -109,6 +109,41 @@
                     </div>
                 </div>
                 <!-- Background Image end -->
+
+                <!-- Theme start -->
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Homepage Theme</h4>
+                    </div>
+                    <div class="card-block">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <form id="theme" action="{{ route('admin.settings.theme') }}" method="post">
+                                    @csrf
+                                    <div class="form-group">
+                                        <div class="form-check ml-4">
+                                            <input id="dark-theme" type="radio" name="theme" class="form-check-input" value="dark" {{ isset($theme) && $theme->value !== 'light' ? 'checked':'' }}>
+                                            <label for="dark-theme" class="form-check-label">Dark Theme</label>
+                                        </div>
+
+                                        <div class="form-check ml-4">
+                                            <input id="light-theme" type="radio" name="theme" class="form-check-input" value="light" {{ isset($theme) && $theme->value == 'light' ? 'checked':'' }}>
+                                            <label for="light-theme" class="form-check-label">Light Theme</label>
+                                            @error('theme')
+                                                <div class="error">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <button class="btn btn-primary">Update</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Theme end -->
             </div>
             <!-- Page-body end -->
           </div>

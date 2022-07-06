@@ -206,13 +206,21 @@ var nav = $('.fixed-button');
  });
 </script>
 <script>
-    @if (Session::has('message'))
+    @if(Session::has('message'))
         var type = "{{ Session::get('alert-type', 'info') }}"
         switch (type) {
             case 'success':
                 toastr.success("{{ Session::get('message') }}");
                 break;
         }
+    @endif
+
+    @if(Session::has('success'))
+        toastr.success("{{ Session::get('success') }}");
+
+        @php
+            Session::forget('success')
+        @endphp
     @endif
 </script>
 </body>
