@@ -11,17 +11,13 @@ class UserController extends Controller
     public function register(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email',
             'phone' => 'required|unique:users,phone',
-            'password' => 'required',
-            'password_confirmation' => 'required|same:password',
+            'pin' => 'required|numeric|digits:4',
+            'pin_confirmation' => 'required|same:pin',
         ]);
             $model=new User();
-            $model->name=$request->input('name');
-            $model->email=$request->input('email');
             $model->phone=$request->input('phone');
-            $model->password=Hash::make($request->input('password'));
+            $model->pin=Hash::make($request->input('pin'));
 
             if($model->save()){
                 \Auth::login($model);
@@ -33,15 +29,21 @@ class UserController extends Controller
     public function login(Request $request){
         $credentials = $request->validate([
             'phone'=>'required',
-            'password'=>'required'
+            'pin'=>'required'
         ]);
 
-        if(\Auth::attempt($credentials) && \Auth::check()){
+        $user = User::where('phone', $credentials['phone'])->first();
+
+        if ($user !== null && Hash::check($credentials['pin'], $user->pin)) {
+            \Auth::login($user);
+        }
+
+        if(\Auth::check()){
             
             return response()->json('Login Success');
         }else{
             
-            return response()->json('Login Failed');
+            return response()->json(['errors' => ['login_error' => 'Login Failed']], 422);
         }
 
         // $phone = $request->post('phone');

@@ -47,6 +47,8 @@ Route::group(['middleware'=>'admin_auth'],function(){
 
     //Resource for game
     Route::resource('admin/game', GameController::class);
+    Route::post('admin/game/toggle_mark_new', [GameController::class, 'toggleMarkNew'])->name('admin.game.toggle_mark_new');
+    Route::post('admin/game/toggle_mark_popular', [GameController::class, 'toggleMarkPopular'])->name('admin.game.toggle_mark_popular');
 
 
     // Customization

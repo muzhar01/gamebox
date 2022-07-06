@@ -44,6 +44,8 @@ class CategoryController extends Controller
         $category->thumbnail = $imageName;
         $category->ar_title = $request->ar_title ?? '';
         $category->ar_description = $request->ar_description ?? '';
+        if ($request->has('index'))
+            $category->index = $request->index;
         $category->save();
 
         return redirect()->route('admin.category.index')->with('success', 'Category added Successfully.');
@@ -107,6 +109,9 @@ class CategoryController extends Controller
             $category->ar_description = $request->ar_description ?? '';
 
         }
+
+        if ($request->has('index'))
+            $category->index = $request->index;
         
         $category->save();
 

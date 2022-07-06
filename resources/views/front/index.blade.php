@@ -38,8 +38,8 @@ $theme = $theme_key ? $theme_key->value : '';
                     @foreach($new_games as $key => $new_game)
                         <div class="grid-item item-grid item shadow mb-2">
                             @auth
-                            <a href="{{ route('home.play', $new_game->id) }}" target="_blank">
-                               @else
+                                <a href="{{ route('home.play', $new_game->id) }}" target="_blank">
+                            @else
                                <a href="#" onclick="openLoginModal();"> 
                             @endauth
                                 <div class="list-game">
@@ -70,7 +70,11 @@ $theme = $theme_key ? $theme_key->value : '';
                 <div class="owl-carousel owl-theme">
                     @foreach($papular_games as $key => $papular_game)
                         <div class="grid-item item-grid item shadow mb-2">
-                            <a href="{{ route('home.play', $papular_game->id) }}">
+                            @auth
+                                <a href="{{ route('home.play', $papular_game->id) }}">
+                            @else
+                               <a href="#" onclick="openLoginModal();"> 
+                            @endauth
                                 <div class="list-game">
                                     <div class="list-thumbnail mb-1"><img src="{{ '/storage/game/' . ($papular_game->thumbnail ?? '') }}" class="small-thumb" alt="{{ $papular_game->title ?? '' }}"></div>
                                     {{-- <div class="list-title"><span class="btn btn-sm btn-outline-success">Play Now</span></div> --}}
@@ -101,7 +105,11 @@ $theme = $theme_key ? $theme_key->value : '';
                     <div class="owl-carousel owl-theme">
                         @foreach($category->games as $key => $game)
                             <div class="grid-item item-grid item shadow mb-2">
+                            @auth
                                 <a href="{{ route('home.play', $game->id) }}">
+                            @else
+                                <a href="#" onclick="openLoginModal();"> 
+                            @endauth
                                     <div class="list-game">
                                         <div class="list-thumbnail mb-1"><img src="{{ '/storage/game/' . ($game->thumbnail ?? '') }}" class="small-thumb" alt="{{ $game->title ?? '' }}"></div>
                                         {{-- <div class="list-title"><span class="btn btn-sm btn-outline-success">Play Now</span></div> --}}

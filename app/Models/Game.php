@@ -40,4 +40,9 @@ class Game extends Model
         return $value;
     }
 
+    public function category()
+    {
+        return $this->belongsTo(Admin\Category::class);
+    }
+
 }

@@ -72,6 +72,7 @@
                                       <th>Title</th>
                                       <th>Arabic Title</th>
                                       <th>Thumbnail</th>
+                                      <th>No. of Games</th>
                                       <th>Status</th>
                                       <th>Action</th>
                                   </tr>
@@ -83,7 +84,7 @@
                                         <td>{{ $category->title ?? '' }}</td>
                                         <td>{{ $category->ar_title ?? '' }}</td>
                                         <td><img src="{{ '/storage/category/' . ($category->thumbnail ?? '') }}" alt="{{ $category->title ?? '' }}" style="height:50px !important;width:auto;"></td>
-                                        
+                                        <td>{{ $category->games()->count() }}</td>
                                         <td>
                                             <div class="btn-group">
                                                 @if($category->status == 1)

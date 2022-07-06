@@ -44,6 +44,9 @@ if ($backgroundImage !== null) {
 
     <link rel="stylesheet" type="text/css" href="/front_assets/css/custom.css">
     <style>
+        html[dir="rtl"], body[dir="rtl"] {
+            font-family: calibri !important;
+        }
         body {
             background-image: url('{{ $backgroundImage }}');
             background-repeat: no-repeat;
@@ -130,10 +133,17 @@ if ($backgroundImage !== null) {
                     <div class="carousel-inner">
                         @foreach ($sliders as $slider)
                             <div class="carousel-item @if ($loop->first) active @endif">
+                            @auth
                                 <a href="{{ $slider->link }}">
                                     <img class="d-block w-100"
                                         src="{{ '/storage/sliders/' . ($slider->banner ?? '') }}" alt="">
                                 </a>
+                            @else
+                               <a href="#" onclick="openLoginModal();">
+                                    <img class="d-block w-100"
+                                        src="{{ '/storage/sliders/' . ($slider->banner ?? '') }}" alt="">
+                                </a>
+                            @endauth
                             </div>
                         @endforeach
                     </div>
@@ -151,7 +161,9 @@ if ($backgroundImage !== null) {
             @php
                 $nav_categories =
                     \App\Models\Admin\Category::active()
+                        ->orderBy('index', 'asc')
                         ->orderBy('title', 'asc')
+                        ->whereHas('games')
                         ->get() ?? [];
             @endphp
 
@@ -209,8 +221,8 @@ if ($backgroundImage !== null) {
                                 <form id="user_login" action="" accept-charset="UTF-8">
                                     <input id="u_number" class="form-control" type="number" placeholder="Phone"
                                         name="phone">
-                                    <input id="u_password" class="form-control" type="password"
-                                        placeholder="Password" name="password">
+                                    <input id="u_pin" class="form-control" type="password"
+                                        placeholder="Pin" name="pin">
                                     <input class="btn btn-default btn-login" type="submit" value="Login">
                                 </form>
                             </div>
@@ -221,17 +233,12 @@ if ($backgroundImage !== null) {
                             <div class="form">
                                 <form id="user_register" method="" html="{:multipart=>true}" data-remote="true"
                                     action="" accept-charset="UTF-8">
-
-                                    <input id="username" class="form-control" type="text" placeholder="Name"
-                                        name="name">
-                                    <input id="useremail" class="form-control" type="email" placeholder="Email"
-                                        name="email">
                                     <input id="usernumber" class="form-control" type="number" placeholder="Phone"
                                         name="phone">
-                                    <input id="userpassword" class="form-control" type="password"
-                                        placeholder="Password" name="password">
-                                    <input id="userpassword_confirmation" class="form-control" type="password"
-                                        placeholder="Repeat Password" name="password_confirmation">
+                                    <input id="userpin" class="form-control" type="password"
+                                        placeholder="Pin" name="pin">
+                                    <input id="userpin_confirmation" class="form-control" type="password"
+                                        placeholder="Confirm Pin" name="pin_confirmation">
                                     <input class="btn btn-default btn-register" type="submit" value="Create account"
                                         name="commit">
                                 </form>
@@ -273,12 +280,9 @@ if ($backgroundImage !== null) {
         $(document).ready(function() {
             $('#user_register').submit(function(e) {
                 e.preventDefault();
-                var name = $('#username').val();
-                var email = $('#useremail').val();
                 var phone = $('#usernumber').val();
-                var password = $('#userpassword').val();
-                var password_confirmation = $('#userpassword_confirmation').val();
-                console.log(name);
+                var pin = $('#userpin').val();
+                var pin_confirmation = $('#userpin_confirmation').val();
 
                 $.ajax({
                     headers: {
@@ -287,11 +291,9 @@ if ($backgroundImage !== null) {
                     type: "post",
                     url: "{{ route('user-register') }}",
                     data: {
-                        'name': name,
-                        'email': email,
                         'phone': phone,
-                        'password': password,
-                        'password_confirmation': password_confirmation
+                        'pin': pin,
+                        'pin_confirmation': pin_confirmation
                     },
                     success: function(response) {
                         $('#loginModal').closest('.modal').modal('toggle');
@@ -311,8 +313,7 @@ if ($backgroundImage !== null) {
             $('#user_login').submit(function(e) {
                 e.preventDefault();
                 var phone = $('#u_number').val();
-                var password = $('#u_password').val();
-                console.log(name);
+                var pin = $('#u_pin').val();
 
                 $.ajax({
                     headers: {
@@ -322,7 +323,7 @@ if ($backgroundImage !== null) {
                     url: "{{ route('user-login') }}",
                     data: {
                         'phone': phone,
-                        'password': password,
+                        'pin': pin,
                     },
                     success: function(response) {
 
@@ -340,6 +341,7 @@ if ($backgroundImage !== null) {
                     },
                     error:function(response){
                         var error=response.responseJSON;
+                        console.log(error);
                         $.each(error.errors,(x,y) => toastr.error(y,{timeOut: 5000}));
                     }
                 });
