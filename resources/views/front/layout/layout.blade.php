@@ -1,6 +1,8 @@
 @php
 $lang = session()->get('lang') ?? 'en';
 $logo = App\Models\Setting::where('key', 'logo')->first();
+$theme_key = App\Models\Setting::where('key', 'theme')->first();
+$theme = $theme_key ? $theme_key->value : '';
 $backgroundImage = App\Models\Setting::where('key', 'background_image')->first();
 if ($backgroundImage !== null) {
     $backgroundImage = asset('storage/background/'.$backgroundImage->value);
@@ -23,7 +25,16 @@ if ($backgroundImage !== null) {
     <link rel="stylesheet" type="text/css" href="/front_assets/dark-grid/style/bootstrap.min.css">
     {{-- <link rel="stylesheet" type="text/css" href="/front_assets/dark-grid/style/jquery-comments.css"> --}}
     <link rel="stylesheet" type="text/css" href="/front_assets/dark-grid/style/user.css">
-    <link rel="stylesheet" type="text/css" href="/front_assets/dark-grid/style/style.css">
+
+    @if($theme && $theme == 'light')
+        <!-- light theme -->
+        <link rel="stylesheet" type="text/css" href="/front_assets/dark-grid/style/style.css"> 
+
+    @else
+        <!-- dark theme -->
+        <link rel="stylesheet" type="text/css" href="/front_assets/dark-grid/style/dark-style.css">
+
+    @endif
     {{-- <link rel="stylesheet" type="text/css" href="/front_assets/dark-grid/style/custom.css"> --}}
     <link rel="stylesheet" type="text/css" href="/front_assets/css/owl.carousel.min.css">
     <link rel="stylesheet" type="text/css" href="/front_assets/css/owl.theme.default.min.css">
@@ -163,7 +174,8 @@ if ($backgroundImage !== null) {
                             <nav class="">
                                 <ul class="nav">
                                     <li class="nav-item {{ request()->is('/') ? 'active' : '' }}"><a href="/"
-                                            class="nav-link {{ request()->is('/') ? 'active' : '' }}">{{ $lang && $lang == 'ar' ? 'كل الألعاب' : 'All Games' }}</a>
+                                            class="nav-link {{ request()->is('/') ? 'active' : '' }}"> {{ $lang && $lang == 'ar' ? 'كل الألعاب' : 'All Games' }}</a>
+
                                     </li>
 
                                     @foreach ($nav_categories as $category)
@@ -255,7 +267,11 @@ if ($backgroundImage !== null) {
     <script type="text/javascript" src="/front_assets/dark-grid/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/front_assets/js/owl.carousel.min.js"></script>
     <script type="text/javascript" src="/front_assets/dark-grid/js/script.js"></script>
-    <script type="text/javascript" src="/front_assets/js/greedy-menu.js"></script>
+    @if($theme && $theme == 'light')
+        <script type="text/javascript" src="/front_assets/js/greedy-menu.js"></script>
+    @else
+        <script type="text/javascript" src="/front_assets/js/dark-greedy-menu.js"></script>
+    @endif
     <script type="text/javascript" src="/front_assets/js/custom.js"></script>
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>

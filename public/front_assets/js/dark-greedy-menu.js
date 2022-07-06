@@ -29,7 +29,7 @@
                         .append('<div class="dropdown"></div>')
                         .find("div.dropdown")
                         .append('<a href="javascript:void(0)" data-toggle="dropdown">More <span class="caret"></span></a>')
-                        .append('<ul class="dropdown-menu dropdown-menu-center greedy-menu"></ul>');
+                        .append('<ul class="dropdown-menu dropdown-menu-center greedy-menu bg-dark"></ul>');
                 }
                 obj.find("li").each(function(index) {
                     $(this).attr("data-index", index);
