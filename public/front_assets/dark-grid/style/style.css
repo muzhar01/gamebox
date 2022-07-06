@@ -72,7 +72,9 @@ https://codepen.io/balazs_sziklai*/
 }
 
 .grid-item {
-    border-radius: 5px;
+    border-radius: 10px;
+    aspect-ratio: 1 / 1;
+    background: #f7f6f9;
     /* &:nth-child(odd) {
       background-color: #424242;
     } */
@@ -211,8 +213,9 @@ img.small-thumb {
 }
 
 .list-game {
-  border-radius: 5px;
+  border-radius: 10px;
   aspect-ratio: 1 / 1;
+  background: #f7f6f9;
 }
 
 @supports not (aspect-ratio: 1 / 1) {
