@@ -19,7 +19,7 @@ class FrontController extends Controller
         $papular_games = Game::where('is_popular', 1)->latest()->active()->take(20)->get();
         // $foryou_games = Game::active()->take(15)->get();
         $sliders = Slider::where('status', 1)->get();
-        $cat_games = Category::active()->with(['games' => function($q){
+        $cat_games = Category::active()->orderBy('index', 'asc')->orderBy('title', 'asc')->with(['games' => function($q){
                 return $q->latest()->active();
             }])
             ->whereHas('games')->take(7)->get();

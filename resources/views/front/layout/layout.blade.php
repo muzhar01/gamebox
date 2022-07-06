@@ -33,6 +33,9 @@ if ($backgroundImage !== null) {
 
     <link rel="stylesheet" type="text/css" href="/front_assets/css/custom.css">
     <style>
+        html[dir="rtl"], body[dir="rtl"] {
+            font-family: calibri !important;
+        }
         body {
             background-image: url('{{ $backgroundImage }}');
             background-repeat: no-repeat;
@@ -147,7 +150,9 @@ if ($backgroundImage !== null) {
             @php
                 $nav_categories =
                     \App\Models\Admin\Category::active()
+                        ->orderBy('index', 'asc')
                         ->orderBy('title', 'asc')
+                        ->whereHas('games')
                         ->get() ?? [];
             @endphp
 
