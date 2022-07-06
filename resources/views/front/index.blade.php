@@ -4,6 +4,9 @@
 
 @php
 $lang = session()->get('lang') ?? 'en';
+
+$theme_key = App\Models\Setting::where('key', 'theme')->first();
+$theme = $theme_key ? $theme_key->value : '';
 @endphp
 
     <style>
@@ -20,7 +23,7 @@ $lang = session()->get('lang') ?? 'en';
     <div class="game-container">
 
         <!--New Games -->
-        <div class="row mb-3 text-white">
+        <div class="row mb-3 {{ $theme && $theme == 'light' ? 'text-dark' : 'text-white' }}">
             <div class="col-10">
                 <h3 class="h4 d-flex"><i class="fa fa-plus mx-2" aria-hidden="true"></i>{{ $lang && $lang == 'ar' ? 'ألعاب جديدة' : 'NEW GAMES' }}</h3>
             </div>
@@ -33,16 +36,16 @@ $lang = session()->get('lang') ?? 'en';
             <div class="col">
                 <div class="owl-carousel owl-theme">
                     @foreach($new_games as $key => $new_game)
-                        <div class="grid-item item-grid item shadow-lg">
+                        <div class="grid-item item-grid item shadow mb-2">
                             @auth
-                            <a href="{{ route('home.play', $new_game->id) }}" target="_blank">
-                               @else
+                                <a href="{{ route('home.play', $new_game->id) }}" target="_blank">
+                            @else
                                <a href="#" onclick="openLoginModal();"> 
                             @endauth
                                 <div class="list-game">
                                     <div class="list-thumbnail mb-1"><img src="{{ '/storage/game/' . ($new_game->thumbnail ?? '') }}" class="small-thumb" alt="{{ $new_game->title }}"></div>
                                     {{-- <div class="list-title"><span class="btn btn-sm btn-outline-success">Play Now</span></div> --}}
-                                    <div class="font-weight-light text-center text-white">{{ $new_game->title }}</div>
+                                    <div class="font-weight-light text-center {{ $theme && $theme == 'light' ? 'text-dark' : 'text-white' }}">{{ $new_game->title }}</div>
                                 </div>
                             </a>
                         </div>
@@ -53,7 +56,7 @@ $lang = session()->get('lang') ?? 'en';
         </div>
         <br>
         <!-- Popular games -->
-        <div class="row mb-3 text-white">
+        <div class="row mb-3 {{ $theme && $theme == 'light' ? 'text-dark' : 'text-white' }}">
             <div class="col-10">
                 <h3 class="h4 d-flex"><i class="fa fa-certificate mx-2" aria-hidden="true"></i>{{ $lang && $lang == 'ar' ? 'الألعاب الشعبية' : 'POPULAR GAMES' }}</h3>
             </div>
@@ -66,16 +69,16 @@ $lang = session()->get('lang') ?? 'en';
             <div class="col">
                 <div class="owl-carousel owl-theme">
                     @foreach($papular_games as $key => $papular_game)
-                        <div class="grid-item item-grid item shadow-lg">
+                        <div class="grid-item item-grid item shadow mb-2">
                             @auth
-                            <a href="{{ route('home.play', $papular_game->id) }}">
+                                <a href="{{ route('home.play', $papular_game->id) }}">
                             @else
                                <a href="#" onclick="openLoginModal();"> 
                             @endauth
                                 <div class="list-game">
                                     <div class="list-thumbnail mb-1"><img src="{{ '/storage/game/' . ($papular_game->thumbnail ?? '') }}" class="small-thumb" alt="{{ $papular_game->title ?? '' }}"></div>
                                     {{-- <div class="list-title"><span class="btn btn-sm btn-outline-success">Play Now</span></div> --}}
-                                    <div class="font-weight-light text-center text-white">{{ $papular_game->title }}</div>
+                                    <div class="font-weight-light text-center {{ $theme && $theme == 'light' ? 'text-dark' : 'text-white' }}">{{ $papular_game->title }}</div>
                                 </div>
                             </a>
                         </div>
@@ -88,12 +91,12 @@ $lang = session()->get('lang') ?? 'en';
         <!-- Category games -->
         {{-- for each category games --}}
         @foreach($cat_games as $category)
-            <div class="row mb-3 text-white">
+            <div class="row mb-3 {{ $theme && $theme == 'light' ? 'text-dark' : 'text-white' }}">
                 <div class="col-11">
                     <h3 class="h4 d-flex"><i class="fa fa-gamepad mx-2" aria-hidden="true"></i>{{ $category->title ?? '' }}</h3>
                 </div>
                 <div class="col-1">
-                    <a href="{{ route('home.category', ($category->id ?? 0)) }}" class="text-white"><h3 class="h4 text-right"><i class="fa fa-arrow-right {{ $lang && $lang == 'ar' ? 'fa-flip-horizontal' : '' }}" aria-hidden="true"></i></h3></a>
+                    <a href="{{ route('home.category', ($category->id ?? 0)) }}" class="{{ $theme && $theme == 'light' ? 'text-dark' : 'text-white' }}"><h3 class="h4 text-right"><i class="fa fa-arrow-right {{ $lang && $lang == 'ar' ? 'fa-flip-horizontal' : '' }}" aria-hidden="true"></i></h3></a>
                 </div>
             </div>
 
@@ -101,16 +104,16 @@ $lang = session()->get('lang') ?? 'en';
                 <div class="col">
                     <div class="owl-carousel owl-theme">
                         @foreach($category->games as $key => $game)
-                            <div class="grid-item item-grid item shadow-lg">
-                                @auth
+                            <div class="grid-item item-grid item shadow mb-2">
+                            @auth
                                 <a href="{{ route('home.play', $game->id) }}">
-                                @else
+                            @else
                                 <a href="#" onclick="openLoginModal();"> 
-                                @endauth
+                            @endauth
                                     <div class="list-game">
                                         <div class="list-thumbnail mb-1"><img src="{{ '/storage/game/' . ($game->thumbnail ?? '') }}" class="small-thumb" alt="{{ $game->title ?? '' }}"></div>
                                         {{-- <div class="list-title"><span class="btn btn-sm btn-outline-success">Play Now</span></div> --}}
-                                        <div class="font-weight-light text-center text-white">{{ $game->title }}</div>
+                                        <div class="font-weight-light text-center {{ $theme && $theme == 'light' ? 'text-dark' : 'text-white' }}">{{ $game->title }}</div>
                                     </div>
                                 </a>
                             </div>
