@@ -82,7 +82,7 @@ class FrontController extends Controller
      */
     public function latest()
     {
-        $cat = ['title'=> 'New Games'];
+        $cat = ['title' => 'New Games'];
         $cat_games = Game::where('is_new', 1)->latest()->active()->get();
         return view('front.category',['cat' => $cat, 'cat_games' => $cat_games]);
     }
@@ -92,7 +92,7 @@ class FrontController extends Controller
      */
     public function popular()
     {
-        $cat = ['title'=> 'Popular Games'];
+        $cat = ['title' => 'Popular Games'];
         $cat_games = Game::where('is_popular', 1)->latest()->active()->get();
         return view('front.category',['cat' => $cat, 'cat_games' => $cat_games]);
     }

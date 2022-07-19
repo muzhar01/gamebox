@@ -3,11 +3,21 @@
 @section('content')
     <div class="game-container">
 @php
+    $lang = session()->get('lang') ?? 'en';
     $theme_key = App\Models\Setting::where('key', 'theme')->first();
     $theme = session()->get('theme') ?? ($theme_key ? $theme_key->value : '');
 @endphp
         <!--Category Games -->
-        {{-- <h3 class="item-title"><i class="fa fa-gamepad" aria-hidden="true"></i>{{ $cat->title ?? 'Games' }}</h3>  <!-- Update 18 Jul -->  --}}
+
+        @if($cat['title'] == 'New Games')
+            <h3 class="item-title"><i class="fa fa-gamepad" aria-hidden="true"></i>{{ $lang == 'ar' ? 'ألعاب جديدة' : 'New Games'}}</h3>  <!-- Update 18 Jul --> 
+        @endif
+        
+        @if($cat['title'] == 'Popular Games')
+            <h3 class="item-title"><i class="fa fa-gamepad" aria-hidden="true"></i>{{ $lang == 'ar' ? 'الألعاب الشعبية' : 'Popular Games'}}</h3>
+        @endif
+            
+
         <div class="grid-layout grid-wrapper">
             @foreach($cat_games as $key => $cat_game)
                 <div class="grid-item item-grid item shadow">

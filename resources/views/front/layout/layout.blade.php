@@ -120,7 +120,10 @@ if ($backgroundImage !== null) {
                                         id="changeThemeBtn">Light</a> </li>
                             @endif
 
-                                <li class="nav-item"> <a class="nav-link" data-toggle="modal" href="#shareModal" id="share">Share</a> </li>
+                                <li class="nav-item">
+                                    <a class="mx-1 text-success" href="whatsapp://send?text=Gamebox Play Gmaes Online {{ url()->current() }}')" id="whatsapp"><i class="fa fa-2x fa-whatsapp"></i></a>
+                                    <a class="mx-1 text-white" href="{{ url()->current() }}" id="share"><i class="fa fa-2x fa-share-alt"></i></a>
+                                </li>
                         </ul>
 
                         {{-- Search Form  =========== --}}
@@ -287,7 +290,7 @@ if ($backgroundImage !== null) {
                                 <input id="shareLink" class="custom-control" type="text" onclick="this.select();" value="{{ url()->current() }}" readonly>
                             </div>
                             <div class="mb-3 ml-2">
-                                <a href="whatsapp://send?text=Gamebox Play Gmaes Online {{ url()->current() }}')" class="btn btn-success"><span class="fa fa-whatsapp mr-2"></span>Whatsapp</a>
+                                <a href="whatsapp://send?text=Gamebox Play Gmaes Online {{ url()->current() }}" class="btn btn-success"><span class="fa fa-whatsapp mr-2"></span>Whatsapp</a>
                             </div>
                         </div>
                     </div>
