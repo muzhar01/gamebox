@@ -80,6 +80,8 @@ Route::get('/category/{id}', [FrontController::class, 'category'])->name('home.c
 
 Route::get('/language/{language}', [FrontController::class, 'language'])->name('home.language');
 Route::get('/theme/{theme}', [FrontController::class, 'theme'])->name('home.theme');
+Route::get('/latest', [FrontController::class, 'latest'])->name('home.latest');
+Route::get('/popular', [FrontController::class, 'popular'])->name('home.popular');
 
 Route::group(['middleware'=>'auth'],function(){
     Route::get('/play/{id}', [FrontController::class, 'play'])->name('home.play');

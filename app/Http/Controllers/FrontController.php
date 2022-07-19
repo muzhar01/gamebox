@@ -34,7 +34,7 @@ class FrontController extends Controller
     {
         $cat = Category::findOrFail($id);
         // $cat_name = $category->title ?? 'Game';
-        $cat_games = Game::whereCategoryId($cat->id)->active()->get();
+        $cat_games = Game::whereCategoryId($cat->id)->latest()->active()->get();
         return view('front.category',['cat' => $cat, 'cat_games' => $cat_games]);
     }
 
@@ -78,36 +78,23 @@ class FrontController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * get new games
      */
-    public function edit($id)
+    public function latest()
     {
-        //
+        $cat = ['title'=> 'New Games'];
+        $cat_games = Game::where('is_new', 1)->latest()->active()->get();
+        return view('front.category',['cat' => $cat, 'cat_games' => $cat_games]);
+    }
+    
+    /**
+     * get new games
+     */
+    public function popular()
+    {
+        $cat = ['title'=> 'Popular Games'];
+        $cat_games = Game::where('is_popular', 1)->latest()->active()->get();
+        return view('front.category',['cat' => $cat, 'cat_games' => $cat_games]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

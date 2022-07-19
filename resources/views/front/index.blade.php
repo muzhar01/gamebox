@@ -31,7 +31,7 @@ $theme = session()->get('theme') ?? ($theme_key ? $theme_key->value : '');
                 <h3 class="h4 text-right"><i class="fa fa-arrow-right" aria-hidden="true"></i></h3>
             </div> --}}
             <div class="col-1">
-                <a href="#" class="{{ $theme && $theme == 'light' ? 'text-dark' : 'text-white' }}"><h3 class="h4 text-right"><i class="fa fa-arrow-right {{ $lang && $lang == 'ar' ? 'fa-flip-horizontal' : '' }}" aria-hidden="true"></i></h3></a>
+                <a href="{{ route('home.latest') }}" class="{{ $theme && $theme == 'light' ? 'text-dark' : 'text-white' }}"><h3 class="h4 text-right"><i class="fa fa-arrow-right {{ $lang && $lang == 'ar' ? 'fa-flip-horizontal' : '' }}" aria-hidden="true"></i></h3></a>
             </div>
         </div>
 
@@ -67,7 +67,7 @@ $theme = session()->get('theme') ?? ($theme_key ? $theme_key->value : '');
                 <h3 class="h4 text-right"><i class="fa fa-arrow-right" aria-hidden="true"></i></h3>
             </div> --}}
             <div class="col-1">
-                <a href="#" class="{{ $theme && $theme == 'light' ? 'text-dark' : 'text-white' }}"><h3 class="h4 text-right"><i class="fa fa-arrow-right {{ $lang && $lang == 'ar' ? 'fa-flip-horizontal' : '' }}" aria-hidden="true"></i></h3></a>
+                <a href="{{ route('home.popular') }}" class="{{ $theme && $theme == 'light' ? 'text-dark' : 'text-white' }}"><h3 class="h4 text-right"><i class="fa fa-arrow-right {{ $lang && $lang == 'ar' ? 'fa-flip-horizontal' : '' }}" aria-hidden="true"></i></h3></a>
             </div>
         </div>
 
