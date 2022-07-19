@@ -2,7 +2,7 @@
 $lang = session()->get('lang') ?? 'en';
 $logo = App\Models\Setting::where('key', 'logo')->first();
 $theme_key = App\Models\Setting::where('key', 'theme')->first();
-$theme = $theme_key ? $theme_key->value : '';
+$theme = session()->get('theme') ?? ($theme_key ? $theme_key->value : '');
 $backgroundImage = App\Models\Setting::where('key', 'background_image')->first();
 if ($backgroundImage !== null) {
     $backgroundImage = asset('storage/background/'.$backgroundImage->value);
@@ -111,6 +111,16 @@ if ($backgroundImage !== null) {
                                         onclick="openLoginModal();">Login \ Register</a> </li>
                             @endauth
 
+                            <!-- Theme Change Button -->
+                            @if ($theme && $theme == 'light')
+                                <li class="nav-item"> <a class="nav-link" href="{{ route('home.theme', 'dark') }}"
+                                        id="changeThemeBtn">Dark</a> </li>
+                            @else
+                                <li class="nav-item"> <a class="nav-link" href="{{ route('home.theme', 'light') }}"
+                                        id="changeThemeBtn">Light</a> </li>
+                            @endif
+
+                                <li class="nav-item"> <a class="nav-link" data-toggle="modal" href="#shareModal" id="share">Share</a> </li>
                         </ul>
 
                         {{-- Search Form  =========== --}}
@@ -260,6 +270,34 @@ if ($backgroundImage !== null) {
             </div>
         </div>
     </div>
+
+    <!-- share Modal -->
+    <div class="modal fade share" id="shareModal">
+        <div class="modal-dialog share animated">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Share</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="box">
+                        <div class="content">
+                            <div class="input-group mb-4">
+                                <label class="input-label mr-1">Copy Link: </label>
+                                <input id="shareLink" class="custom-control" type="text" onclick="this.select();" value="{{ url()->current() }}" readonly>
+                            </div>
+                            <div class="mb-3 ml-2">
+                                <a href="whatsapp://send?text=Gamebox Play Gmaes Online {{ url()->current() }}')" class="btn btn-success"><span class="fa fa-whatsapp mr-2"></span>Whatsapp</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End share modal -->
+
     <script type="text/javascript" src="/front_assets/dark-grid/js/jquery-3.3.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">

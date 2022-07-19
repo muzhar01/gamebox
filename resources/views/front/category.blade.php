@@ -4,7 +4,7 @@
     <div class="game-container">
 @php
     $theme_key = App\Models\Setting::where('key', 'theme')->first();
-    $theme = $theme_key ? $theme_key->value : '';
+    $theme = session()->get('theme') ?? ($theme_key ? $theme_key->value : '');
 @endphp
         <!--Category Games -->
         {{-- <h3 class="item-title"><i class="fa fa-gamepad" aria-hidden="true"></i>{{ $cat->title ?? 'Games' }}</h3>  <!-- Update 18 Jul -->  --}}

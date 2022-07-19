@@ -63,6 +63,21 @@ class FrontController extends Controller
     }
 
     /**
+     * Change Theme
+     */
+    public function theme($theme)
+    {
+        if($theme == 'light'){
+            session()->put('theme', 'light');
+        }else{
+            session()->put('theme', 'dark');    
+        }
+
+        return back();
+
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id

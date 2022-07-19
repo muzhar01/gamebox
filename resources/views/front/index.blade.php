@@ -6,7 +6,7 @@
 $lang = session()->get('lang') ?? 'en';
 
 $theme_key = App\Models\Setting::where('key', 'theme')->first();
-$theme = $theme_key ? $theme_key->value : '';
+$theme = session()->get('theme') ?? ($theme_key ? $theme_key->value : '');
 @endphp
 
     <style>
@@ -24,11 +24,14 @@ $theme = $theme_key ? $theme_key->value : '';
 
         <!--New Games -->
         <div class="row mb-3 {{ $theme && $theme == 'light' ? 'text-dark' : 'text-white' }}">
-            <div class="col-10">
+            <div class="col-11">
                 <h3 class="h4 d-flex"><i class="fa fa-plus mx-2" aria-hidden="true"></i>{{ $lang && $lang == 'ar' ? 'ألعاب جديدة' : 'NEW GAMES' }}</h3>
             </div>
-            <div class="col-2">
-                {{-- <h3 class="h4 text-right"><i class="fa fa-arrow-right" aria-hidden="true"></i></h3> --}}
+            {{-- <div class="col-2">
+                <h3 class="h4 text-right"><i class="fa fa-arrow-right" aria-hidden="true"></i></h3>
+            </div> --}}
+            <div class="col-1">
+                <a href="#" class="{{ $theme && $theme == 'light' ? 'text-dark' : 'text-white' }}"><h3 class="h4 text-right"><i class="fa fa-arrow-right {{ $lang && $lang == 'ar' ? 'fa-flip-horizontal' : '' }}" aria-hidden="true"></i></h3></a>
             </div>
         </div>
 
@@ -57,11 +60,14 @@ $theme = $theme_key ? $theme_key->value : '';
         <br>
         <!-- Popular games -->
         <div class="row mb-3 {{ $theme && $theme == 'light' ? 'text-dark' : 'text-white' }}">
-            <div class="col-10">
+            <div class="col-11">
                 <h3 class="h4 d-flex"><i class="fa fa-certificate mx-2" aria-hidden="true"></i>{{ $lang && $lang == 'ar' ? 'الألعاب الشعبية' : 'POPULAR GAMES' }}</h3>
             </div>
-            <div class="col-2">
-                {{-- <h3 class="h4 text-right"><i class="fa fa-arrow-right" aria-hidden="true"></i></h3> --}}
+            {{-- <div class="col-2">
+                <h3 class="h4 text-right"><i class="fa fa-arrow-right" aria-hidden="true"></i></h3>
+            </div> --}}
+            <div class="col-1">
+                <a href="#" class="{{ $theme && $theme == 'light' ? 'text-dark' : 'text-white' }}"><h3 class="h4 text-right"><i class="fa fa-arrow-right {{ $lang && $lang == 'ar' ? 'fa-flip-horizontal' : '' }}" aria-hidden="true"></i></h3></a>
             </div>
         </div>
 
