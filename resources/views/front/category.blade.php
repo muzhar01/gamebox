@@ -7,7 +7,7 @@
     $theme = $theme_key ? $theme_key->value : '';
 @endphp
         <!--Category Games -->
-        <h3 class="item-title"><i class="fa fa-gamepad" aria-hidden="true"></i>{{ $cat->title ?? 'Games' }}</h3>
+        {{-- <h3 class="item-title"><i class="fa fa-gamepad" aria-hidden="true"></i>{{ $cat->title ?? 'Games' }}</h3>  <!-- Update 18 Jul -->  --}}
         <div class="grid-layout grid-wrapper">
             @foreach($cat_games as $key => $cat_game)
                 <div class="grid-item item-grid item shadow">
