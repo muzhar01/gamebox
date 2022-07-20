@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\GameController;
 use App\Models\Admin\Category;
@@ -49,8 +50,9 @@ Route::group(['middleware'=>'admin_auth'],function(){
     Route::resource('admin/game', GameController::class);
     Route::post('admin/game/toggle_mark_new', [GameController::class, 'toggleMarkNew'])->name('admin.game.toggle_mark_new');
     Route::post('admin/game/toggle_mark_popular', [GameController::class, 'toggleMarkPopular'])->name('admin.game.toggle_mark_popular');
-
-
+    //Resource for page
+    Route::resource('admin/page', PageController::class, ['as' => 'admin']);
+    
     // Customization
     Route::prefix('admin/customize')->name('admin.customize.')->group(function () {
         Route::get('homepage', [CustomizeController::class, 'editHomePage'])->name('homepage');
