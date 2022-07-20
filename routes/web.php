@@ -84,6 +84,7 @@ Route::get('/language/{language}', [FrontController::class, 'language'])->name('
 Route::get('/theme/{theme}', [FrontController::class, 'theme'])->name('home.theme');
 Route::get('/latest', [FrontController::class, 'latest'])->name('home.latest');
 Route::get('/popular', [FrontController::class, 'popular'])->name('home.popular');
+Route::get('/page/{id}', [FrontController::class, 'page'])->name('home.page');
 
 Route::group(['middleware'=>'auth'],function(){
     Route::get('/play/{id}', [FrontController::class, 'play'])->name('home.play');

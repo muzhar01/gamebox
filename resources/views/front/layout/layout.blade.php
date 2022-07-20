@@ -121,7 +121,7 @@ if ($backgroundImage !== null) {
                             @endif
 
                                 <li class="nav-item">
-                                    <a class="mx-1 text-success" href="whatsapp://send?text=Gamebox Play Gmaes Online {{ url()->current() }}')" id="whatsapp"><i class="fa fa-2x fa-whatsapp"></i></a>
+                                    <a class="mx-1 text-success" href="whatsapp://send?text=Gamebox Play Gmaes Online {{ url()->current() }}" id="whatsapp"><i class="fa fa-2x fa-whatsapp"></i></a>
                                     <a class="mx-1 text-white" href="{{ url()->current() }}" id="share"><i class="fa fa-2x fa-share-alt"></i></a>
                                 </li>
                         </ul>
@@ -214,9 +214,28 @@ if ($backgroundImage !== null) {
 
             </div>
 
-            <div class="copyright py-4 text-center">
-                <div class="container"> Gamebox © 2022. All rights reserved.</div>
-            </div>
+            <!-- footer -->
+            @php
+                $pages = \App\Models\Page::active()->orderBy('pos')->get();
+            @endphp
+            <footer>
+                <div class="copyright py-4">
+                    <div class="container">
+                        <ul class="list-inline">
+                            <li class="list-inline-item">Gamebox © 2022. All rights reserved.</li>
+                            <li class="list-inline-item">
+                            <ul>
+                            @foreach ($pages as $page)
+                                <li class="list-inline-item"><a href="{{ route('home.page', $page->id) }}">{{ $page->title }}</a></li>
+                            @endforeach
+                            </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </footer>
+
+            
         </div>
     </div>
     <div class="modal fade login" id="loginModal">
