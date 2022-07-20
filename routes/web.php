@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\GameController;
 use App\Models\Admin\Category;
@@ -49,8 +50,9 @@ Route::group(['middleware'=>'admin_auth'],function(){
     Route::resource('admin/game', GameController::class);
     Route::post('admin/game/toggle_mark_new', [GameController::class, 'toggleMarkNew'])->name('admin.game.toggle_mark_new');
     Route::post('admin/game/toggle_mark_popular', [GameController::class, 'toggleMarkPopular'])->name('admin.game.toggle_mark_popular');
-
-
+    //Resource for page
+    Route::resource('admin/page', PageController::class, ['as' => 'admin']);
+    
     // Customization
     Route::prefix('admin/customize')->name('admin.customize.')->group(function () {
         Route::get('homepage', [CustomizeController::class, 'editHomePage'])->name('homepage');
@@ -82,6 +84,7 @@ Route::get('/language/{language}', [FrontController::class, 'language'])->name('
 Route::get('/theme/{theme}', [FrontController::class, 'theme'])->name('home.theme');
 Route::get('/latest', [FrontController::class, 'latest'])->name('home.latest');
 Route::get('/popular', [FrontController::class, 'popular'])->name('home.popular');
+Route::get('/page/{id}', [FrontController::class, 'page'])->name('home.page');
 
 Route::group(['middleware'=>'auth'],function(){
     Route::get('/play/{id}', [FrontController::class, 'play'])->name('home.play');
