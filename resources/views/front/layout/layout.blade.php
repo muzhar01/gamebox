@@ -105,19 +105,19 @@ if ($backgroundImage !== null) {
 
                             @auth
                                 <li class="nav-item"> <a class="nav-link" href="{{ route('user-logout') }}"
-                                        class="nav-link">Logout</a> </li>
+                                        class="nav-link">{{ $lang && $lang == 'ar' ? 'تسجيل الخروج' : 'Logout' }}</a> </li>
                             @else
                                 <li class="nav-item"> <a class="nav-link" data-toggle="modal" href="javascript:void(0)"
-                                        onclick="openLoginModal();">Login \ Register</a> </li>
+                                        onclick="openLoginModal();">{{ $lang && $lang == 'ar' ? 'تسجيل الدخول' : 'Login \ Register' }}</a> </li>
                             @endauth
 
                             <!-- Theme Change Button -->
                             @if ($theme && $theme == 'light')
                                 <li class="nav-item"> <a class="nav-link" href="{{ route('home.theme', 'dark') }}"
-                                        id="changeThemeBtn">Dark</a> </li>
+                                        id="changeThemeBtn">{{ $lang && $lang == 'ar' ? 'الوضع المظلم' : 'Dark' }}</a> </li>
                             @else
                                 <li class="nav-item"> <a class="nav-link" href="{{ route('home.theme', 'light') }}"
-                                        id="changeThemeBtn">Light</a> </li>
+                                        id="changeThemeBtn">{{ $lang && $lang == 'ar' ? 'الوضع المضئ' : 'Light' }}</a> </li>
                             @endif
 
                                 <li class="nav-item">
@@ -242,8 +242,8 @@ if ($backgroundImage !== null) {
         <div class="modal-dialog login animated">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Login</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">{{ $lang && $lang == 'ar' ? 'تسجيل الدخول' : 'Login' }}</h4>
+                    <button type="button" class="close mx-1" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
                 <div class="modal-body">
                     <div class="box">
@@ -255,7 +255,7 @@ if ($backgroundImage !== null) {
                                         name="phone">
                                     <input id="u_pin" class="form-control" type="password"
                                         placeholder="Pin" name="pin">
-                                    <input class="btn btn-default btn-login" type="submit" value="Login">
+                                    <input class="btn btn-default btn-login" type="submit" value="{{ $lang && $lang == 'ar' ? 'تسجيل الدخول' : 'Login' }}">
                                 </form>
                             </div>
                         </div>
