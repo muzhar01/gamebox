@@ -45,6 +45,7 @@ Route::group(['middleware'=>'admin_auth'],function(){
     Route::get('admin/add/category',[CategoryController::class,'create'])->name('admin-add-category');
     //Resource for Category
     Route::resource('admin/category', CategoryController::class, ['as' => 'admin']);
+    Route::post('admin/category/pos', [CategoryController::class, 'position'])->name('admin.category.pos');
 
     //Resource for game
     Route::resource('admin/game', GameController::class);
