@@ -122,7 +122,7 @@ if ($backgroundImage !== null) {
 
                                 <li class="nav-item">
                                     <a class="mx-1 text-success" href="whatsapp://send?text=Gamebox Play Gmaes Online {{ url()->current() }}" id="whatsapp"><i class="fa fa-2x fa-whatsapp"></i></a>
-                                    <a class="mx-1 text-white" href="{{ url()->current() }}" id="share"><i class="fa fa-2x fa-share-alt"></i></a>
+                                    <a class="mx-1 {{ $theme && $theme == 'light' ? 'text-dark' : 'text-white' }}" href="{{ url()->current() }}" id="share"><i class="fa fa-2x fa-share-alt"></i></a>
                                 </li>
                         </ul>
 
